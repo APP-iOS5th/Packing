@@ -6,93 +6,83 @@
 //
 
 import SwiftUI
-import UIKit
+import AuthenticationServices
 
-struct ImagePicker: UIViewControllerRepresentable {
-    @Environment(\.dismiss) var dismiss
-    @Binding var selectedImage: UIImage?
-    var sourceType: UIImagePickerController.SourceType = .photoLibrary
-
-    func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        picker.sourceType = sourceType
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        var parent: ImagePicker
-
-        init(_ parent: ImagePicker) {
-            self.parent = parent
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let image = info[.originalImage] as? UIImage {
-                parent.selectedImage = image
-            }
-            parent.dismiss()
+struct RegisterationView: View {
+    @State private var userName: String = ""
+    @State private var userEmail: String = ""
+    
+    @AppStorage("storedName") private var storedName: String = "" {
+        didSet {
+            userName = storedName
         }
     }
-}
-
-//TODO : Register word  pixel 5 move
-
-struct RegistrationView: View {
-    @State private var username: String = ""
-    @State private var profileImage: UIImage? = nil
-    @State private var isShowingImagePicker = false
-    @State private var isRegistrationComplete = false
-
+    @AppStorage("storedEmail") private var storedEmail: String = "" {
+        didSet {
+            userEmail = storedEmail
+        }
+    }
+    @AppStorage("userID") private var userID: String = ""
+    
     var body: some View {
-        if isRegistrationComplete {
-            OnboardingView()
-        } else {
-            NavigationStack {
-                VStack {
-                    if let profileImage = profileImage {
-                        Image(uiImage: profileImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200) // 이미지 크기 조정
-                            .clipShape(Circle())
-                            .padding()
-                    } else {
-                        Button("Choose Profile Image") {
-                            isShowingImagePicker = true
-                        }
-                        .padding()
-                    }
-
-                    TextField("Enter your name", text: $username)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-
-                    Button("Complete Registration") {
-                        completeRegistration()
-                    }
-                    .padding()
-                    .disabled(username.isEmpty || profileImage == nil)
-                }
-                .navigationTitle("Register")
-                .sheet(isPresented: $isShowingImagePicker) {
-                    ImagePicker(selectedImage: $profileImage, sourceType: .photoLibrary)
+        NavigationStack {
+            ZStack {
+                Color.white
+                if userName.isEmpty {
+                    SignInWithAppleButton(.signIn,
+                                          onRequest: onRequest,
+                                          onCompletion: onCompletion)
+                    .signInWithAppleButtonStyle(.white)
+                    .frame(width: 200, height: 50)
+                } else {
+                    Text("Welcome, Packing \n\(userName), \(userEmail)")
+                        .foregroundStyle(.black)
+                        .font(.headline)
                 }
             }
+            .navigationTitle("Packing")
+            .font(.system(size: 30))
+            .task { await authorize() }
         }
     }
-
-    func completeRegistration() {
-        isRegistrationComplete = true
+    private func authorize() async {
+        guard !userID.isEmpty else {
+            userName = ""
+            userEmail = ""
+            return
+        }
+        guard let credentialState = try? await ASAuthorizationAppleIDProvider()
+            .credentialState(forUserID: userID) else {
+            userName = ""
+            userEmail = ""
+            return
+        }
+        switch credentialState {
+        case .authorized:
+            userName = storedName
+            userEmail = storedEmail
+        default:
+            userName = ""
+            userEmail = ""
+        }
+    }
+    private func onRequest(_ request: ASAuthorizationAppleIDRequest) {
+        request.requestedScopes = [.fullName, .email]
+    }
+    private func onCompletion(_ result: Result<ASAuthorization, Error>) {
+        switch result {
+        case .success(let authResult):
+            guard let credential = authResult.credential as? ASAuthorizationAppleIDCredential
+            else { return }
+            storedName = credential.fullName?.givenName ?? ""
+            storedEmail = credential.email ?? ""
+            userID = credential.user
+        case .failure(let error):
+            print("Authorization failed: " + error.localizedDescription)
+        }
     }
 }
 
 #Preview {
-    RegistrationView()
+    RegisterationView()
 }
