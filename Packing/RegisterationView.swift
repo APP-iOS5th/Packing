@@ -2,7 +2,7 @@
 //  RegisterationView.swift
 //  Packing
 //
-//  Created by 이융의 on 4/30/24.
+//  Created by 김소희 on 4/30/24.
 //
 
 import SwiftUI
@@ -25,26 +25,37 @@ struct RegisterationView: View {
     @AppStorage("userID") private var userID: String = ""
     
     var body: some View {
-        NavigationStack {
+        Color(hex: 0xBDCDD6)
+            .edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("Packing")
+                    .font(.custom("New York-Bold", size: 30))
+                    .font(.largeTitle)
+                Text("여행의 목적에 맞는 짐싸기")
+                    .font(.custom("New York-Bold", size: 20))
+                    .font(.largeTitle)
+            }
             ZStack {
-                Color.white
+                Color(hex: 0xBDCDD6)
                 if userName.isEmpty {
                     SignInWithAppleButton(.signIn,
                                           onRequest: onRequest,
                                           onCompletion: onCompletion)
-                    .signInWithAppleButtonStyle(.white)
+                    .signInWithAppleButtonStyle(.whiteOutline)
                     .frame(width: 200, height: 50)
+                    .padding()
+                    
                 } else {
                     Text("Welcome, Packing \n\(userName), \(userEmail)")
                         .foregroundStyle(.black)
                         .font(.headline)
                 }
             }
-            .navigationTitle("Packing")
-            .font(.system(size: 30))
             .task { await authorize() }
+            .background(Color(hex: 0xBDCDD6))
+            .edgesIgnoringSafeArea(.all)
         }
-    }
+    
     private func authorize() async {
         guard !userID.isEmpty else {
             userName = ""

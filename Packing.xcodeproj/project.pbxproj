@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8DAC29792BE11138008BB500 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAC29782BE11138008BB500 /* ColorExtension.swift */; };
 		C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B792BE0CBE600B62122 /* PackingApp.swift */; };
 		C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B7B2BE0CBE600B62122 /* ContentView.swift */; };
 		C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8DAC29782BE11138008BB500 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		C68C4B762BE0CBE600B62122 /* Packing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Packing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68C4B792BE0CBE600B62122 /* PackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingApp.swift; sourceTree = "<group>"; };
 		C68C4B7B2BE0CBE600B62122 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
 				C68C4B892BE0CE0300B62122 /* OnboardingView.swift */,
 				C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */,
+				8DAC29782BE11138008BB500 /* ColorExtension.swift */,
 				C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */,
 				C68C4B7F2BE0CBE900B62122 /* Preview Content */,
 			);
@@ -149,6 +152,7 @@
 				C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */,
 				C68C4B8A2BE0CE0300B62122 /* OnboardingView.swift in Sources */,
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
+				8DAC29792BE11138008BB500 /* ColorExtension.swift in Sources */,
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
 				C68C4B8C2BE0CE3100B62122 /* RegisterationView.swift in Sources */,
 			);
