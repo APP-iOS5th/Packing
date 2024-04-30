@@ -117,13 +117,19 @@ extension Journey {
 
 struct JourneyListView: View {
     var journeys = Journey.sample
+    @State private var selectedJourney: Journey?
+
     @State private var isNewJourneyPresented = false
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("mainColor").ignoresSafeArea()
+//                Color("mainColor").ignoresSafeArea()
+                
+                LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    .ignoresSafeArea()
+
                 VStack {
                     if journeys.isEmpty {
                         Image(systemName: "airplane")
@@ -143,22 +149,25 @@ struct JourneyListView: View {
                                 .edgesIgnoringSafeArea(.bottom)
                             
                             List(journeys) { journey in
-                                NavigationLink(value: journey) {
+                                Button(action: {
+                                    self.selectedJourney = journey
+                                }) {
                                     JourneySummaryView(journey: journey)
-                                        .frame(height: 100)
+                                        .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
                                         .padding(.top, 10)
+//                                        .background(Color.clear)
+                                        .shadow(radius: 3, x: 1, y: 4)
                                 }
+                                .buttonStyle(PlainButtonStyle())
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
-                                .cornerRadius(3.0)
-                                .shadow(radius: 3, x: 1, y: 4)
                             }
                             .listStyle(.plain)
                             .cornerRadius(30)
                             .edgesIgnoringSafeArea(.bottom)
 
     //                        .padding(.top)
-                            .navigationDestination(for: Journey.self) { journey in
+                            .navigationDestination(item: $selectedJourney) { journey in
                                 JourneyDetailView(journey: journey)
                             }
                         }
@@ -220,38 +229,39 @@ struct JourneySummaryView: View {
             backgroundImage = nil
         }
         
-        return VStack(alignment: .leading, spacing: 4) {
-            Text(journey.destination)
-                .font(.title2)
-                .fontWeight(.bold)
-            
-            Text(journey.activities.map { $0.rawValue }.joined(separator: ", "))
-                .font(.callout)
-                .fontWeight(.thin)
+        return HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(journey.destination)
+                    .font(.title2)
+                    .fontWeight(.black)
+                
+                Text(journey.activities.map { $0.rawValue }.joined(separator: ", "))
+                    .font(.callout)
+                    .fontWeight(.thin)
 
-            
-            Text(journey.duration)
-                .font(.caption)
-                .fontWeight(.ultraLight)
-
+                Text(journey.duration)
+                    .font(.caption)
+                    .fontWeight(.light)
+            }
+            Spacer()
         }
         .padding()
         .background(
             ZStack {
                 if let background = backgroundImage {
                     background
-                        .opacity(0.8)
                 }
-
                 LinearGradient(gradient: Gradient(stops: [
-                    .init(color: colorScheme == .dark ? Color.black : Color.white.opacity(0.99), location: 0.3),
-                    .init(color: colorScheme == .dark ? Color.black.opacity(0.7) : Color.white.opacity(0.6), location: 0.7),
+                    .init(color: colorScheme == .dark ? Color.black.opacity(0.6) : Color.white.opacity(0.8), location: 0.3),
+                    .init(color: colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.5), location: 0.7),
                     .init(color: .clear, location: 1)
-                ]), startPoint: .leading, endPoint: .trailing) // 왼쪽에서 오른쪽으로의 선형 그라데이션
+                ]), startPoint: .leading, endPoint: .trailing)
             }
                 .frame(height: 100)
                 .clipped()
         )
+        .cornerRadius(8)
+        .shadow(radius: 3)
         .scaledToFill()
     }
 }
@@ -266,4 +276,24 @@ struct JourneyDetailView: View {
 
 #Preview {
     JourneyListView()
+}
+
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let a, r, g, b: UInt64
+        switch hex.count {
+        case 3: // RGB (12-bit)
+            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6: // RGB (24-bit)
+            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        case 8: // ARGB (32-bit)
+            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (a, r, g, b) = (255, 0, 0, 0)
+        }
+        self.init(.sRGB, red: Double(r) / 255, green: Double(g) / 255, blue:  Double(b) / 255, opacity: Double(a) / 255)
+    }
 }
