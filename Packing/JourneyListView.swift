@@ -7,10 +7,24 @@
 
 import SwiftUI
 
+enum TravelActivity: String, CaseIterable {
+    case beach = "해변"
+    case camping = "캠핑"
+    case hiking = "등산"
+    case sightseeing = "관광"
+    case skiing = "스키"
+    case cycling = "자전거 타기"
+    case foodTour = "음식 투어"
+    case culturalExperience = "문화 체험"
+    case waterSports = "수상 스포츠"
+    // 다른 여행 활동 추가
+}
+
+
 struct Journey: Identifiable, Hashable {
     let id: UUID = UUID()
     let destination: String // 여행 목적지
-    let activities: [String]    // 여행 활동 Array
+    let activities: [TravelActivity]
     let image: String    //  여행 사진
     let startDate: Date // 여행 시작 날짜
     let endDate: Date   // 여행 끝 날짜
@@ -24,9 +38,9 @@ struct Journey: Identifiable, Hashable {
 
 extension Journey {
     static let sample: [Journey] = [
-        Journey(destination: "다낭", activities: ["바다", "해변"], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
-        Journey(destination: "가평", activities: ["글램핑", "캠핑"], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
-        Journey(destination: "사하라 사막", activities: ["배낭여행", "사막"], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3))
+        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
+        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
+        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3))
     ]
 }
 
@@ -45,7 +59,6 @@ struct JourneyListView: View {
                 .listRowSeparator(.hidden)
                 .cornerRadius(3.0)
                 .shadow(radius: 3, x: 3, y: 3)
-
             }
             .listStyle(.plain)
             .navigationDestination(for: Journey.self) { journey in
@@ -90,7 +103,7 @@ struct JourneySummaryView: View {
                 .font(.title2)
                 .fontWeight(.bold)
             
-            Text("\(journey.activities.joined(separator: ", "))")
+            Text(journey.activities.map { $0.rawValue }.joined(separator: ", "))
                 .font(.callout)
                 .fontWeight(.thin)
 
