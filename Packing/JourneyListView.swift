@@ -146,15 +146,17 @@ struct JourneyListView: View {
                                 NavigationLink(value: journey) {
                                     JourneySummaryView(journey: journey)
                                         .frame(height: 100)
-                                        .padding(.top)
+                                        .padding(.top, 10)
                                 }
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .cornerRadius(3.0)
-                                .shadow(radius: 3, x: 3, y: 3)
+                                .shadow(radius: 3, x: 1, y: 4)
                             }
                             .listStyle(.plain)
                             .cornerRadius(30)
+                            .edgesIgnoringSafeArea(.bottom)
+
     //                        .padding(.top)
                             .navigationDestination(for: Journey.self) { journey in
                                 JourneyDetailView(journey: journey)
@@ -196,6 +198,7 @@ struct JourneyListView: View {
                     } label: {
                         Image(systemName: "bag.fill.badge.plus")
                             .font(.title)
+                            .foregroundStyle(Color("DarkColor"))
                     }
                 }
             }
