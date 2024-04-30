@@ -40,50 +40,169 @@ extension Journey {
     static let sample: [Journey] = [
         Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
         Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
+        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3)),
+        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
+        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
         Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3))
     ]
 }
 
+//
+//struct JourneyListView: View {
+//    var journeys = Journey.sample
+//    @State private var isNewJourneyPresented = false
+//
+//    var body: some View {
+//        NavigationStack {
+//            ZStack {
+////                Color("mainColor")
+//
+//                VStack {
+//                    if journeys.isEmpty {
+//                        Image(systemName: "airplane")
+//                            .font(.title)
+//                            .padding()
+//                        
+//                        Text("현재 여행 목록이 없습니다.\n여행을 추가해주세요.")
+//                            .font(.headline)
+//                            .multilineTextAlignment(.center)
+//                    } else {
+//                        List(journeys) { journey in
+//                            NavigationLink(value: journey) {
+//                                JourneySummaryView(journey: journey)
+//                                    .frame(height: 100)
+//                            }
+//                            .listRowSeparator(.hidden)
+//                            .cornerRadius(3.0)
+//                            .shadow(radius: 3, x: 3, y: 3)
+//                        }
+//                        .listStyle(.plain)
+//                        .navigationDestination(for: Journey.self) { journey in
+//                            JourneyDetailView(journey: journey)
+//                        }
+//                    }
+//                }
+//                
+//                // MARK: - ADD BUTTON
+//                VStack {
+//                    Spacer()
+//                    HStack {
+//                        Spacer()
+//                        Button {
+//                            isNewJourneyPresented.toggle()
+//                        } label: {
+//                            Image(systemName: "bag.fill.badge.plus")
+//                                .font(.largeTitle)
+//                                .foregroundStyle(Color("mainColor"))
+//                                .shadow(radius: 1)
+//                        }
+//                    }
+//                    .padding(.horizontal)
+//                }
+//                .padding()
+//            }
+//
+//            .navigationTitle("JourneyListView")
+//            .navigationBarTitleDisplayMode(.inline)
+//            .toolbarBackground(Color("mainColor"), for: .navigationBar)
+//            .sheet(isPresented: $isNewJourneyPresented) {
+//                // MARK: -  AddJourneyView 추가
+//                EmptyView()
+//                    .presentationDetents([.medium, .large])
+//                    .presentationCornerRadius(21)
+//            }
+//        }
+//    }
+//}
 
 struct JourneyListView: View {
     var journeys = Journey.sample
     @State private var isNewJourneyPresented = false
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
         NavigationStack {
-            List(journeys) { journey in
-                NavigationLink(value: journey) {
-                    JourneySummaryView(journey: journey)
-                        .frame(height: 100)
+            ZStack {
+                Color("mainColor").ignoresSafeArea()
+                VStack {
+                    if journeys.isEmpty {
+                        Image(systemName: "airplane")
+                            .font(.title)
+                            .padding()
+                        
+                        Text("현재 여행 목록이 없습니다.\n여행을 추가해주세요.")
+                            .font(.headline)
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Spacer()
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 30)
+                                .fill(colorScheme == .dark ? Color("DarkColor") : .white)
+                                .frame(minHeight: 700, maxHeight: .infinity)
+                                .shadow(radius: 5)
+                                .edgesIgnoringSafeArea(.bottom)
+                            
+                            List(journeys) { journey in
+                                NavigationLink(value: journey) {
+                                    JourneySummaryView(journey: journey)
+                                        .frame(height: 100)
+                                        .padding(.top)
+                                }
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .cornerRadius(3.0)
+                                .shadow(radius: 3, x: 3, y: 3)
+                            }
+                            .listStyle(.plain)
+                            .cornerRadius(30)
+    //                        .padding(.top)
+                            .navigationDestination(for: Journey.self) { journey in
+                                JourneyDetailView(journey: journey)
+                            }
+                        }
+//                        .offset(y: 20)
+                    }
                 }
-                .listRowSeparator(.hidden)
-                .cornerRadius(3.0)
-                .shadow(radius: 3, x: 3, y: 3)
+//                // MARK: - ADD BUTTON
+//                VStack {
+//                    Spacer()
+//                    HStack {
+//                        Spacer()
+//                        Button {
+//                            isNewJourneyPresented.toggle()
+//                        } label: {
+//                            Image(systemName: "bag.fill.badge.plus")
+//                                .font(.largeTitle)
+//                                .foregroundStyle(Color("mainColor"))
+////                                .shadow(radius: 1)
+//                        }
+//                    }
+//                    .padding(.horizontal)
+//                }
+//                .padding()
             }
-            .listStyle(.plain)
-            .navigationDestination(for: Journey.self) { journey in
-                JourneyDetailView(journey: journey)
-            }
-            .navigationTitle("JourneyListView")
-            .navigationBarTitleDisplayMode(.inline)
+//            .navigationTitle("여행 목록")
             .toolbarBackground(Color("mainColor"), for: .navigationBar)
-            .toolbar {
-                Button {
-                    isNewJourneyPresented.toggle()
-                } label: {
-                    Image(systemName: "plus")
-                        .font(.headline)
-                }
-            }
             .sheet(isPresented: $isNewJourneyPresented) {
                 // MARK: -  AddJourneyView 추가
                 EmptyView()
                     .presentationDetents([.medium, .large])
                     .presentationCornerRadius(21)
             }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isNewJourneyPresented.toggle()
+                    } label: {
+                        Image(systemName: "bag.fill.badge.plus")
+                            .font(.title)
+                    }
+                }
+            }
         }
     }
 }
+
 
 struct JourneySummaryView: View {
     @Environment(\.colorScheme) var colorScheme
@@ -122,8 +241,8 @@ struct JourneySummaryView: View {
                 }
 
                 LinearGradient(gradient: Gradient(stops: [
-                    .init(color: colorScheme == .dark ? Color.black : Color.white.opacity(0.9), location: 0.3),
-                    .init(color: colorScheme == .dark ? Color.black.opacity(0.7) : Color.white.opacity(0.5), location: 0.7),
+                    .init(color: colorScheme == .dark ? Color.black : Color.white.opacity(0.99), location: 0.3),
+                    .init(color: colorScheme == .dark ? Color.black.opacity(0.7) : Color.white.opacity(0.6), location: 0.7),
                     .init(color: .clear, location: 1)
                 ]), startPoint: .leading, endPoint: .trailing) // 왼쪽에서 오른쪽으로의 선형 그라데이션
             }
