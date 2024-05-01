@@ -23,7 +23,7 @@ struct OnboardingView: View {
             MainView()
         } else {
             ZStack {
-                Color(red: 189/255, green: 205/255, blue: 214/255).edgesIgnoringSafeArea(.all) // 전체 배경색 설정
+                Color("mainColor").edgesIgnoringSafeArea(.all)
 
                 TabView(selection: $currentPage) {
                     ForEach(0..<4, id: \.self) { index in
@@ -32,6 +32,8 @@ struct OnboardingView: View {
                 }
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .transition(.slide)
+                .animation(.easeInOut, value: currentPage)
 
                 HStack {
                     if currentPage > 0 {
@@ -70,10 +72,11 @@ struct OnboardingStepView: View {
     var body: some View {
         VStack {
             Text(headerText[index])
-                .font(.title2)
+                .font(.largeTitle)
                 .fontWeight(.semibold)
                 .padding()
                 .foregroundColor(.black)
+                .shadow(color:.gray, radius: 2, x:0 , y:1)
 
             Image(images[index])
                 .resizable()
@@ -82,25 +85,20 @@ struct OnboardingStepView: View {
 
             Text(descriptionText[index])
                 .font(.headline)
-                .fontWeight(.semibold)
+                .fontWeight(.light)
                 .multilineTextAlignment(.center)
                 .padding()
 
             if index == 3 {
-                Button("Enjoy your trip!") {
+                Button("Let's Start") {
                     showMainView = true
                 }
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding()
-                .background(Color.gray)
+                .background(Color.mint)
                 .cornerRadius(10)
-//            } else {
-//                Text(footerText[index])
-//                    .font(.subheadline)
-//                    .foregroundColor(.gray)
-//                    .multilineTextAlignment(.center)
-//                    .padding()
+                .shadow(color:.gray, radius: 2, x:0, y:1)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -111,7 +109,7 @@ let headerText = [
     "Get Organized",
     "Personalized Suggestions",
     "Pack Together",
-//    "Enjoy Your Trip"
+    "Enjoy Your Trip"
 ]
 
 let descriptionText = [
@@ -121,12 +119,7 @@ let descriptionText = [
     ""
 ]
 
-//let footerText = [
-//    "Prepare for your trip efficiently.",
-//    "Tailor your packing list and share it.",
-//    "Coordinate real-time with your travel companions.",
-//    "Have a great journey!"
-//]
+
 
 
 
