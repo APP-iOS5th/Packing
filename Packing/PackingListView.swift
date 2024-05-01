@@ -10,11 +10,6 @@ import SwiftUI
 struct PackingListView: View {
     @State var showingMember: String = "나"
     var memberList: [String] = ["나", "멤버2", "멤버3", "멤버4"]
-//    @State var packingList: [Luggage] =
-//    [Luggage(name: "잠옷", isChecked: true, type: .common),
-//     Luggage(name: "칫솔", isChecked: false, type: .common),
-//     Luggage(name: "수건", isChecked: false, type: .common),
-//     Luggage(name: "양말", isChecked: false, type: .common)]
     @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
     var body: some View {
         NavigationStack {
@@ -45,7 +40,7 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)) {
                         Picker(selection: $showingMember, label: Text("choose member")){
-                            ForEach(memberList, id: \.self){ name in
+                            ForEach(Array(service.personalLuggages.keys), id: \.self){ name in
                                 Text(name).tag(name)
                             }
                         }
@@ -57,22 +52,29 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
-                    Button("firestore data print") {
-                        print("click")
-                        service.updatePackingItems()
+                    List(service.shareLuggages){ shareLuggage in
+                        HStack{
+                            Button {
+                                //toggle
+                            } label: {
+                                Label {
+                                    Text(shareLuggage.name)
+                                        .tint(.black)
+                                } icon: {
+                                    Image(systemName: "checkmark.square")
+                                }
+                            }
+                            Text("( \(shareLuggage.checkedPeople.count) / \(shareLuggage.requiredCount) )")
+                                .foregroundStyle(.gray)
+                            if !shareLuggage.checkedPeople.isEmpty {
+                                Text("-")
+                                ForEach(shareLuggage.checkedPeople, id: \.self) { name in
+                                    Text(name)
+                                        .font(.system(size: 15))
+                                }
+                            }
+                        }
                     }
-//                    ForEach($packingList){ $item in
-//                        Button {
-//                            //토글
-//                        } label: {
-//                            Label {
-//                                Text(item.name)
-//                                    .tint(.black)
-//                            } icon: {
-//                                item.isChecked ? Image(systemName: "checkmark.square") : Image(systemName: "square")
-//                            }
-//                        }
-//                    }
                 }
                 Section(header:
                             Text("개인")
@@ -80,19 +82,18 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
-//                    ForEach($packingList){ $item in
-//                        Button {
-//                            //토글
-//                        } label: {
-//                            Label {
-//                                Text(item.name)
-//                                    .tint(.black)
-//                            } icon: {
-//                                item.isChecked ? Image(systemName: "checkmark.square") : Image(systemName: "square")
-//                            }
-//                        }
-//                    }
-                    
+                    List(service.personalLuggages[showingMember] ?? []){ personalLuggage in
+                        Button {
+                            //toggle
+                        } label: {
+                            Label {
+                                Text(personalLuggage.name)
+                                    .tint(.black)
+                            } icon: {
+                                Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
+                            }
+                        }
+                    }
                 }
             }
             .scrollContentBackground(.hidden)

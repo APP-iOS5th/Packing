@@ -7,8 +7,7 @@
 
 import Foundation
 
-class ShareLuggage: Codable {
-    
+class ShareLuggage: Identifiable, Codable {
     let name: String
     var checkedPeople: [String]
     var requiredCount: Int
@@ -20,7 +19,7 @@ class ShareLuggage: Codable {
     }
 }
 
-class PersonalLuggage: Codable {
+class PersonalLuggage: Identifiable, Codable {
 
     let name: String
     var isChecked: Bool
@@ -32,12 +31,12 @@ class PersonalLuggage: Codable {
 }
 
 class PackingItem: Codable {
-    let id: String
+//    let id: String
     let personal: [String: [PersonalLuggage]]
     let share: [ShareLuggage]
     
-    init(id: String, personal: [String : [PersonalLuggage]], share: [ShareLuggage]) {
-        self.id = id
+    init(/*id: String, */personal: [String : [PersonalLuggage]], share: [ShareLuggage]) {
+//        self.id = id
         self.personal = personal
         self.share = share
     }
