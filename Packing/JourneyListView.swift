@@ -28,7 +28,7 @@ struct Journey: Identifiable, Hashable {
     let image: String    //  여행 사진
     let startDate: Date // 여행 시작 날짜
     let endDate: Date   // 여행 끝 날짜
-    
+    let packingItemId: String
     var duration: String {
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
@@ -38,12 +38,12 @@ struct Journey: Identifiable, Hashable {
 
 extension Journey {
     static let sample: [Journey] = [
-        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
-        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
-        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3)),
-        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
-        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
-        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3))
+        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: ""),
+        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7), packingItemId: ""),
+        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3), packingItemId: ""),
+        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: ""),
+        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7), packingItemId: ""),
+        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3), packingItemId: "")
     ]
 }
 
@@ -169,6 +169,7 @@ struct JourneyListView: View {
     //                        .padding(.top)
                             .navigationDestination(item: $selectedJourney) { journey in
                                 JourneyDetailView(journey: journey)
+                                
                             }
                         }
 //                        .offset(y: 20)
