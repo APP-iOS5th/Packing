@@ -11,7 +11,7 @@ import SwiftUI
 struct PackingApp: App {
     var body: some Scene {
         WindowGroup {
-            JourneyListView()
+            RegisterationView()
         }
     }
 }

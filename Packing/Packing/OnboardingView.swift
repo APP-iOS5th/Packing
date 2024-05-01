@@ -14,6 +14,7 @@ struct MainView: View {
     }
 }
 
+// TODO: step 넘어갈때 부드러운 효과 
 struct OnboardingView: View {
     @State private var currentPage = 0
     @State private var showMainView = false
@@ -23,6 +24,8 @@ struct OnboardingView: View {
             MainView()
         } else {
             ZStack {
+//                Color(hex: 0xF3F3F3)
+//                    .edgesIgnoringSafeArea(.all)
                 Color(red: 189/255, green: 205/255, blue: 214/255).edgesIgnoringSafeArea(.all) // 전체 배경색 설정
 
                 TabView(selection: $currentPage) {
@@ -32,6 +35,8 @@ struct OnboardingView: View {
                 }
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
+                .transition(.slide)
+                .animation(.easeInOut, value: currentPage)
 
                 HStack {
                     if currentPage > 0 {
@@ -95,12 +100,6 @@ struct OnboardingStepView: View {
                 .padding()
                 .background(Color.gray)
                 .cornerRadius(10)
-//            } else {
-//                Text(footerText[index])
-//                    .font(.subheadline)
-//                    .foregroundColor(.gray)
-//                    .multilineTextAlignment(.center)
-//                    .padding()
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -121,12 +120,7 @@ let descriptionText = [
     ""
 ]
 
-//let footerText = [
-//    "Prepare for your trip efficiently.",
-//    "Tailor your packing list and share it.",
-//    "Coordinate real-time with your travel companions.",
-//    "Have a great journey!"
-//]
+
 
 
 
