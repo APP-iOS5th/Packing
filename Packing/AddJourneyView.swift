@@ -41,16 +41,14 @@ struct AddJourneyView: View {
                         if let image = image {
                             image
                                 .resizable()
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
                                 .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                                 .padding(.top, 60)
                                 .shadow(radius: 3)
-                            
                         } else {
                             Spacer()
                             Rectangle()
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
                                 .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                                 .padding(.top, 60)
                                 .shadow(radius: 3)
@@ -99,6 +97,7 @@ struct AddJourneyView: View {
                                         .padding()
                                 }
                                 .bold()
+                                .font(.body)
                                 .frame(width: 300 , alignment: .leading)
                                 .background(Color(hex: 0xF3F3F3))
                                 .clipShape(RoundedRectangle(cornerRadius: 15.0))
@@ -108,6 +107,7 @@ struct AddJourneyView: View {
                                 Picker("여행 활동", selection: $travelActivitys){
                                     ForEach(TravelActivity.allCases, id: \.self) {
                                         Text($0.rawValue)
+                                            .font(.body)
                                     }
                                 }
                                 .foregroundStyle(.black)
