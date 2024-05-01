@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PackingListView: View {
     @State var showingMember: String = "나"
-    var memberList: [String] = ["나", "멤버2", "멤버3", "멤버4"]
     @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
     var body: some View {
         NavigationStack {
