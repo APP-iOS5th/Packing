@@ -30,3 +30,14 @@ class PersonalLuggage {
         self.isChecked = isChecked
     }
 }
+
+//class PackingItem: Codable {
+//    let id: String
+//    let peronal: Dictionary<String,[Dictionary<String,Any>]>
+//    let share: [Dictionary<String,Any>]
+//    
+//    init(id: String = UUID().uuidString ,peronal: Dictionary<String, [Dictionary<String, Any>]>, share: [Dictionary<String, Any>]) {
+//        self.peronal = peronal
+//        self.share = share
+//    }
+//}

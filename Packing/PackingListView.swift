@@ -15,6 +15,7 @@ struct PackingListView: View {
 //     Luggage(name: "칫솔", isChecked: false, type: .common),
 //     Luggage(name: "수건", isChecked: false, type: .common),
 //     Luggage(name: "양말", isChecked: false, type: .common)]
+    @State private var service: ShareLuggageService = ShareLuggageService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
     var body: some View {
         NavigationStack {
             Button(action: {
@@ -56,6 +57,11 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
+                    Button("firestore data print") {
+                        print("click")
+//                        service.printData()
+                        service.updateShareLuggages()
+                    }
 //                    ForEach($packingList){ $item in
 //                        Button {
 //                            //토글
