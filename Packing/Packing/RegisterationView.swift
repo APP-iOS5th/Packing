@@ -36,34 +36,34 @@ struct RegistrationView: View {
                     .font(.headline)
                     .foregroundColor(.gray)
                 Spacer()
-// MARK: EMAIL 넣을지말지.. 넣으면 심들꺼같기도 ..
-                TextField("이메일을 입력해주세요.", text: $email)
-                    .padding()
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .padding(.horizontal)
-
-                Button("이메일로 계속하기") {
-                    // Implement email continue action
-                }
-                .foregroundColor(.white)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(10)
-                .padding(.horizontal)
-
-                Text("또는")
-                    .foregroundColor(.gray)
-                    .padding()
+//// MARK: EMAIL 넣을지말지.. 넣으면 심들꺼같기도 ..
+//                TextField("이메일을 입력해주세요.", text: $email)
+//                    .padding()
+//                    .background(Color.white)
+//                    .cornerRadius(10)
+//                    .padding(.horizontal)
+//
+//                Button("continue with email") {
+//                    // Implement email continue action
+//                }
+//                .foregroundColor(.white)
+//                .padding()
+//                .background(Color.blue)
+//                .cornerRadius(10)
+//                .padding(.horizontal)
+//
+//                Text("또는")
+//                    .foregroundColor(.gray)
+//                    .padding()
 
                 HStack {
                     Button(action: {
-                        authenticationViewModel.login() // Google login action
+                        authenticationViewModel.login()
                     }) {
-                        Image("googleIcon") // Ensure 'googleIcon' is in your assets
+                        Image("googleIcon")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 50, height: 50)
                             .padding()
                             .background(Color.white)
                             .clipShape(Circle())
@@ -72,10 +72,10 @@ struct RegistrationView: View {
                     Button(action: {
                         performAppleLogin()
                     }) {
-                        Image("macIcon") // Ensure 'appleIcon' is in your assets
+                        Image("macIcon")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20, height: 20)
+                            .frame(width: 50, height: 50)
                             .padding()
                             .background(Color.white)
                             .clipShape(Circle())
