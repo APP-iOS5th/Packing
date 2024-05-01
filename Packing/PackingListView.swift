@@ -54,14 +54,20 @@ struct PackingListView: View {
             .padding()
             .frame(maxWidth: .infinity, maxHeight: 100)
             .background(.yellow)
+            .padding()
             
-            Picker(selection: $showingMember, label: Text("choose member")){
-                ForEach(memberList, id: \.self){ name in
-                    Text(name).tag(name)
-                }
-            }
-            .pickerStyle(.automatic)
             Form {
+                Section(header: Text("구성원")
+                    .foregroundStyle(.black)
+                    .font(.title2)
+                    .fontWeight(.bold)) {
+                        Picker(selection: $showingMember, label: Text("choose member")){
+                            ForEach(memberList, id: \.self){ name in
+                                Text(name).tag(name)
+                            }
+                        }
+                        .pickerStyle(.automatic)
+                    }
                 Section(header:
                             Text("공용")
                     .foregroundStyle(.black)
@@ -102,8 +108,12 @@ struct PackingListView: View {
                     
                 }
             }
+            .scrollContentBackground(.hidden)
+            
+            //색상 변경해야함
+            .background(RoundedRectangle(cornerRadius: 30).fill(Color.blue))
+            .ignoresSafeArea()
         }
-        .padding()
     }
 }
 
