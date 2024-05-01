@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15256EDB2BE0D04000473DD1 /* PackingListView.swift */; };
+		4B1139FB2BE205160028EE65 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1139FA2BE205160028EE65 /* ImagePicker.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		15256EDB2BE0D04000473DD1 /* PackingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListView.swift; sourceTree = "<group>"; };
+		4B1139FA2BE205160028EE65 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		C68C4B762BE0CBE600B62122 /* Packing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Packing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,7 @@
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
 				C68C4B892BE0CE0300B62122 /* OnboardingView.swift */,
 				4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */,
+				4B1139FA2BE205160028EE65 /* ImagePicker.swift */,
 				C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */,
 				C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */,
 				4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */,
@@ -171,6 +174,7 @@
 				C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */,
 				4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */,
 				C68C4B8A2BE0CE0300B62122 /* OnboardingView.swift in Sources */,
+				4B1139FB2BE205160028EE65 /* ImagePicker.swift in Sources */,
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
 				15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */,
