@@ -14,8 +14,7 @@ struct AddJourneyView: View {
     @State private var startdate = Date()
     @State private var endDate = Date()
     
-    @State private var selectedlist = ""
-    private let list: [String] = ["test1","test2","test3","test4","test5"]
+    @State private var travelActivitys: TravelActivity = .beach
     
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
@@ -26,45 +25,59 @@ struct AddJourneyView: View {
         image = Image(uiImage: selectedImage)
     }
     @Environment(\.colorScheme) var colorScheme
-
+    
     
     var body: some View {
         NavigationStack{
             ZStack{
                 //MARK: - 사진 배경
-             
-//                Color(hex: 0xBDCDD6)
+                
+                //                Color(hex: 0xBDCDD6)
                 LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
                 
                 VStack{
-                    if let image = image {
-                        image
-                            .resizable()
-                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            .frame(width:300, height: 200)
-                            .padding(.top, 50)
-                            .shadow(radius: 3)
+                    ZStack{
+                        if let image = image {
+                            image
+                                .resizable()
+                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(.top, 60)
+                                .shadow(radius: 3)
+                            
+                        } else {
                             Spacer()
-                    } else {
-                        Rectangle()
-                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            .frame(width:300, height: 200)
-                            .padding(.top, 50)
-                            .shadow(radius: 3)
-                            .foregroundStyle(.white)
-                            Spacer()
+                            Rectangle()
+                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(.top, 60)
+                                .shadow(radius: 3)
+                                .foregroundStyle(.white)
+                            VStack{
+                                Image(systemName: "photo.badge.plus")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100)
+                                    .padding(.top, 50)
+                                    .foregroundStyle(Color(hex: 0x566375))
+                        
+                            }
+                        }
+                    }.onTapGesture {
+                        showImagePicker.toggle()
                     }
                     ZStack{
                         RoundedRectangle(cornerRadius: 30)
                             .foregroundStyle(.white)
-                            .frame(height: 600)
+                            .frame(minHeight: 550, maxHeight: .infinity)
                         VStack {
-                            VStack(alignment:.leading){
+                            VStack(alignment:.center){
                                 
                                 // MARK: 여행 목적
                                 Text("여행목적")
-                                    .font(.title3)
+                                    .font(.title2)
                                     .fontWeight(.bold)
                                 
                                 TextField("여행목적",text: $testString)
@@ -76,26 +89,25 @@ struct AddJourneyView: View {
                                     .padding(.bottom,30)
                                 
                                 // MARK: - 여행 기간
-                                Section(content: {
+                                Text("여행 기간")
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                VStack{
                                     DatePicker("시작 날짜", selection: $startdate, displayedComponents: [.date])
-                                    
+                                        .padding()
                                     DatePicker("종료 날짜", selection: $endDate, displayedComponents: [.date])
-                                        .padding(.bottom,30)
-                                }, header: {
-                                    Text("여행 기간")
-                                        .font(.title3)
-                                        .fontWeight(.bold)
-                                    
-                                })
-                                
+                                        .padding()
+                                }
+                                .bold()
                                 .frame(width: 300 , alignment: .leading)
-                                
-                                
-                                
+                                .background(Color(hex: 0xF3F3F3))
+                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .padding()
+                                    
                                 //MARK: - 여행 목적
-                                Picker("여행 활동", selection: $selectedlist){
-                                    ForEach(list, id: \.self) {
-                                        Text($0)
+                                Picker("여행 활동", selection: $travelActivitys){
+                                    ForEach(TravelActivity.allCases, id: \.self) {
+                                        Text($0.rawValue)
                                     }
                                 }
                                 .foregroundStyle(.black)
@@ -108,7 +120,7 @@ struct AddJourneyView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                 
                                 
-                            }.padding(.bottom,30)
+                            }
                             
                             //MARK: - 확인 버튼
                             Button{
@@ -123,27 +135,15 @@ struct AddJourneyView: View {
                                     .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                 
                             }
+                            .padding(.top, 30)
                             
                         }
-                    }.padding(.top, 20)
+                    }
                 }
             }
             .ignoresSafeArea(.all)
         }
-        .toolbar{
-            ToolbarItem(placement: .topBarTrailing) {
-                //MARK: - 사진 추가
-                Button{
-                    //TODO: 사진 추가 기능 구현
-                    showImagePicker.toggle()
-                }label: {
-                    Image(systemName: "plus.circle")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .foregroundStyle(Color(hex: 0x566375))
-                }
-            }
-        }
+        
         .sheet(isPresented: $showImagePicker, onDismiss: {
             loadImage()
         }) {
