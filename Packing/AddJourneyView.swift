@@ -70,7 +70,7 @@ struct AddJourneyView: View {
                                     .font(.title3)
                                     .fontWeight(.bold)
                                     .padding(.top,30)
-                                Picker("list",selection: $listdata){
+                                Picker("list", selection: $selectedlist){
                                     ForEach(list, id: \.self) {
                                         Text($0)
                                         .clipShape(RoundedRectangle(cornerRadius: 15.0))
