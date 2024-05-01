@@ -10,28 +10,12 @@ import SwiftUI
 struct PackingListView: View {
     @State var showingMember: String = "나"
     @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
+    let journey = Journey.sample[0]
     var body: some View {
         NavigationStack {
-            Button(action: {
-                
-            }, label: {
-                HStack{
-                    VStack(alignment: .leading){
-                        Text("경기 가평")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.black)
-                        Text("캠핑")
-                            .font(.subheadline)
-                            .foregroundStyle(.gray)
-                    }
-                    Spacer()
-                }
-            })
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: 100)
-            .background(.yellow)
-            .padding()
+            JourneySummaryView(journey: journey)
+                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
+                .padding()
             
             Form {
                 Section(header: Text("구성원")
