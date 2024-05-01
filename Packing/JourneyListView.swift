@@ -62,7 +62,7 @@ extension Journey {
 //                        Image(systemName: "airplane")
 //                            .font(.title)
 //                            .padding()
-//                        
+//
 //                        Text("현재 여행 목록이 없습니다.\n여행을 추가해주세요.")
 //                            .font(.headline)
 //                            .multilineTextAlignment(.center)
@@ -82,7 +82,7 @@ extension Journey {
 //                        }
 //                    }
 //                }
-//                
+//
 //                // MARK: - ADD BUTTON
 //                VStack {
 //                    Spacer()
@@ -118,18 +118,18 @@ extension Journey {
 struct JourneyListView: View {
     var journeys = Journey.sample
     @State private var selectedJourney: Journey?
-
+    
     @State private var isNewJourneyPresented = false
     @Environment(\.colorScheme) var colorScheme
-
+    
     var body: some View {
         NavigationStack {
             ZStack {
-//                Color("mainColor").ignoresSafeArea()
+                //                Color("mainColor").ignoresSafeArea()
                 
                 LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
-
+                
                 VStack {
                     if journeys.isEmpty {
                         Image(systemName: "airplane")
@@ -155,7 +155,7 @@ struct JourneyListView: View {
                                     JourneySummaryView(journey: journey)
                                         .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
                                         .padding(.top, 10)
-//                                        .background(Color.clear)
+                                    //                                        .background(Color.clear)
                                         .shadow(radius: 3, x: 1, y: 4)
                                 }
                                 .buttonStyle(PlainButtonStyle())
@@ -165,35 +165,35 @@ struct JourneyListView: View {
                             .listStyle(.plain)
                             .cornerRadius(30)
                             .edgesIgnoringSafeArea(.bottom)
-
-    //                        .padding(.top)
+                            
+                            //                        .padding(.top)
                             .navigationDestination(item: $selectedJourney) { journey in
                                 JourneyDetailView(journey: journey)
                                 
                             }
                         }
-//                        .offset(y: 20)
+                        //                        .offset(y: 20)
                     }
                 }
-//                // MARK: - ADD BUTTON
-//                VStack {
-//                    Spacer()
-//                    HStack {
-//                        Spacer()
-//                        Button {
-//                            isNewJourneyPresented.toggle()
-//                        } label: {
-//                            Image(systemName: "bag.fill.badge.plus")
-//                                .font(.largeTitle)
-//                                .foregroundStyle(Color("mainColor"))
-////                                .shadow(radius: 1)
-//                        }
-//                    }
-//                    .padding(.horizontal)
-//                }
-//                .padding()
+                //                // MARK: - ADD BUTTON
+                //                VStack {
+                //                    Spacer()
+                //                    HStack {
+                //                        Spacer()
+                //                        Button {
+                //                            isNewJourneyPresented.toggle()
+                //                        } label: {
+                //                            Image(systemName: "bag.fill.badge.plus")
+                //                                .font(.largeTitle)
+                //                                .foregroundStyle(Color("mainColor"))
+                ////                                .shadow(radius: 1)
+                //                        }
+                //                    }
+                //                    .padding(.horizontal)
+                //                }
+                //                .padding()
             }
-//            .navigationTitle("여행 목록")
+            //            .navigationTitle("여행 목록")
             .toolbarBackground(Color("mainColor"), for: .navigationBar)
             .sheet(isPresented: $isNewJourneyPresented) {
                 // MARK: -  AddJourneyView 추가
@@ -203,9 +203,15 @@ struct JourneyListView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        isNewJourneyPresented.toggle()
-                    } label: {
+                    //                    Button {
+                    //                        isNewJourneyPresented.toggle()
+                    //
+                    //                    } label: {
+                    //                        Image(systemName: "bag.fill.badge.plus")
+                    //                            .font(.title)
+                    //                            .foregroundStyle(Color("DarkColor"))
+                    //                    }
+                    NavigationLink(destination: AddJourneyView()){
                         Image(systemName: "bag.fill.badge.plus")
                             .font(.title)
                             .foregroundStyle(Color("DarkColor"))
@@ -239,7 +245,7 @@ struct JourneySummaryView: View {
                 Text(journey.activities.map { $0.rawValue }.joined(separator: ", "))
                     .font(.callout)
                     .fontWeight(.thin)
-
+                
                 Text(journey.duration)
                     .font(.caption)
                     .fontWeight(.light)
