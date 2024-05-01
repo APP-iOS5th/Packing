@@ -8,92 +8,104 @@
 import SwiftUI
 import AuthenticationServices
 
-struct RegisterationView: View {
+extension AuthenticationViewModel {
+    @ObservedObject static var shared = AuthenticationViewModel()
+}
+
+struct RegistrationView: View {
+    @State private var email: String = ""
     @State private var userName: String = ""
     @State private var userEmail: String = ""
-    
-    @AppStorage("storedName") private var storedName: String = "" {
-        didSet {
-            userName = storedName
-        }
-    }
-    @AppStorage("storedEmail") private var storedEmail: String = "" {
-        didSet {
-            userEmail = storedEmail
-        }
-    }
+    @AppStorage("storedName") private var storedName: String = ""
+    @AppStorage("storedEmail") private var storedEmail: String = ""
     @AppStorage("userID") private var userID: String = ""
-    
+    @StateObject private var authenticationViewModel = AuthenticationViewModel.shared
+
     var body: some View {
-        Color(hex: 0xBDCDD6)
-            .edgesIgnoringSafeArea(.all)
+        ZStack {
+            Color("mainColor").edgesIgnoringSafeArea(.all)
+
             VStack {
+                Spacer()
                 Text("Packing")
-                    .font(.custom("New York-Bold", size: 30))
+                    .bold()
                     .font(.largeTitle)
-                Text("여행의 목적에 맞는 짐싸기")
-                    .font(.custom("New York-Bold", size: 20))
-                    .font(.largeTitle)
-            }
-            ZStack {
-                Color(hex: 0xBDCDD6)
-                if userName.isEmpty {
-                    SignInWithAppleButton(.signIn,
-                                          onRequest: onRequest,
-                                          onCompletion: onCompletion)
-                    .signInWithAppleButtonStyle(.whiteOutline)
-                    .frame(width: 200, height: 50)
-                    .padding()
-                    
-                } else {
-                    Text("Welcome, Packing \n\(userName), \(userEmail)")
-                        .foregroundStyle(.black)
+                    .foregroundColor(.black)
+                    .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                Text("여행 목적에 맞는 짐 싸기")
+                    .font(.headline)
+                    .foregroundColor(.gray)
+                Spacer()
+//// MARK: EMAIL 넣을지말지.. 넣으면 심들꺼같기도 ..
+//                TextField("이메일을 입력해주세요.", text: $email)
+//                    .padding()
+//                    .background(Color.white)
+//                    .cornerRadius(10)
+//                    .padding(.horizontal)
+//
+//                Button("continue with email") {
+//                    // Implement email continue action
+//                }
+//                .foregroundColor(.white)
+//                .padding()
+//                .background(Color.blue)
+//                .cornerRadius(10)
+//                .padding(.horizontal)
+//
+//                Text("또는")
+//                    .foregroundColor(.gray)
+//                    .padding()
+
+                HStack {
+                    Button(action: {
+                        authenticationViewModel.login()
+                    }) {
+                        Image("googleIcon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .padding()
+                            .background(Color.white)
+                            .clipShape(Circle())
+                    }
+
+                    Button(action: {
+                        performAppleLogin()
+                    }) {
+                        Image("macIcon")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .padding()
+                            .background(Color.white)
+                            .clipShape(Circle())
+                    }
+                }
+
+                Spacer()
+                if authenticationViewModel.state == .signedIn {
+                    Text("Welcome, \(userName), \(userEmail)")
+                        .foregroundColor(.black)
                         .font(.headline)
                 }
             }
-            .task { await authorize() }
-            .background(Color(hex: 0xBDCDD6))
-            .edgesIgnoringSafeArea(.all)
+            .padding()
         }
-    
-    private func authorize() async {
-        guard !userID.isEmpty else {
-            userName = ""
-            userEmail = ""
-            return
-        }
-        guard let credentialState = try? await ASAuthorizationAppleIDProvider()
-            .credentialState(forUserID: userID) else {
-            userName = ""
-            userEmail = ""
-            return
-        }
-        switch credentialState {
-        case .authorized:
-            userName = storedName
-            userEmail = storedEmail
-        default:
-            userName = ""
-            userEmail = ""
+        .onAppear {
+            authenticationViewModel.restorePreviousSignIn()
         }
     }
-    private func onRequest(_ request: ASAuthorizationAppleIDRequest) {
+
+    private func performAppleLogin() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.fullName, .email]
-    }
-    private func onCompletion(_ result: Result<ASAuthorization, Error>) {
-        switch result {
-        case .success(let authResult):
-            guard let credential = authResult.credential as? ASAuthorizationAppleIDCredential
-            else { return }
-            storedName = credential.fullName?.givenName ?? ""
-            storedEmail = credential.email ?? ""
-            userID = credential.user
-        case .failure(let error):
-            print("Authorization failed: " + error.localizedDescription)
-        }
+
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.performRequests()
     }
 }
 
+
 #Preview {
-    RegisterationView()
+    RegistrationView()
 }
