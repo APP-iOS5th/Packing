@@ -10,7 +10,11 @@ import SwiftUI
 
 struct AddJourneyView: View {
     @State var testString = ""
-    @State private var date = Date()
+    @State private var Startdate = Date()
+    @State private var endDate = Date()
+    @State private var listdata = ""
+    private let list: [String] = ["test1","test2","test3","test4","test5"]
+    
     var body: some View {
         NavigationStack{
             ZStack{
@@ -20,10 +24,11 @@ struct AddJourneyView: View {
                     ZStack{
                         RoundedRectangle(cornerRadius: 30)                            
                             .foregroundStyle(.white)
-                            .frame(height: 700)
+                            .frame(height: 550)
                         VStack {
-                            // MARK: 여행 목적
                             VStack(alignment:.leading){
+                                
+                                // MARK: 여행 목적
                                 Text("여행목적")
                                     .font(.title3)
                                     .fontWeight(.bold)
@@ -32,31 +37,48 @@ struct AddJourneyView: View {
                                     .padding()
                                     .font(.subheadline)
                                     .background(Color(hex: 0xF3F3F3))
-                                    .clipShape(.capsule)
+                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                     .frame(width: 300)
+                                    .padding(.bottom,30)
+                                
                                 // MARK: 여행 기간
-                                Text("여행 기간")
-                                    .font(.title3)
-                                    .fontWeight(.bold)
-                                DatePicker(
-                                       "Start Date",
-                                       selection: $date,
-                                       displayedComponents: [.date]
-                                   )
-                                   .datePickerStyle(.graphical)
-                                    .frame(width: 300)
+                                Section(content: {
+                                    
+//                                    DatePicker(
+//                                        "Start Date",
+//                                        selection: $date,
+//                                        displayedComponents: [.date]
+//                                    )
+//                                    .background(Color(hex: 0xF3F3F3))
+//                                    .clipShape(RoundedRectangle(cornerRadius: /*@START_MENU_TOKEN@*/25.0/*@END_MENU_TOKEN@*/))
+//                                    .datePickerStyle(.graphical)
+//                                    .frame(width: 300)
+//                                    .bold()
+                                    DatePicker("시작 날짜", selection: $Startdate, displayedComponents: [.date])
+                                    DatePicker("종료 날짜", selection: $endDate, displayedComponents: [.date])
+                                }, header: {
+                                    Text("여행 기간")
+                                        .font(.title3)
+                                        .fontWeight(.bold)
+                                    
+                                })
+                                .frame(width: 300 , alignment: .leading)
+                        
+                                    
+                                
                                 //MARK: 여행 목적
                                 Text("여행목적")
                                     .font(.title3)
                                     .fontWeight(.bold)
-                                TextField("여행목적",text: $testString)
-                                    .padding()
-                                    .font(.subheadline)
-                                    .background(Color(hex: 0xF3F3F3))
-                                    .clipShape(.capsule)
-                                    .frame(width: 300)
-                                    .padding(.bottom)
-                            }
+                                    .padding(.top,30)
+                                Picker("list",selection: $listdata){
+                                    ForEach(0..<list.count) {
+                                        Text(self.list[$0])
+                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    }
+                                }.background(Color(hex: 0xF3F3F3))
+                            }.padding(.bottom,30)
+                            
                             //MARK: 확인 버튼
                             Button{
                                 //TODO: 버튼 클릭시 데이터 전송
