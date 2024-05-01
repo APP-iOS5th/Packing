@@ -75,7 +75,7 @@ struct OnboardingStepView: View {
     var body: some View {
         VStack {
             Text(headerText[index])
-                .font(.title2)
+                .font(.largeTitle)
                 .fontWeight(.semibold)
                 .padding()
                 .foregroundColor(.black)
@@ -87,18 +87,18 @@ struct OnboardingStepView: View {
 
             Text(descriptionText[index])
                 .font(.headline)
-                .fontWeight(.semibold)
+                .fontWeight(.light)
                 .multilineTextAlignment(.center)
                 .padding()
 
             if index == 3 {
-                Button("Enjoy your trip!") {
+                Button("Let's Start") {
                     showMainView = true
                 }
                 .font(.headline)
                 .foregroundColor(.white)
                 .padding()
-                .background(Color.gray)
+                .background(Color.mint)
                 .cornerRadius(10)
             }
         }
