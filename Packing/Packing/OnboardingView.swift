@@ -79,6 +79,7 @@ struct OnboardingStepView: View {
                 .fontWeight(.semibold)
                 .padding()
                 .foregroundColor(.black)
+                .shadow(color:.gray, radius: 2, x:0 , y:1)
 
             Image(images[index])
                 .resizable()
@@ -100,6 +101,7 @@ struct OnboardingStepView: View {
                 .padding()
                 .background(Color.mint)
                 .cornerRadius(10)
+                .shadow(color:.gray, radius: 2, x:0, y:1)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
