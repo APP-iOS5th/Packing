@@ -4,25 +4,27 @@
 //
 //  Created by 이융의 on 4/30/24.
 //
-
 import SwiftUI
 
-struct MainView : View {
-    var body : some View {
-        Text("Welcome to LAB5 Paking APP")
-        //main layout details insertion
+struct MainView: View {
+    var body: some View {
+        Text("Welcome to LAB5 Packing APP")
+            .font(.title)
+            .padding()
     }
 }
-//onboardingView
+
 struct OnboardingView: View {
     @State private var currentPage = 0
     @State private var showMainView = false
-    
+
     var body: some View {
         if showMainView {
             MainView()
         } else {
             ZStack {
+                Color(red: 189/255, green: 205/255, blue: 214/255).edgesIgnoringSafeArea(.all) // 전체 배경색 설정
+
                 TabView(selection: $currentPage) {
                     ForEach(0..<4, id: \.self) { index in
                         OnboardingStepView(index: index, showMainView: $showMainView)
@@ -30,24 +32,29 @@ struct OnboardingView: View {
                 }
                 .tabViewStyle(PageTabViewStyle())
                 .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-                
-                // you can "swipe" the page or click "next"
-                VStack {
-                    HStack {
-                        Spacer()
+
+                HStack {
+                    if currentPage > 0 {
                         Button(action: {
-                            if currentPage < 3 {
-                                currentPage += 1
-                            } else {
-                                showMainView = true
-                            }
+                            currentPage -= 1
                         }) {
-                            Text("다음 >")
-                                .padding()
-                                .font(.system(size: 22))
+                            Image(systemName: "chevron.left")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
                         }
+                        .padding(.leading, 20)
                     }
                     Spacer()
+                    if currentPage < 3 {
+                        Button(action: {
+                            currentPage += 1
+                        }) {
+                            Image(systemName: "chevron.right")
+                                .font(.largeTitle)
+                                .foregroundColor(.white)
+                        }
+                        .padding(.trailing, 20)
+                    }
                 }
             }
         }
@@ -57,46 +64,71 @@ struct OnboardingView: View {
 struct OnboardingStepView: View {
     var index: Int
     @Binding var showMainView: Bool
-    
+
     let images = ["onboarding1", "onboarding2", "onboarding3", "onboarding4"]
     
     var body: some View {
         VStack {
-            Image(images[index]) // 각 인덱스에 따라서 넣어줌
+            Text(headerText[index])
+                .font(.title2)
+                .fontWeight(.semibold)
+                .padding()
+                .foregroundColor(.black)
+
+            Image(images[index])
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .padding()
-            Text(descriptionText)
+
+            Text(descriptionText[index])
                 .font(.headline)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
-            
-//            if index == 3
-//            {
-////                Button("Let's Dig in!") {
-////                    showMainView = true
-//                }
-//                .padding()
-//            }
+                .padding()
+
+            if index == 3 {
+                Button("Enjoy your trip!") {
+                    showMainView = true
+                }
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.gray)
+                .cornerRadius(10)
+//            } else {
+//                Text(footerText[index])
+//                    .font(.subheadline)
+//                    .foregroundColor(.gray)
+//                    .multilineTextAlignment(.center)
+//                    .padding()
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
-    
-    private var descriptionText: String {
-        switch index {
-        case 0:
-            return "Get Organized \n여행 준비를 한눈에! 여행 목적지와 활동에 맞춰 필요한 물품을 추천받으세요."
-        case 1:
-            return "Personalized Suggestions \n목적지와 일정에 따라 맞춤 패킹 리스트를 생성하고, 친구들과 공유하여 여행 준비를 더욱 쉽게!"
-        case 2:
-            return "Pack Together \n친구들과 패킹 리스트를 공유하고, 누가 무엇을 가져갈지 실시간으로 조율하세요."
-        case 3:
-            return "Enjoy Your Trip"
-        default:
-            return ""
-        }
-    }
 }
+
+let headerText = [
+    "Get Organized",
+    "Personalized Suggestions",
+    "Pack Together",
+//    "Enjoy Your Trip"
+]
+
+let descriptionText = [
+    "여행 준비를 한눈에! 여행 목적지와 활동에 맞춰 필요한 물품을 추천받으세요.",
+    "목적지와 일정에 따라 맞춤 패킹 리스트를 생성하고, 친구들과 공유하여 여행 준비를 더욱 쉽게!",
+    "친구들과 패킹 리스트를 공유하고, 누가 무엇을 가져갈지 실시간으로 조율하세요.",
+    ""
+]
+
+//let footerText = [
+//    "Prepare for your trip efficiently.",
+//    "Tailor your packing list and share it.",
+//    "Coordinate real-time with your travel companions.",
+//    "Have a great journey!"
+//]
+
+
 
 #Preview {
     OnboardingView()
