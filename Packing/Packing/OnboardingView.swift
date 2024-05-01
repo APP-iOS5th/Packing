@@ -111,7 +111,7 @@ let headerText = [
     "Get Organized",
     "Personalized Suggestions",
     "Pack Together",
-//    "Enjoy Your Trip"
+    "Enjoy Your Trip"
 ]
 
 let descriptionText = [
