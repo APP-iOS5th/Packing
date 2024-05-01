@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-
 struct AddJourneyView: View {
     @State var testString = ""
     @State private var Startdate = Date()
     @State private var endDate = Date()
-    @State private var listdata = ""
+    @State private var selectedlist = ""
     private let list: [String] = ["test1","test2","test3","test4","test5"]
     
     var body: some View {
@@ -67,16 +66,18 @@ struct AddJourneyView: View {
                                     
                                 
                                 //MARK: 여행 목적
-                                Text("여행목적")
+                                Text("여행 활동")
                                     .font(.title3)
                                     .fontWeight(.bold)
                                     .padding(.top,30)
                                 Picker("list",selection: $listdata){
-                                    ForEach(0..<list.count) {
-                                        Text(self.list[$0])
+                                    ForEach(list, id: \.self) {
+                                        Text($0)
                                         .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                    }
+                                    }.pickerStyle(.wheel)
                                 }.background(Color(hex: 0xF3F3F3))
+                                
+                            
                             }.padding(.bottom,30)
                             
                             //MARK: 확인 버튼
