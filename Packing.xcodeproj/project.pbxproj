@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15256EDB2BE0D04000473DD1 /* PackingListView.swift */; };
 		1526C0152BE1F2A500CDDE90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1526C0142BE1F2A500CDDE90 /* GoogleService-Info.plist */; };
+		1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
@@ -27,6 +28,7 @@
 		15256EDB2BE0D04000473DD1 /* PackingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListView.swift; sourceTree = "<group>"; };
 		1526C0132BE1EE0E00CDDE90 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		1526C0142BE1F2A500CDDE90 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItem.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		C68C4B762BE0CBE600B62122 /* Packing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Packing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,6 +76,7 @@
 				1526C0132BE1EE0E00CDDE90 /* Info.plist */,
 				C68C4B792BE0CBE600B62122 /* PackingApp.swift */,
 				15256EDB2BE0D04000473DD1 /* PackingListView.swift */,
+				1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */,
 				C68C4B872BE0CD5700B62122 /* JourneyListView.swift */,
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
 				C68C4B892BE0CE0300B62122 /* OnboardingView.swift */,
@@ -179,6 +182,7 @@
 				C68C4B8A2BE0CE0300B62122 /* OnboardingView.swift in Sources */,
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
+				1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */,
 				15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */,
 				4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */,
 				C68C4B8C2BE0CE3100B62122 /* RegisterationView.swift in Sources */,
