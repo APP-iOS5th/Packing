@@ -34,24 +34,6 @@ class PackingItemService {
         }
     }
     
-//    func updateShareLuggages () {
-//        let docRef = dbCollection.document(documentID)
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-////                if let data = document.data() {
-//                if let data = document.data(as: PackingItem.self) {
-//                    if let personalData = data["personal"] as? [String: Any] {
-//                        print("personal data: \(personalData)")
-//                    }
-//                    if let shareData = data["share"] as? [[String: Any]] {
-//                        print("share data: \(shareData)")
-//                    }
-//                }
-//            } else {
-//                print("document does not exist")
-//            }
-//        }
-//    }
     func updatePackingItems () {
         let docRef = dbCollection.document(documentID)
         docRef.getDocument { (document, error) in

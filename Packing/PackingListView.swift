@@ -15,7 +15,7 @@ struct PackingListView: View {
 //     Luggage(name: "칫솔", isChecked: false, type: .common),
 //     Luggage(name: "수건", isChecked: false, type: .common),
 //     Luggage(name: "양말", isChecked: false, type: .common)]
-    @State private var service: ShareLuggageService = ShareLuggageService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
+    @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
     var body: some View {
         NavigationStack {
             Button(action: {
