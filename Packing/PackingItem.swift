@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ShareLuggage {
+class ShareLuggage: Codable {
     
     let name: String
     var checkedPeople: [String]
@@ -20,7 +20,7 @@ class ShareLuggage {
     }
 }
 
-class PersonalLuggage {
+class PersonalLuggage: Codable {
 
     let name: String
     var isChecked: Bool
@@ -31,13 +31,14 @@ class PersonalLuggage {
     }
 }
 
-//class PackingItem: Codable {
-//    let id: String
-//    let peronal: Dictionary<String,[Dictionary<String,Any>]>
-//    let share: [Dictionary<String,Any>]
-//    
-//    init(id: String = UUID().uuidString ,peronal: Dictionary<String, [Dictionary<String, Any>]>, share: [Dictionary<String, Any>]) {
-//        self.peronal = peronal
-//        self.share = share
-//    }
-//}
+class PackingItem: Codable {
+    let id: String
+    let personal: [String: [PersonalLuggage]]
+    let share: [ShareLuggage]
+    
+    init(id: String, personal: [String : [PersonalLuggage]], share: [ShareLuggage]) {
+        self.id = id
+        self.personal = personal
+        self.share = share
+    }
+}

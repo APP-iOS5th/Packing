@@ -9,30 +9,19 @@ import Firebase
 import FirebaseFirestore
 
 @Observable
-class ShareLuggageService {
-    var sharedLuggages: [ShareLuggage]
+class PackingItemService {
+    var personalLuggages: [String: [PersonalLuggage]]
+    var shareLuggages: [ShareLuggage]
     var documentID: String
     private let dbCollection = Firestore.firestore().collection("PackingList")
     private var listener: ListenerRegistration?
     
-    init(sharedLuggages: [ShareLuggage] = [], documentID: String) {
-        self.sharedLuggages = sharedLuggages
+    init(personalLuggages: [String: [PersonalLuggage]] = [:], shareLuggages: [ShareLuggage] = [], documentID: String) {
+        self.personalLuggages = personalLuggages
+        self.shareLuggages = shareLuggages
         self.documentID = documentID
-        
+        updatePackingItems()
     }
-    
-//    func getDocumentData() async {
-//        do {
-//            let document = try await dbCollection.document(documentID).getDocument()
-//            if document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//            } else {
-//                print("Document does not exist")
-//            }
-//        } catch {
-//            print("Error getting document: \(error)")
-//        }
-//    }
     
     func printData() {
         print(documentID)
@@ -45,27 +34,33 @@ class ShareLuggageService {
         }
     }
     
-//    private func updateShareLuggages () async {
+//    func updateShareLuggages () {
 //        let docRef = dbCollection.document(documentID)
-//        do {
-//            let packingItem = try await docRef.getDocument(as: PackingItem.self)
-//            sharedLuggages = packingItem.share
-//        } catch {
-//            print("error: \(error)")
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+////                if let data = document.data() {
+//                if let data = document.data(as: PackingItem.self) {
+//                    if let personalData = data["personal"] as? [String: Any] {
+//                        print("personal data: \(personalData)")
+//                    }
+//                    if let shareData = data["share"] as? [[String: Any]] {
+//                        print("share data: \(shareData)")
+//                    }
+//                }
+//            } else {
+//                print("document does not exist")
+//            }
 //        }
 //    }
-    
-    func updateShareLuggages () {
+    func updatePackingItems () {
         let docRef = dbCollection.document(documentID)
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
-                if let data = document.data() {
-                    if let personalData = data["personal"] as? [String: Any] {
-                        print("personal data: \(personalData)")
-                    }
-                    if let shareData = data["share"] as? [[String: Any]] {
-                        print("share data: \(shareData)")
-                    }
+                if let data = try? document.data(as: PackingItem.self) {
+                    self.personalLuggages = data.personal
+                    print("personalLuggages: \(self.personalLuggages)")
+                    self.shareLuggages = data.share
+                    print("shareLuggages: \(self.shareLuggages)")
                 }
             } else {
                 print("document does not exist")

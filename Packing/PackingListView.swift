@@ -59,8 +59,7 @@ struct PackingListView: View {
                 ){
                     Button("firestore data print") {
                         print("click")
-//                        service.printData()
-                        service.updateShareLuggages()
+                        service.updatePackingItems()
                     }
 //                    ForEach($packingList){ $item in
 //                        Button {
