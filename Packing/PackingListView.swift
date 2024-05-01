@@ -111,7 +111,7 @@ struct PackingListView: View {
             .scrollContentBackground(.hidden)
             
             //색상 변경해야함
-            .background(RoundedRectangle(cornerRadius: 30).fill(Color.blue))
+            .background(RoundedRectangle(cornerRadius: 30).fill( Color(red: 157/255, green: 178/255, blue: 191/255)))
             .ignoresSafeArea()
         }
     }
