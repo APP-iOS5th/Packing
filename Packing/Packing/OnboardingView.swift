@@ -14,7 +14,6 @@ struct MainView: View {
     }
 }
 
-// TODO: step 넘어갈때 부드러운 효과 
 struct OnboardingView: View {
     @State private var currentPage = 0
     @State private var showMainView = false
@@ -24,9 +23,7 @@ struct OnboardingView: View {
             MainView()
         } else {
             ZStack {
-//                Color(hex: 0xF3F3F3)
-//                    .edgesIgnoringSafeArea(.all)
-                Color(red: 189/255, green: 205/255, blue: 214/255).edgesIgnoringSafeArea(.all) // 전체 배경색 설정
+                Color("mainColor").edgesIgnoringSafeArea(.all)
 
                 TabView(selection: $currentPage) {
                     ForEach(0..<4, id: \.self) { index in
