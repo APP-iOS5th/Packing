@@ -25,6 +25,7 @@ class JourneyService: ObservableObject {
                 print("Error fetching snapshots: \(error!)")
                 return
             }
+            print("Successfully fetched journeys")
             updateJourneys(snapshot: snapshot)
         }
     }
@@ -32,13 +33,14 @@ class JourneyService: ObservableObject {
     // Adds a new journey to Firestore
     func addJourney(destination: String, activities: [String], image: String, startDate: Date, endDate: Date, packingItemId: String) {
         let newJourney = Journey(
-            id: UUID(),
+            id: UUID().uuidString,
             destination: destination,
             activities: activities.compactMap { TravelActivity(rawValue: $0) },
             image: image,
             startDate: startDate,
             endDate: endDate,
-            packingItemId: packingItemId
+            packingItemId: packingItemId,
+            docId: nil
         )
         
         _ = try? dbCollection.addDocument(from: newJourney) { error in
@@ -59,7 +61,26 @@ class JourneyService: ObservableObject {
             }
             snapshot.documentChanges.forEach { diff in
                 if (diff.type == .added) {
-                    print("New journey added: \(diff.document.data())")
+                    let data = diff.document.data()
+                    let id = data["id"] as? String ?? "Unknown ID"
+                    let destination = data["destination"] as? String ?? "Unknown Destination"
+                    let image = data["image"] as? String ?? "No Image"
+                    let startDate = (data["startDate"] as? Timestamp)?.dateValue() ?? Date()
+                    let endDate = (data["endDate"] as? Timestamp)?.dateValue() ?? Date()
+                    let packingItemId = data["packingItemId"] as? String ?? "No Packing Item ID"
+                    
+                    let activities = (data["activities"] as? [String] ?? []).joined(separator: ", ")
+                    
+                    print("""
+                    New journey added:
+                    ID: \(id)
+                    Destination: \(destination)
+                    Image: \(image)
+                    Start Date: \(startDate)
+                    End Date: \(endDate)
+                    Packing Item ID: \(packingItemId)
+                    Activities: \(activities)
+                    """)
                 }
                 if (diff.type == .modified) {
                     print("Modified journey: \(diff.document.data())")
@@ -72,15 +93,21 @@ class JourneyService: ObservableObject {
         }
     }
     
-    // Updates the local journeys array with the latest data from Firestore
     private func updateJourneys(snapshot: QuerySnapshot) {
         let journeys: [Journey] = snapshot.documents.compactMap { document in
-            var journey = try? document.data(as: Journey.self)
-            journey?.id = UUID(uuidString: document.documentID) ?? UUID()
-            return journey
+            do {
+                var journey = try document.data(as: Journey.self)
+                journey.docId = document.documentID  // 문서 ID 저장
+                return journey
+            } catch {
+                print("Failed to decode journey: \(error.localizedDescription)")
+                return nil
+            }
         }
         self.journeys = journeys.sorted(by: { $0.startDate > $1.startDate })
+        print("Updated journeys: \(journeys.map { $0.destination })")  // 로그 추가
     }
+
 }
 
 
