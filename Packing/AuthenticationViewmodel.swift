@@ -72,6 +72,7 @@ final class AuthenticationViewModel: ObservableObject {
             }
             Task {
                 await self.signIn(user: result?.user)
+            
             }
         }
     }
@@ -83,7 +84,7 @@ final class AuthenticationViewModel: ObservableObject {
         controller.performRequests()
     }
     
-    private func signIn(user: GIDGoogleUser?) async {
+   func signIn(user: GIDGoogleUser?) async {
         guard let user, let idToken = user.idToken else {
             errorMessage = "Login failed: Invalid user data"
             state = .signedOut
@@ -95,6 +96,7 @@ final class AuthenticationViewModel: ObservableObject {
         do {
             authResult = try await Auth.auth().signIn(with: credential)
             state = .signedIn
+            print(state)
         } catch {
             errorMessage = "Login failed: \(error.localizedDescription)"
             state = .signedOut

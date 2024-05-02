@@ -76,6 +76,7 @@ struct RegistrationView: View {
                 .onChange(of: authViewModel.errorMessage) { _ in
                     showingAlert = authViewModel.errorMessage != nil
                 }
+                
             }
         }
     }
