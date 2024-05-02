@@ -8,6 +8,8 @@ import Foundation
 import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
+import PhotosUI
+import SwiftUI
 
 extension UIApplication {
     static var currentRootViewController: UIViewController? {
@@ -85,6 +87,17 @@ final class AuthenticationViewModel: ObservableObject {
         } catch {
             state = .signedOut
             print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func saveJourneyImage(item: PhotosPickerItem) {
+//        guard let user else { return }
+        Task{
+            guard let data = try await item.loadTransferable(type: Data.self) else { return }
+            let (path, name) = try await StorageManager.shared.saveImage(data: data)
+            print("Success!")
+            print(path)
+            print(name)
         }
     }
 }
