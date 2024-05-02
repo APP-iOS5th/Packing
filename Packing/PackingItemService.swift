@@ -23,10 +23,16 @@ class PackingItemService {
         startRealtimeUpdates()
     }
     
-//    func fetch() {
-//        guard listener == nil else {return}
-//        dbCollection
-//    }
+    func fetch() {
+        guard listener == nil else {return}
+        dbCollection.document(documentID).getDocument{ (documentSnapshot, error) in
+            guard let snapshot = documentSnapshot else {
+                print("Error fetching snapshot: \(error!)")
+                return
+            }
+            self.updatePackingItems(snapshot: snapshot)
+        }
+    }
     
     private func startRealtimeUpdates() {
         listener = dbCollection.document(documentID).addSnapshotListener{ [self] documentSnapshot, error in
@@ -43,18 +49,5 @@ class PackingItemService {
             self.personalLuggages = data.personal
             self.shareLuggages = data.share
         }
-//        let docRef = dbCollection.document(documentID)
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                if let data = try? document.data(as: PackingItem.self) {
-//                    self.personalLuggages = data.personal
-//                    print("personalLuggages: \(self.personalLuggages)")
-//                    self.shareLuggages = data.share
-//                    print("shareLuggages: \(self.shareLuggages)")
-//                }
-//            } else {
-//                print("document does not exist")
-//            }
-//        }
     }
 }
