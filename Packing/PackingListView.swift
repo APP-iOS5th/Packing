@@ -10,7 +10,7 @@ import SwiftUI
 struct PackingListView: View {
     @State var showingMember: String = "나"
     @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
-    let journey = Journey.sample[0]
+    var journey: Journey
     var body: some View {
         NavigationStack {
             JourneySummaryView(journey: journey)
@@ -110,7 +110,7 @@ struct PackingListView: View {
     }
 }
 
-#Preview {
-    PackingListView()
-}
+//#Preview {
+//    PackingListView(journey: Journey.sample[0])
+//}
 

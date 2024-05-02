@@ -25,7 +25,7 @@ struct PackingApp: App {
    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
    var body: some Scene {
        WindowGroup {
-           PackingListView()
+           PackingListView(journey:Journey.sample[0])
        }
    }
 }
