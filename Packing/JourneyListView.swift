@@ -52,11 +52,21 @@ struct JourneyListView: View {
     @StateObject private var service: JourneyService = JourneyService()
 
     var body: some View {
-        List(service.journeys) { journey in
-            Text(journey.destination)
-        }
-        .task {
-            service.fetch()
+        NavigationStack {
+            
+            List(service.journeys) { journey in
+                Text(journey.destination)
+            }
+            .task {
+                service.fetch()
+            }
+            .toolbar {
+                Button {
+                    service.addJourney(destination: "다낭!", activities: ["beach"], image: "test", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "")
+                } label: {
+                    Text("ADD JOURNEY")
+                }
+            }
         }
     }
 }
