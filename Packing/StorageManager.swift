@@ -21,12 +21,12 @@ final class StorageManager {
         storage.child("images")
     }
     
-//    private func userReference(userId: String) -> StorageReference {
-//        storage.child("users").child(userId)
+//    private func journeyReference(journeyId: String) -> StorageReference {
+//        storage.child("journey").child(journeyId)
 //    }
     
     func getDate(path: String) async throws -> Data {
-        try await imagesRefrence.child(path).data(maxSize: 3 * 12024 * 1024)
+        try await imagesRefrence.child(path).data(maxSize: 3 * 1024 * 1024)
     }
     
     func saveImage(data: Data) async throws  -> (path: String, name: String){

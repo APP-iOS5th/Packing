@@ -73,7 +73,7 @@ struct RegistrationView: View {
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Login Error"), message: Text(authViewModel.errorMessage ?? "Unknown error"), dismissButton: .default(Text("OK")))
                 }
-                .onChange(of: authViewModel.errorMessage) { _ in
+                .onChange(of: authViewModel.errorMessage) { _, _ in
                     showingAlert = authViewModel.errorMessage != nil
                 }
                 

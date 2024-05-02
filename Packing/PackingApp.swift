@@ -8,6 +8,9 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
 class AppDelegate: NSObject, UIApplicationDelegate {
    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -26,9 +29,10 @@ struct PackingApp: App {
     @StateObject var authenticationViewModel = AuthenticationViewModel()
 
     var body: some Scene {
-        WindowGroup {
+//        WindowGroup {
 //            RegistrationView()
 //                .environmentObject(authenticationViewModel)
+        WindowGroup {
             JourneyListView()
         }
     }

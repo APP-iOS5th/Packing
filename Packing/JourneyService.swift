@@ -7,6 +7,7 @@
 
 import Firebase
 import FirebaseFirestore
+import _PhotosUI_SwiftUI
 
 class JourneyService: ObservableObject {
     @Published var journeys: [Journey]
@@ -97,6 +98,7 @@ class JourneyService: ObservableObject {
         let journeys: [Journey] = snapshot.documents.compactMap { document in
             guard let data = document.data() as? [String: Any],
                   let id = data["id"] as? String,
+                  
                   let destination = data["destination"] as? String,
                   let activitiesData = data["activities"] as? [String],
                   let image = data["image"] as? String,
@@ -141,6 +143,18 @@ class JourneyService: ObservableObject {
             }
         }
     }
+    
+    func saveJourneyImage(item: PhotosPickerItem) {
+//        guard let docId = journey.docId else { return }
+        Task{
+            guard let data = try await item.loadTransferable(type: Data.self) else { return }
+            let (path, name) = try await StorageManager.shared.saveImage(data: data)
+            print("Success!")
+            print(path)
+            print(name)
+        }
+    }
+
 
 }
 
