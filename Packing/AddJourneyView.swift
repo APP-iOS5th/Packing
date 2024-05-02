@@ -10,6 +10,9 @@ import PhotosUI
 
 
 struct AddJourneyView: View {
+    var service: JourneyService?
+    @Environment(\.dismiss) var dismiss
+
     @StateObject private var viewModel = AuthenticationViewModel()
     @State var testString = ""
     @State private var startdate = Date()
@@ -133,6 +136,8 @@ struct AddJourneyView: View {
                             //MARK: - 확인 버튼
                             Button{
                                 //TODO: 버튼 클릭시 데이터 전송
+                                service?.addJourney(destination: testString, activities: [travelActivitys], image: "", startDate: startdate, endDate: endDate, packingItemId: "")
+                                dismiss()
                             } label: {
                                 Text("확인")
                                     .fontWeight(.bold)
@@ -144,6 +149,8 @@ struct AddJourneyView: View {
                                 
                             }
                             .padding(.top, 30)
+                            .disabled(testString.isEmpty)
+
                             
                         }
                     }
@@ -173,6 +180,6 @@ struct AddJourneyView: View {
 #Preview {
     NavigationStack{
         
-        AddJourneyView()
+        AddJourneyView(service: nil)
     }
 }

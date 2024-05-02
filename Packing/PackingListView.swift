@@ -10,7 +10,8 @@ import SwiftUI
 struct PackingListView: View {
     @State var showingMember: String = "나"
     @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
-    let journey = Journey.sample[0]
+//    let journey = Journey.sample[0]
+    var journey: Journey
     var body: some View {
         NavigationStack {
             JourneySummaryView(journey: journey)
@@ -18,19 +19,26 @@ struct PackingListView: View {
                 .padding()
             
             Form {
-                Section(header: Text("구성원")
+                Section(header: Text("구성원 선택")
                     .foregroundStyle(.black)
                     .font(.title2)
                     .fontWeight(.bold)) {
-                        Picker(selection: $showingMember, label: Text("choose member")){
+                        Picker(selection: $showingMember, label: Text("")){
                             ForEach(Array(service.personalLuggages.keys), id: \.self){ name in
                                 Text(name).tag(name)
                             }
                         }
                         .pickerStyle(.automatic)
                     }
-                Section(header:
-                            Text("공용")
+                Section(header: HStack{
+                    Text("공용 물품")
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
                     .foregroundStyle(.black)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -38,15 +46,18 @@ struct PackingListView: View {
                     List(service.shareLuggages){ shareLuggage in
                         HStack{
                             Button {
-                                //toggle
+                                if let index = service.shareLuggages.firstIndex(where: {$0.name == shareLuggage.name}) {
+                                    service.toggleShareLuggage(showingMember: showingMember, index: index)
+                                }
                             } label: {
                                 Label {
                                     Text(shareLuggage.name)
                                         .tint(.black)
                                 } icon: {
-                                    Image(systemName: "checkmark.square")
+                                    Image(systemName: shareLuggage.checkedPeople.contains(showingMember) ? "checkmark.square" : "square")
                                 }
                             }
+                            //                            .disabled(showingMember가 내가 아니면)
                             Text("( \(shareLuggage.checkedPeople.count) / \(shareLuggage.requiredCount) )")
                                 .foregroundStyle(.gray)
                             if !shareLuggage.checkedPeople.isEmpty {
@@ -59,15 +70,24 @@ struct PackingListView: View {
                         }
                     }
                 }
-                Section(header:
-                            Text("개인")
+                Section(header: HStack{
+                    Text("개인 물품")
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
                     .foregroundStyle(.black)
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
                     List(service.personalLuggages[showingMember] ?? []){ personalLuggage in
                         Button {
-                            //toggle
+                            if let index = service.personalLuggages[showingMember]?.firstIndex(where: {$0.name == personalLuggage.name}) {
+                                service.togglePersonalLuggage(showingMember: showingMember, index: index)
+                            }
                         } label: {
                             Label {
                                 Text(personalLuggage.name)
@@ -76,22 +96,22 @@ struct PackingListView: View {
                                 Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
+                        //                        .disabled(showingMember가 내가 아니면)
                     }
                 }
             }
             .task{
-                service.updatePackingItems()
+                service.fetch()
             }
             .scrollContentBackground(.hidden)
-            
-            //색상 변경해야함
-            .background(RoundedRectangle(cornerRadius: 30).fill( Color(red: 157/255, green: 178/255, blue: 191/255)))
+            .background(RoundedRectangle(cornerRadius: 30)
+                .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
             .ignoresSafeArea()
         }
     }
 }
 
 #Preview {
-    PackingListView()
+    PackingListView(journey: Journey.sample[0])
 }
 

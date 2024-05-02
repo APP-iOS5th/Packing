@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum TravelActivity: String, CaseIterable {
+enum TravelActivity: String, CaseIterable, Codable {
     case beach = "해변"
     case camping = "캠핑"
     case hiking = "등산"
@@ -21,13 +21,15 @@ enum TravelActivity: String, CaseIterable {
 }
 
 
-struct Journey: Identifiable, Hashable {
-    let id: UUID = UUID()
+struct Journey: Identifiable, Codable, Hashable {
+    let id: String
     let destination: String // 여행 목적지
     let activities: [TravelActivity]
     let image: String    //  여행 사진
     let startDate: Date // 여행 시작 날짜
     let endDate: Date   // 여행 끝 날짜
+    let packingItemId: String
+    var docId: String?
     
     var duration: String {
         let formatter = DateFormatter()
@@ -38,100 +40,30 @@ struct Journey: Identifiable, Hashable {
 
 extension Journey {
     static let sample: [Journey] = [
-        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
-        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
-        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3)),
-        Journey(destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5)),
-        Journey(destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7)),
-        Journey(destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3))
+        Journey(id: UUID().uuidString, destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "", docId: nil),
+        Journey(id: UUID().uuidString, destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7), packingItemId: "", docId: nil),
+        Journey(id: UUID().uuidString, destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3), packingItemId: "", docId: nil),
+        Journey(id: UUID().uuidString, destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "", docId: nil),
+        Journey(id: UUID().uuidString, destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7), packingItemId: "", docId: nil),
+        Journey(id: UUID().uuidString, destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3), packingItemId: "", docId: nil)
     ]
 }
 
-//
-//struct JourneyListView: View {
-//    var journeys = Journey.sample
-//    @State private var isNewJourneyPresented = false
-//
-//    var body: some View {
-//        NavigationStack {
-//            ZStack {
-////                Color("mainColor")
-//
-//                VStack {
-//                    if journeys.isEmpty {
-//                        Image(systemName: "airplane")
-//                            .font(.title)
-//                            .padding()
-//
-//                        Text("현재 여행 목록이 없습니다.\n여행을 추가해주세요.")
-//                            .font(.headline)
-//                            .multilineTextAlignment(.center)
-//                    } else {
-//                        List(journeys) { journey in
-//                            NavigationLink(value: journey) {
-//                                JourneySummaryView(journey: journey)
-//                                    .frame(height: 100)
-//                            }
-//                            .listRowSeparator(.hidden)
-//                            .cornerRadius(3.0)
-//                            .shadow(radius: 3, x: 3, y: 3)
-//                        }
-//                        .listStyle(.plain)
-//                        .navigationDestination(for: Journey.self) { journey in
-//                            JourneyDetailView(journey: journey)
-//                        }
-//                    }
-//                }
-//
-//                // MARK: - ADD BUTTON
-//                VStack {
-//                    Spacer()
-//                    HStack {
-//                        Spacer()
-//                        Button {
-//                            isNewJourneyPresented.toggle()
-//                        } label: {
-//                            Image(systemName: "bag.fill.badge.plus")
-//                                .font(.largeTitle)
-//                                .foregroundStyle(Color("mainColor"))
-//                                .shadow(radius: 1)
-//                        }
-//                    }
-//                    .padding(.horizontal)
-//                }
-//                .padding()
-//            }
-//
-//            .navigationTitle("JourneyListView")
-//            .navigationBarTitleDisplayMode(.inline)
-//            .toolbarBackground(Color("mainColor"), for: .navigationBar)
-//            .sheet(isPresented: $isNewJourneyPresented) {
-//                // MARK: -  AddJourneyView 추가
-//                EmptyView()
-//                    .presentationDetents([.medium, .large])
-//                    .presentationCornerRadius(21)
-//            }
-//        }
-//    }
-//}
 
 struct JourneyListView: View {
-    var journeys = Journey.sample
+    @StateObject private var service: JourneyService = JourneyService()
+//    var journeys = Journey.sample
     @State private var selectedJourney: Journey?
-    
-    @State private var isNewJourneyPresented = false
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationStack {
             ZStack {
-                //                Color("mainColor").ignoresSafeArea()
-                
                 LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
                     .ignoresSafeArea()
                 
                 VStack {
-                    if journeys.isEmpty {
+                    if service.journeys.isEmpty {
                         Image(systemName: "airplane")
                             .font(.title)
                             .padding()
@@ -148,7 +80,7 @@ struct JourneyListView: View {
                                 .shadow(radius: 5)
                                 .edgesIgnoringSafeArea(.bottom)
                             
-                            List(journeys) { journey in
+                            List(service.journeys) { journey in
                                 Button(action: {
                                     self.selectedJourney = journey
                                 }) {
@@ -161,61 +93,41 @@ struct JourneyListView: View {
                                 .buttonStyle(PlainButtonStyle())
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        service.deleteJourney(journey)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                             }
+                            
                             .listStyle(.plain)
                             .cornerRadius(30)
                             .edgesIgnoringSafeArea(.bottom)
                             
                             //                        .padding(.top)
                             .navigationDestination(item: $selectedJourney) { journey in
-                                JourneyDetailView(journey: journey)
+                                PackingListView(journey: journey)
+                                
                             }
                         }
                         //                        .offset(y: 20)
                     }
                 }
-                //                // MARK: - ADD BUTTON
-                //                VStack {
-                //                    Spacer()
-                //                    HStack {
-                //                        Spacer()
-                //                        Button {
-                //                            isNewJourneyPresented.toggle()
-                //                        } label: {
-                //                            Image(systemName: "bag.fill.badge.plus")
-                //                                .font(.largeTitle)
-                //                                .foregroundStyle(Color("mainColor"))
-                ////                                .shadow(radius: 1)
-                //                        }
-                //                    }
-                //                    .padding(.horizontal)
-                //                }
-                //                .padding()
             }
-            //            .navigationTitle("여행 목록")
             .toolbarBackground(Color("mainColor"), for: .navigationBar)
-            .sheet(isPresented: $isNewJourneyPresented) {
-                // MARK: -  AddJourneyView 추가
-                EmptyView()
-                    .presentationDetents([.medium, .large])
-                    .presentationCornerRadius(21)
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    //                    Button {
-                    //                        isNewJourneyPresented.toggle()
-                    //
-                    //                    } label: {
-                    //                        Image(systemName: "bag.fill.badge.plus")
-                    //                            .font(.title)
-                    //                            .foregroundStyle(Color("DarkColor"))
-                    //                    }
-                    NavigationLink(destination: AddJourneyView()){
+                    NavigationLink(destination: AddJourneyView(service: service)){
                         Image(systemName: "bag.fill.badge.plus")
                             .font(.title)
                             .foregroundStyle(Color("DarkColor"))
                     }
                 }
+            }
+            .task {
+                service.fetch()
             }
         }
     }
@@ -232,7 +144,7 @@ struct JourneySummaryView: View {
         if let uiImage = UIImage(named: journey.image) {
             backgroundImage = Image(uiImage: uiImage)
         } else {
-            backgroundImage = nil
+            backgroundImage = Image("다낭")
         }
         
         return HStack {
@@ -282,6 +194,7 @@ struct JourneyDetailView: View {
 
 #Preview {
     JourneyListView()
+        .environmentObject(JourneyService())
 }
 
 extension Color {
