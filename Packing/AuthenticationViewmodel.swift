@@ -9,6 +9,7 @@ import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
 import AuthenticationServices
+import _PhotosUI_SwiftUI
 
 extension UIApplication {
     static var currentRootViewController: UIViewController? {

@@ -14,25 +14,21 @@
 		4B1139FB2BE205160028EE65 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1139FA2BE205160028EE65 /* ImagePicker.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
-		4BC805662BE327FA004880FE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4BC805652BE327FA004880FE /* FirebaseStorage */; };
-		4BC8056A2BE35152004880FE /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4BC805692BE35152004880FE /* FirebaseStorage */; };
 		4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8056D2BE35D67004880FE /* StorageManager.swift */; };
-		4BCE577C2BE3756F001842D6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4BCE577B2BE3756F001842D6 /* GoogleService-Info.plist */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
 		B84E2A672BE1CD03006EBF0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A662BE1CD03006EBF0D /* FirebaseFirestoreSwift */; };
 		B84E2A692BE1CE08006EBF0D /* (null) in Resources */ = {isa = PBXBuildFile; };
-		B8E113C52BE32BE000D14557 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8E113C42BE32BE000D14557 /* GoogleService-Info.plist */; };
 		C60C5F192BE2A00800558210 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60C5F182BE2A00800558210 /* OnboardingView.swift */; };
 		C60C5F1B2BE2A19300558210 /* AuthenticationViewmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */; };
 		C60C5F1D2BE2A1E500558210 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60C5F1C2BE2A1E500558210 /* ProfileView.swift */; };
 		C60C5F1F2BE2A29100558210 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C60C5F1E2BE2A29100558210 /* FirebaseAuth */; };
 		C60C5F222BE2A2CC00558210 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = C60C5F212BE2A2CC00558210 /* GoogleSignIn */; };
 		C60C5F242BE2A2CC00558210 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C60C5F232BE2A2CC00558210 /* GoogleSignInSwift */; };
-		C63415BF2BE2A4CB0068BFD0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C63415BE2BE2A4CB0068BFD0 /* GoogleService-Info.plist */; };
 		C67761802BE327F1000AAF57 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C677617F2BE327F1000AAF57 /* FirebaseStorage */; };
 		C67761822BE32831000AAF57 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C67761812BE32831000AAF57 /* FirebaseStorage */; };
 		C67761842BE3296E000AAF57 /* JourneyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67761832BE3296E000AAF57 /* JourneyManager.swift */; };
 		C67761862BE337A0000AAF57 /* JourneyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67761852BE337A0000AAF57 /* JourneyService.swift */; };
+		C67761882BE391D5000AAF57 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C67761872BE391D5000AAF57 /* GoogleService-Info.plist */; };
 		C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B792BE0CBE600B62122 /* PackingApp.swift */; };
 		C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B7B2BE0CBE600B62122 /* ContentView.swift */; };
 		C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */; };
@@ -50,7 +46,6 @@
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		4BCE577B2BE3756F001842D6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C60C5F182BE2A00800558210 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewmodel.swift; sourceTree = "<group>"; };
 		C60C5F1C2BE2A1E500558210 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -58,6 +53,7 @@
 		C63415C02BE2A54E0068BFD0 /* Packing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Packing.entitlements; sourceTree = "<group>"; };
 		C67761832BE3296E000AAF57 /* JourneyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyManager.swift; sourceTree = "<group>"; };
 		C67761852BE337A0000AAF57 /* JourneyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyService.swift; sourceTree = "<group>"; };
+		C67761872BE391D5000AAF57 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C68C4B762BE0CBE600B62122 /* Packing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Packing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68C4B792BE0CBE600B62122 /* PackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingApp.swift; sourceTree = "<group>"; };
 		C68C4B7B2BE0CBE600B62122 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -117,11 +113,10 @@
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
 				4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */,
 				4B1139FA2BE205160028EE65 /* ImagePicker.swift */,
-				C60C5F1A2BE2A19300558210 /* AuthenticationView.swift */,
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
 				C60C5F1C2BE2A1E500558210 /* ProfileView.swift */,
+				C67761872BE391D5000AAF57 /* GoogleService-Info.plist */,
 				C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */,
-				4BCE577B2BE3756F001842D6 /* GoogleService-Info.plist */,
 				C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */,
 				C60C5F182BE2A00800558210 /* OnboardingView.swift */,
 				C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */,
@@ -211,7 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C68C4B812BE0CBE900B62122 /* Preview Assets.xcassets in Resources */,
-				4BCE577C2BE3756F001842D6 /* GoogleService-Info.plist in Resources */,
+				C67761882BE391D5000AAF57 /* GoogleService-Info.plist in Resources */,
 				C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */,
 				B84E2A692BE1CE08006EBF0D /* (null) in Resources */,
 			);
@@ -485,14 +480,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		4BC805652BE327FA004880FE /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FirebaseStorage;
-		};
-		4BC805692BE35152004880FE /* FirebaseStorage */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = FirebaseStorage;
-		};
 		B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B84E2A632BE1CD03006EBF0D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
