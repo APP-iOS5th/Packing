@@ -93,7 +93,15 @@ struct JourneyListView: View {
                                 .buttonStyle(PlainButtonStyle())
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        service.deleteJourney(journey)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                             }
+                            
                             .listStyle(.plain)
                             .cornerRadius(30)
                             .edgesIgnoringSafeArea(.bottom)

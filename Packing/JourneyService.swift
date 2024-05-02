@@ -126,6 +126,22 @@ class JourneyService: ObservableObject {
         print("Updated journeys: \(journeys.map { $0.destination })")
     }
 
+    func deleteJourney(_ journey: Journey) {
+        guard let docId = journey.docId else {
+            print("Error: Journey does not have a valid document ID")
+            return
+        }
+        
+        dbCollection.document(docId).delete { error in
+            if let error = error {
+                print("Error removing document: \(error)")
+            } else {
+                print("Document successfully removed!")
+                self.fetch()
+            }
+        }
+    }
+
 }
 
 
