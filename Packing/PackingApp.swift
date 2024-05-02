@@ -33,7 +33,7 @@ struct PackingApp: App {
 //            RegistrationView()
 //                .environmentObject(authenticationViewModel)
         WindowGroup {
-            AddJourneyView()
+            JourneyListView()
         }
     }
 }

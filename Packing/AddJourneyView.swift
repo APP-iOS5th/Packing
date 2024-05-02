@@ -138,6 +138,7 @@ struct AddJourneyView: View {
                                     viewModel.saveJourneyImage(item: newValue)
                                 }
                                 dismiss()
+                                
                             } label: {
                                 Text("확인")
                                     .fontWeight(.bold)

@@ -98,6 +98,7 @@ class JourneyService: ObservableObject {
         let journeys: [Journey] = snapshot.documents.compactMap { document in
             guard let data = document.data() as? [String: Any],
                   let id = data["id"] as? String,
+                  
                   let destination = data["destination"] as? String,
                   let activitiesData = data["activities"] as? [String],
                   let image = data["image"] as? String,

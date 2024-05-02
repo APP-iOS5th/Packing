@@ -26,7 +26,7 @@ final class StorageManager {
 //    }
     
     func getDate(path: String) async throws -> Data {
-        try await imagesRefrence.child(path).data(maxSize: 3 * 12024 * 1024)
+        try await imagesRefrence.child(path).data(maxSize: 3 * 1024 * 1024)
     }
     
     func saveImage(data: Data) async throws  -> (path: String, name: String){
