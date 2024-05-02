@@ -2,12 +2,21 @@
 //  JourneyService.swift
 //  Packing
 //
-//  Created by 이융의 on 5/1/24.
+//  Created by 이융의 on 5/2/24.
 //
 
 import Firebase
-import FirebaseFirestore
+import FirebaseCore
 
 class JourneyService: ObservableObject {
+    @Published var journeys: [Journey]
+    private let dbCollection = Firestore.firestore().collection("Journey")
+    private var listener: ListenerRegistration?
     
+    init(journeys: [Journey] = []) {
+        self.journeys = journeys
+//        startRealtimeUpdates()
+    }
 }
+
+
