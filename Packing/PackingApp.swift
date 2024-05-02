@@ -22,10 +22,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct PackingApp: App {
-   @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-   var body: some Scene {
-       WindowGroup {
-           JourneyListView()
-       }
-   }
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var authenticationViewModel = AuthenticationViewModel()
+
+    var body: some Scene {
+        WindowGroup {
+            RegistrationView()
+                .environmentObject(authenticationViewModel)
+        }
+    }
 }
