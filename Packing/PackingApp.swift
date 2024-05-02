@@ -27,8 +27,9 @@ struct PackingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RegistrationView()
-                .environmentObject(authenticationViewModel)
+//            RegistrationView()
+//                .environmentObject(authenticationViewModel)
+            JourneyListView()
         }
     }
 }
