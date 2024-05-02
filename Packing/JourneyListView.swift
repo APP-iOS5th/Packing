@@ -108,7 +108,7 @@ struct JourneyListView: View {
                             
                             //                        .padding(.top)
                             .navigationDestination(item: $selectedJourney) { journey in
-                                JourneyDetailView(journey: journey)
+                                PackingListView(journey: journey)
                                 
                             }
                         }

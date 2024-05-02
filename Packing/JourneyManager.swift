@@ -45,7 +45,7 @@ public class JourneyManager: ObservableObject {
     }
 }
 
-// resize image
+
 extension UIImage {
     func aspectFittedToHeight(_ newHeight: CGFloat) -> UIImage? {
         let scale = newHeight / self.size.height
