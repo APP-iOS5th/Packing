@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15256EDB2BE0D04000473DD1 /* PackingListView.swift */; };
 		4B1139FB2BE205160028EE65 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1139FA2BE205160028EE65 /* ImagePicker.swift */; };
+		1526C0152BE1F2A500CDDE90 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1526C0142BE1F2A500CDDE90 /* GoogleService-Info.plist */; };
+		1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */; };
+		1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
@@ -30,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItem.swift; sourceTree = "<group>"; };
+		1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItemService.swift; sourceTree = "<group>"; };
+		
 		15256EDB2BE0D04000473DD1 /* PackingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListView.swift; sourceTree = "<group>"; };
 		4B1139FA2BE205160028EE65 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
@@ -89,6 +95,8 @@
 				C63415BD2BE2A4530068BFD0 /* Info.plist */,
 				C68C4B792BE0CBE600B62122 /* PackingApp.swift */,
 				15256EDB2BE0D04000473DD1 /* PackingListView.swift */,
+				1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */,
+				1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */,
 				C68C4B872BE0CD5700B62122 /* JourneyListView.swift */,
 				C60C5F182BE2A00800558210 /* OnboardingView.swift */,
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
@@ -204,6 +212,8 @@
 				C60C5F1B2BE2A19300558210 /* AuthenticationView.swift in Sources */,
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
+				1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */,
+				1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */,
 				15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */,
 				4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */,
 				C60C5F1D2BE2A1E500558210 /* ProfileView.swift in Sources */,

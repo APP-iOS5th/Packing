@@ -7,54 +7,15 @@
 
 import SwiftUI
 
-class Luggage: Identifiable {
-    enum LuggageType {
-        case common
-        case personal
-    }
-    
-    let id: UUID = UUID()
-    let name: String
-    var isChecked: Bool
-    var type: LuggageType
-    
-    init(name: String, isChecked: Bool, type: LuggageType) {
-        self.name = name
-        self.isChecked = isChecked
-        self.type = type
-    }
-}
-
 struct PackingListView: View {
     @State var showingMember: String = "나"
-    var memberList: [String] = ["나", "멤버2", "멤버3", "멤버4"]
-    @State var packingList: [Luggage] =
-    [Luggage(name: "잠옷", isChecked: true, type: .common),
-     Luggage(name: "칫솔", isChecked: false, type: .common),
-     Luggage(name: "수건", isChecked: false, type: .common),
-     Luggage(name: "양말", isChecked: false, type: .common)]
+    @State private var service: PackingItemService = PackingItemService(documentID: "Tk0hmyjN99tnGpt2Ka4g")
+    let journey = Journey.sample[0]
     var body: some View {
         NavigationStack {
-            Button(action: {
-                
-            }, label: {
-                HStack{
-                    VStack(alignment: .leading){
-                        Text("경기 가평")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.black)
-                        Text("캠핑")
-                            .font(.subheadline)
-                            .foregroundStyle(.gray)
-                    }
-                    Spacer()
-                }
-            })
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: 100)
-            .background(.yellow)
-            .padding()
+            JourneySummaryView(journey: journey)
+                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
+                .padding()
             
             Form {
                 Section(header: Text("구성원")
@@ -62,7 +23,7 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)) {
                         Picker(selection: $showingMember, label: Text("choose member")){
-                            ForEach(memberList, id: \.self){ name in
+                            ForEach(Array(service.personalLuggages.keys), id: \.self){ name in
                                 Text(name).tag(name)
                             }
                         }
@@ -74,15 +35,26 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
-                    ForEach($packingList){ $item in
-                        Button {
-                            //토글
-                        } label: {
-                            Label {
-                                Text(item.name)
-                                    .tint(.black)
-                            } icon: {
-                                item.isChecked ? Image(systemName: "checkmark.square") : Image(systemName: "square")
+                    List(service.shareLuggages){ shareLuggage in
+                        HStack{
+                            Button {
+                                //toggle
+                            } label: {
+                                Label {
+                                    Text(shareLuggage.name)
+                                        .tint(.black)
+                                } icon: {
+                                    Image(systemName: "checkmark.square")
+                                }
+                            }
+                            Text("( \(shareLuggage.checkedPeople.count) / \(shareLuggage.requiredCount) )")
+                                .foregroundStyle(.gray)
+                            if !shareLuggage.checkedPeople.isEmpty {
+                                Text("-")
+                                ForEach(shareLuggage.checkedPeople, id: \.self) { name in
+                                    Text(name)
+                                        .font(.system(size: 15))
+                                }
                             }
                         }
                     }
@@ -93,20 +65,22 @@ struct PackingListView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
-                    ForEach($packingList){ $item in
+                    List(service.personalLuggages[showingMember] ?? []){ personalLuggage in
                         Button {
-                            //토글
+                            //toggle
                         } label: {
                             Label {
-                                Text(item.name)
+                                Text(personalLuggage.name)
                                     .tint(.black)
                             } icon: {
-                                item.isChecked ? Image(systemName: "checkmark.square") : Image(systemName: "square")
+                                Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
                     }
-                    
                 }
+            }
+            .task{
+                service.updatePackingItems()
             }
             .scrollContentBackground(.hidden)
             
