@@ -70,4 +70,25 @@ class PackingItemService {
             dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
         }
     }
+    
+    func toggleShareLuggage(showingMember: String, index: Int) {
+        var updatedShareLuggages: [[String:Any]] = []
+        for luggage in shareLuggages {
+            updatedShareLuggages.append(["checkedPeople": luggage.checkedPeople, "name": luggage.name, "requiredCount": luggage.requiredCount])
+        }
+        guard index < updatedShareLuggages.count else{
+            print("Invalid index")
+            return
+        }
+        if var checkedPeople: [String] = updatedShareLuggages[index]["checkedPeople"] as? [String] {
+            if let indexForRemove = checkedPeople.firstIndex(of: showingMember) {
+                checkedPeople.remove(at: indexForRemove)
+                updatedShareLuggages[index]["checkedPeople"] = checkedPeople
+            } else {
+                checkedPeople.append(showingMember)
+                updatedShareLuggages[index]["checkedPeople"] = checkedPeople
+            }
+            dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
+        }
+    }
 }

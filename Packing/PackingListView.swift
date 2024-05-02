@@ -39,14 +39,18 @@ struct PackingListView: View {
                         HStack{
                             Button {
                                 //toggle
+                                if let index = service.shareLuggages.firstIndex(where: {$0.name == shareLuggage.name}) {
+                                    service.toggleShareLuggage(showingMember: showingMember, index: index)
+                                }
                             } label: {
                                 Label {
                                     Text(shareLuggage.name)
                                         .tint(.black)
                                 } icon: {
-                                    Image(systemName: "checkmark.square")
+                                    Image(systemName: shareLuggage.checkedPeople.contains(showingMember) ? "checkmark.square" : "square")
                                 }
                             }
+//                            .disabled(showingMember가 내가 아니면)
                             Text("( \(shareLuggage.checkedPeople.count) / \(shareLuggage.requiredCount) )")
                                 .foregroundStyle(.gray)
                             if !shareLuggage.checkedPeople.isEmpty {
@@ -67,7 +71,6 @@ struct PackingListView: View {
                 ){
                     List(service.personalLuggages[showingMember] ?? []){ personalLuggage in
                         Button {
-                            //toggle
                             if let index = service.personalLuggages[showingMember]?.firstIndex(where: {$0.name == personalLuggage.name}) {
                                 service.togglePersonalLuggage(showingMember: showingMember, index: index)
                             }
@@ -79,6 +82,7 @@ struct PackingListView: View {
                                 Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
+//                        .disabled(showingMember가 내가 아니면)
                     }
                 }
             }
