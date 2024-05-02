@@ -32,27 +32,27 @@ class JourneyService: ObservableObject {
     
     // Adds a new journey to Firestore
     func addJourney(destination: String, activities: [String], image: String, startDate: Date, endDate: Date, packingItemId: String) {
-        let newJourney = Journey(
-            id: UUID().uuidString,
-            destination: destination,
-            activities: activities.compactMap { TravelActivity(rawValue: $0) },
-            image: image,
-            startDate: startDate,
-            endDate: endDate,
-            packingItemId: packingItemId,
-            docId: nil
-        )
+        let id = UUID().uuidString
+        let newJourney: [String: Any] = [
+            "id": id,
+            "destination": destination,
+            "activities": activities,
+            "image": image,
+            "startDate": Timestamp(date: startDate),
+            "endDate": Timestamp(date: endDate),
+            "packingItemId": packingItemId
+
+        ]
         
-        _ = try? dbCollection.addDocument(from: newJourney) { error in
+        dbCollection.addDocument(data: newJourney) { error in
             if let error = error {
                 print("Error adding journey: \(error)")
             } else {
-                self.fetch() // Optionally fetch all journeys again to refresh the local data
+                self.fetch()
             }
         }
     }
     
-    // Starts listening for real-time updates to the journeys collection
     private func startRealtimeUpdates() {
         listener = dbCollection.addSnapshotListener { [self] querySnapshot, error in
             guard let snapshot = querySnapshot else {
@@ -95,17 +95,35 @@ class JourneyService: ObservableObject {
     
     private func updateJourneys(snapshot: QuerySnapshot) {
         let journeys: [Journey] = snapshot.documents.compactMap { document in
-            do {
-                var journey = try document.data(as: Journey.self)
-                journey.docId = document.documentID  // 문서 ID 저장
-                return journey
-            } catch {
-                print("Failed to decode journey: \(error.localizedDescription)")
+            guard let data = document.data() as? [String: Any],
+                  let id = data["id"] as? String,
+                  let destination = data["destination"] as? String,
+                  let activitiesData = data["activities"] as? [String],
+                  let image = data["image"] as? String,
+                  let startDateTimestamp = data["startDate"] as? Timestamp,
+                  let endDateTimestamp = data["endDate"] as? Timestamp,
+                  let packingItemId = data["packingItemId"] as? String else {
+                print("Error decoding journey")
                 return nil
             }
+
+            let activities = activitiesData.compactMap(TravelActivity.init)  // String 배열을 TravelActivity 배열로 변환
+            let startDate = startDateTimestamp.dateValue()
+            let endDate = endDateTimestamp.dateValue()
+
+            return Journey(
+                id: id,
+                destination: destination,
+                activities: activities,
+                image: image,
+                startDate: startDate,
+                endDate: endDate,
+                packingItemId: packingItemId,
+                docId: document.documentID
+            )
         }
         self.journeys = journeys.sorted(by: { $0.startDate > $1.startDate })
-        print("Updated journeys: \(journeys.map { $0.destination })")  // 로그 추가
+        print("Updated journeys: \(journeys.map { $0.destination })")
     }
 
 }
