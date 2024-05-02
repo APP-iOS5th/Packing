@@ -29,8 +29,15 @@ struct PackingListView: View {
                         }
                         .pickerStyle(.automatic)
                     }
-                Section(header:
-                            Text("공용")
+                Section(header: HStack{
+                    Text("공용 물품")
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
                     .foregroundStyle(.black)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -38,7 +45,6 @@ struct PackingListView: View {
                     List(service.shareLuggages){ shareLuggage in
                         HStack{
                             Button {
-                                //toggle
                                 if let index = service.shareLuggages.firstIndex(where: {$0.name == shareLuggage.name}) {
                                     service.toggleShareLuggage(showingMember: showingMember, index: index)
                                 }
@@ -50,7 +56,7 @@ struct PackingListView: View {
                                     Image(systemName: shareLuggage.checkedPeople.contains(showingMember) ? "checkmark.square" : "square")
                                 }
                             }
-//                            .disabled(showingMember가 내가 아니면)
+                            //                            .disabled(showingMember가 내가 아니면)
                             Text("( \(shareLuggage.checkedPeople.count) / \(shareLuggage.requiredCount) )")
                                 .foregroundStyle(.gray)
                             if !shareLuggage.checkedPeople.isEmpty {
@@ -63,8 +69,15 @@ struct PackingListView: View {
                         }
                     }
                 }
-                Section(header:
-                            Text("개인")
+                Section(header: HStack{
+                    Text("개인 물품")
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
                     .foregroundStyle(.black)
                     .font(.title2)
                     .fontWeight(.bold)
@@ -82,7 +95,7 @@ struct PackingListView: View {
                                 Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
-//                        .disabled(showingMember가 내가 아니면)
+                        //                        .disabled(showingMember가 내가 아니면)
                     }
                 }
             }
@@ -90,9 +103,8 @@ struct PackingListView: View {
                 service.fetch()
             }
             .scrollContentBackground(.hidden)
-            
-            //색상 변경해야함
-            .background(RoundedRectangle(cornerRadius: 30).fill( Color(red: 157/255, green: 178/255, blue: 191/255)))
+            .background(RoundedRectangle(cornerRadius: 30)
+                .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
             .ignoresSafeArea()
         }
     }
