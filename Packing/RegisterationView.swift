@@ -2,7 +2,7 @@
 //  RegisterationView.swift
 //  Packing
 //
-//  Created by 김소희 on 4/30/24.
+//  Created by 장예진 on 4/30/24.
 //
 
 import SwiftUI
@@ -20,10 +20,19 @@ struct RegistrationView: View {
     @AppStorage("storedEmail") private var storedEmail: String = ""
     @AppStorage("userID") private var userID: String = ""
     @StateObject private var authenticationViewModel = AuthenticationViewModel.shared
+    @State private var isOnboardingActive: Bool = false
+
+    
+    
+    
 
     var body: some View {
         ZStack {
             Color("mainColor").edgesIgnoringSafeArea(.all)
+            
+            NavigationLink(destination: OnboardingView(), isActive: $isOnboardingActive) {
+                            EmptyView()
+                        }
 
             VStack {
                 Spacer()
@@ -36,25 +45,7 @@ struct RegistrationView: View {
                     .font(.headline)
                     .foregroundColor(.gray)
                 Spacer()
-//// MARK: EMAIL 넣을지말지.. 넣으면 심들꺼같기도 ..
-//                TextField("이메일을 입력해주세요.", text: $email)
-//                    .padding()
-//                    .background(Color.white)
-//                    .cornerRadius(10)
-//                    .padding(.horizontal)
-//
-//                Button("continue with email") {
-//                    // Implement email continue action
-//                }
-//                .foregroundColor(.white)
-//                .padding()
-//                .background(Color.blue)
-//                .cornerRadius(10)
-//                .padding(.horizontal)
-//
-//                Text("또는")
-//                    .foregroundColor(.gray)
-//                    .padding()
+
 
                 HStack {
                     Button(action: {
@@ -84,12 +75,14 @@ struct RegistrationView: View {
 
                 Spacer()
                 if authenticationViewModel.state == .signedIn {
-                    Text("Welcome, \(userName), \(userEmail)")
+                    Text("Welcome \(userName), \(userEmail)")
                         .foregroundColor(.black)
                         .font(.headline)
                 }
+                
             }
             .padding()
+            
         }
         .onAppear {
             authenticationViewModel.restorePreviousSignIn()
@@ -104,6 +97,7 @@ struct RegistrationView: View {
         controller.performRequests()
     }
 }
+
 
 
 #Preview {

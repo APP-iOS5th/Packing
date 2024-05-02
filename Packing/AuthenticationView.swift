@@ -66,11 +66,12 @@ final class AuthenticationViewModel: ObservableObject {
             if let error { print("Error: \(error.localizedDescription)")}
             Task {
                 await self.signIn(user: result?.user)
+            
             }
         }
     }
     
-    private func signIn(user: GIDGoogleUser?) async {
+   func signIn(user: GIDGoogleUser?) async {
         guard let user, let idToken = user.idToken else {
             state = .signedOut
             return
@@ -82,6 +83,7 @@ final class AuthenticationViewModel: ObservableObject {
         do {
             authResult = try await Auth.auth().signIn(with: credential)
             state = .signedIn
+            print(state)
         } catch {
             state = .signedOut
             print("Error: \(error.localizedDescription)")
