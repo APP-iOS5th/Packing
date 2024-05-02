@@ -119,16 +119,16 @@ struct JourneyListView: View {
             .toolbarBackground(Color("mainColor"), for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-//                    NavigationLink(destination: AddJourneyView()){
-//                        Image(systemName: "bag.fill.badge.plus")
-//                            .font(.title)
-//                            .foregroundStyle(Color("DarkColor"))
-//                    }
-                    Button {
-                        service.addJourney(destination: "다낭!", activities: ["해변"], image: "test", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "")
-                    } label: {
-                        Text("ADD JOURNEY")
+                    NavigationLink(destination: AddJourneyView(service: service)){
+                        Image(systemName: "bag.fill.badge.plus")
+                            .font(.title)
+                            .foregroundStyle(Color("DarkColor"))
                     }
+//                    Button {
+//                        service.addJourney(destination: "다낭!", activities: ["해변"], image: "test", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "")
+//                    } label: {
+//                        Text("ADD JOURNEY")
+//                    }
                 }
             }
             .task {
