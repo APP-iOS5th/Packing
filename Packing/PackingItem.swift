@@ -28,6 +28,10 @@ class PersonalLuggage: Identifiable, Codable {
         self.name = name
         self.isChecked = isChecked
     }
+    
+    func dictionaryRepresentation() -> [String: Any] {
+            return ["name": self.name, "isChecked": self.isChecked]
+        }
 }
 
 class PackingItem: Codable {

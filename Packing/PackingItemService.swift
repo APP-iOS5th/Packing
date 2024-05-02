@@ -20,27 +20,75 @@ class PackingItemService {
         self.personalLuggages = personalLuggages
         self.shareLuggages = shareLuggages
         self.documentID = documentID
-        updatePackingItems()
+        startRealtimeUpdates()
     }
     
-//    func fetch() {
-//        guard listener == nil else {return}
-//        dbCollection
-//    }
-    
-    func updatePackingItems () {
-        let docRef = dbCollection.document(documentID)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let data = try? document.data(as: PackingItem.self) {
-                    self.personalLuggages = data.personal
-                    print("personalLuggages: \(self.personalLuggages)")
-                    self.shareLuggages = data.share
-                    print("shareLuggages: \(self.shareLuggages)")
-                }
-            } else {
-                print("document does not exist")
+    func fetch() {
+        guard listener == nil else {return}
+        dbCollection.document(documentID).getDocument{ (documentSnapshot, error) in
+            guard let snapshot = documentSnapshot else {
+                print("Error fetching snapshot: \(error!)")
+                return
             }
+            self.updatePackingItems(snapshot: snapshot)
+        }
+    }
+    
+    private func startRealtimeUpdates() {
+        listener = dbCollection.document(documentID).addSnapshotListener{ [self] documentSnapshot, error in
+            guard let snapshot = documentSnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
+            }
+            updatePackingItems(snapshot: snapshot)
+        }
+    }
+    
+    private func updatePackingItems (snapshot: DocumentSnapshot) {
+        if let data = try? snapshot.data(as: PackingItem.self) {
+            self.personalLuggages = data.personal
+            self.shareLuggages = data.share
+        }
+    }
+    
+    func togglePersonalLuggage(showingMember: String, index: Int) {
+        var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
+        for (key, value) in personalLuggages {
+            var luggageArray: [[String: Any]] = []
+            for luggage in value {
+                luggageArray.append(luggage.dictionaryRepresentation())
+            }
+            updatedPersonalLuggages[key] = luggageArray
+        }
+        guard let luggages = updatedPersonalLuggages[showingMember], index < luggages.count else {
+                print("Invalid index")
+                return
+            }
+        
+        if let isChecked = updatedPersonalLuggages[showingMember]![index]["isChecked"] as? Bool {
+            updatedPersonalLuggages[showingMember]![index]["isChecked"] = !isChecked
+            dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
+        }
+    }
+    
+    func toggleShareLuggage(showingMember: String, index: Int) {
+        var updatedShareLuggages: [[String:Any]] = []
+        for luggage in shareLuggages {
+            updatedShareLuggages.append(["checkedPeople": luggage.checkedPeople, "name": luggage.name, "requiredCount": luggage.requiredCount])
+        }
+        guard index < updatedShareLuggages.count else{
+            print("Invalid index")
+            return
+        }
+        if var checkedPeople: [String] = updatedShareLuggages[index]["checkedPeople"] as? [String] {
+            if let indexForRemove = checkedPeople.firstIndex(of: showingMember) {
+                checkedPeople.remove(at: indexForRemove)
+                updatedShareLuggages[index]["checkedPeople"] = checkedPeople
+            } else {
+                checkedPeople.append(showingMember)
+                updatedShareLuggages[index]["checkedPeople"] = checkedPeople
+            }
+            dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
         }
     }
 }

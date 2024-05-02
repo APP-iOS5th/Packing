@@ -10,6 +10,7 @@
 		15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15256EDB2BE0D04000473DD1 /* PackingListView.swift */; };
 		1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */; };
 		1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */; };
+		1526C01B2BE36ECB00CDDE90 /* AddPackingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */; };
 		4B1139FB2BE205160028EE65 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1139FA2BE205160028EE65 /* ImagePicker.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
@@ -44,6 +45,7 @@
 		15256EDB2BE0D04000473DD1 /* PackingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListView.swift; sourceTree = "<group>"; };
 		1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItem.swift; sourceTree = "<group>"; };
 		1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItemService.swift; sourceTree = "<group>"; };
+		1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPackingItemView.swift; sourceTree = "<group>"; };
 		4B1139FA2BE205160028EE65 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				C67761832BE3296E000AAF57 /* JourneyManager.swift */,
 				C67761852BE337A0000AAF57 /* JourneyService.swift */,
 				15256EDB2BE0D04000473DD1 /* PackingListView.swift */,
+				1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */,
 				1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */,
 				1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */,
 				C68C4B872BE0CD5700B62122 /* JourneyListView.swift */,
@@ -233,6 +236,7 @@
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
 				1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */,
 				1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */,
+				1526C01B2BE36ECB00CDDE90 /* AddPackingItemView.swift in Sources */,
 				15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */,
 				4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */,
 				C60C5F1D2BE2A1E500558210 /* ProfileView.swift in Sources */,
