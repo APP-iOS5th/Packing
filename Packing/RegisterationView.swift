@@ -19,16 +19,24 @@ struct RegistrationView: View {
                 
                 VStack {
                     Spacer()
+                    Text("여행에 딱 필요한 짐을 쌀 땐")
+                        .font(Font.custom("NanumSquareOTFB", size: 15))
                     Text("Packing")
-                        .bold()
-                        .font(.largeTitle)
-                        .foregroundColor(.black)
+                        .font(Font.custom("Graduate-Regular", size: 50))
+                        .foregroundStyle(Color(hex: 0x566375))
                         .shadow(color: .gray, radius: 2, x: 0, y: 1)
-                    Text("여행 목적에 맞는 짐 싸기")
-                        .font(.headline)
-                        .foregroundColor(.gray)
+                    Text("Packing과 함께라면")
+                        .font(Font.custom("NanumSquareOTFL", size: 20))
+                        .padding(.vertical, 1)
+                    Text("완벽하게 준비할 수 있습니다!")
+                        .font(Font.custom("NanumSquareOTFL", size: 20))
+                        .frame(maxWidth: 550, alignment: .center)
+                        .foregroundStyle(.black)
+                        .padding(.bottom, 15)
+//                        .multilineTextAlignment(.center)
+
                     Spacer()
-                    
+                       
                     HStack {
                         Button(action: {
                             authViewModel.login()

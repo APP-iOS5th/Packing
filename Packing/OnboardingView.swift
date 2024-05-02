@@ -74,7 +74,7 @@ struct OnboardingStepView: View {
     var body: some View {
         VStack {
             Text(headerText[index])
-                .font(.largeTitle)
+                .font(.title)
                 .fontWeight(.semibold)
                 .padding()
                 .foregroundColor(.black)
@@ -108,15 +108,15 @@ struct OnboardingStepView: View {
 }
 
 let headerText = [
-    "Get Organized",
-    "Personalized Suggestions",
-    "Pack Together",
-    "Enjoy Your Trip"
+    "여행 일정을 추가해보세요!",
+    "물품 추가와 수정을 쉽고 자유롭게",
+    "친구와 함께하는 여행의 새로운 방식",
+    "Packing과 함께하는 완벽한 준비"
 ]
 
 let descriptionText = [
-    "여행 준비를 한눈에! 여행 목적지와 활동에 맞춰 필요한 물품을 추천받으세요.",
-    "목적지와 일정에 따라 맞춤 패킹 리스트를 생성하고, 친구들과 공유하여 여행 준비를 더욱 쉽게!",
+    "여행 목적지와 활동에 맞춰 필요한 물품을 추천받을 수 있습니다.",
+    "공용물품과 개인물품을 분리하여 관리 할 수 있습니다",
     "친구들과 패킹 리스트를 공유하고, 누가 무엇을 가져갈지 실시간으로 조율하세요.",
     ""
 ]

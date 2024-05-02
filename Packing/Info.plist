@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Graduate-Regular.ttf</string>
+		<string>NanumSquareB.otf</string>
+		<string>NanumSquareEB.otf</string>
+		<string>NanumSquareL.otf</string>
+		<string>NanumSquareR.otf</string>
+		<string>Sansita-Black.ttf</string>
+		<string>Sansita-Regular.ttf</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
