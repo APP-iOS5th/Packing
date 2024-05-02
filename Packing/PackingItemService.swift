@@ -20,7 +20,7 @@ class PackingItemService {
         self.personalLuggages = personalLuggages
         self.shareLuggages = shareLuggages
         self.documentID = documentID
-        updatePackingItems()
+        startRealtimeUpdates()
     }
     
 //    func fetch() {
@@ -28,19 +28,33 @@ class PackingItemService {
 //        dbCollection
 //    }
     
-    func updatePackingItems () {
-        let docRef = dbCollection.document(documentID)
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                if let data = try? document.data(as: PackingItem.self) {
-                    self.personalLuggages = data.personal
-                    print("personalLuggages: \(self.personalLuggages)")
-                    self.shareLuggages = data.share
-                    print("shareLuggages: \(self.shareLuggages)")
-                }
-            } else {
-                print("document does not exist")
+    private func startRealtimeUpdates() {
+        listener = dbCollection.document(documentID).addSnapshotListener{ [self] documentSnapshot, error in
+            guard let snapshot = documentSnapshot else {
+                print("Error fetching snapshots: \(error!)")
+                return
             }
+            updatePackingItems(snapshot: snapshot)
         }
+    }
+    
+    private func updatePackingItems (snapshot: DocumentSnapshot) {
+        if let data = try? snapshot.data(as: PackingItem.self) {
+            self.personalLuggages = data.personal
+            self.shareLuggages = data.share
+        }
+//        let docRef = dbCollection.document(documentID)
+//        docRef.getDocument { (document, error) in
+//            if let document = document, document.exists {
+//                if let data = try? document.data(as: PackingItem.self) {
+//                    self.personalLuggages = data.personal
+//                    print("personalLuggages: \(self.personalLuggages)")
+//                    self.shareLuggages = data.share
+//                    print("shareLuggages: \(self.shareLuggages)")
+//                }
+//            } else {
+//                print("document does not exist")
+//            }
+//        }
     }
 }
