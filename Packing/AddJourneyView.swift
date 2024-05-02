@@ -6,24 +6,26 @@
 //
 
 import SwiftUI
-
+import PhotosUI
 
 
 struct AddJourneyView: View {
+    @StateObject private var viewModel = AuthenticationViewModel()
     @State var testString = ""
     @State private var startdate = Date()
     @State private var endDate = Date()
-    
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var imageData: Data? = nil
     @State private var travelActivitys: TravelActivity = .beach
     
     @State var showImagePicker = false
     @State var selectedUIImage: UIImage?
     @State var image: Image?
     
-    func loadImage() {
-        guard let selectedImage = selectedUIImage else { return }
-        image = Image(uiImage: selectedImage)
-    }
+//    func loadImage() {
+//        guard let selectedImage = selectedItem else { return }
+//        image = Image(uiImage: selectedImage)
+//    }
     @Environment(\.colorScheme) var colorScheme
     
     
@@ -38,8 +40,8 @@ struct AddJourneyView: View {
                 
                 VStack{
                     ZStack{
-                        if let image = image {
-                            image
+                        if let imageData, let image = UIImage(data: imageData) {
+                            Image(uiImage: image)
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 30))
                                 .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
@@ -47,24 +49,30 @@ struct AddJourneyView: View {
                                 .shadow(radius: 3)
                         } else {
                             Spacer()
-                            Rectangle()
-                                .clipShape(RoundedRectangle(cornerRadius: 30))
-                                .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
-                                .padding(.top, 60)
-                                .shadow(radius: 3)
-                                .foregroundStyle(.white)
-                            VStack{
-                                Image(systemName: "photo.badge.plus")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fit)
-                                    .frame(width: 100)
-                                    .padding(.top, 50)
-                                    .foregroundStyle(Color(hex: 0x566375))
-                        
+                            PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
+                                ZStack{
+                                    Rectangle()
+                                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                                        .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                                        .padding(.top, 60)
+                                        .shadow(radius: 3)
+                                        .foregroundStyle(.white)
+                                    VStack{
+                                        Image(systemName: "photo.badge.plus")
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: 100)
+                                            .padding(.top, 50)
+                                            .foregroundStyle(Color(hex: 0x566375))
+                                
+                                    }
+                                }
                             }
+
+                           
                         }
                     }.onTapGesture {
-                        showImagePicker.toggle()
+//                        showImagePicker.toggle()
                     }
                     ZStack{
                         RoundedRectangle(cornerRadius: 30)
@@ -143,12 +151,21 @@ struct AddJourneyView: View {
             }
             .ignoresSafeArea(.all)
         }
-        
-        .sheet(isPresented: $showImagePicker, onDismiss: {
-            loadImage()
-        }) {
-            ImagePicker(image: $selectedUIImage)
+        .task {
+            let data = try? await StorageManager.shared.getDate(path: "images")
+            self.imageData = data
         }
+        .onChange(of: selectedItem) { _, newValue in
+            if let newValue {
+                viewModel.saveJourneyImage(item: newValue)
+//                loadImage()
+            }
+        }
+//        .sheet(isPresented: $showImagePicker, onDismiss: {
+//            loadImage()
+//        }) {
+//            ImagePicker(image: $selectedUIImage)
+//        }
         
     }
 }
