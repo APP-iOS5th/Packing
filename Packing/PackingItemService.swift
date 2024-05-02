@@ -50,4 +50,24 @@ class PackingItemService {
             self.shareLuggages = data.share
         }
     }
+    
+    func togglePersonalLuggage(showingMember: String, index: Int) {
+        var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
+        for (key, value) in personalLuggages {
+            var luggageArray: [[String: Any]] = []
+            for luggage in value {
+                luggageArray.append(luggage.dictionaryRepresentation())
+            }
+            updatedPersonalLuggages[key] = luggageArray
+        }
+        guard let luggages = updatedPersonalLuggages[showingMember], index < luggages.count else {
+                print("Invalid index")
+                return
+            }
+        
+        if let isChecked = updatedPersonalLuggages[showingMember]![index]["isChecked"] as? Bool {
+            updatedPersonalLuggages[showingMember]![index]["isChecked"] = !isChecked
+            dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
+        }
+    }
 }

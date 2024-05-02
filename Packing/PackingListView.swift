@@ -68,6 +68,9 @@ struct PackingListView: View {
                     List(service.personalLuggages[showingMember] ?? []){ personalLuggage in
                         Button {
                             //toggle
+                            if let index = service.personalLuggages[showingMember]?.firstIndex(where: {$0.name == personalLuggage.name}) {
+                                service.togglePersonalLuggage(showingMember: showingMember, index: index)
+                            }
                         } label: {
                             Label {
                                 Text(personalLuggage.name)
@@ -79,9 +82,9 @@ struct PackingListView: View {
                     }
                 }
             }
-//            .task{
-//                service.updatePackingItems()
-//            }
+            .task{
+                service.fetch()
+            }
             .scrollContentBackground(.hidden)
             
             //색상 변경해야함
