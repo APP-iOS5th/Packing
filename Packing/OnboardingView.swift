@@ -15,6 +15,8 @@ struct MainView: View {
 }
 
 struct OnboardingView: View {
+    @StateObject private var authenticationViewModel = AuthenticationViewModel()
+
     @State private var currentPage = 0
     @State private var showMainView = false
 

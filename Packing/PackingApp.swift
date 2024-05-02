@@ -23,12 +23,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct PackingApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var authViewModel = AuthenticationViewModel()
+    @StateObject var authenticationViewModel = AuthenticationViewModel()
 
     var body: some Scene {
         WindowGroup {
             RegistrationView()
-                .environmentObject(authViewModel)
+                .environmentObject(authenticationViewModel)
         }
     }
 }
