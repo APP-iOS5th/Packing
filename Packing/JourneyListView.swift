@@ -124,11 +124,6 @@ struct JourneyListView: View {
                             .font(.title)
                             .foregroundStyle(Color("DarkColor"))
                     }
-//                    Button {
-//                        service.addJourney(destination: "다낭!", activities: ["해변"], image: "test", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "")
-//                    } label: {
-//                        Text("ADD JOURNEY")
-//                    }
                 }
             }
             .task {

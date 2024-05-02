@@ -30,18 +30,17 @@ class JourneyService: ObservableObject {
         }
     }
     
-    // Adds a new journey to Firestore
-    func addJourney(destination: String, activities: [String], image: String, startDate: Date, endDate: Date, packingItemId: String) {
+    func addJourney(destination: String, activities: [TravelActivity], image: String, startDate: Date, endDate: Date, packingItemId: String) {
         let id = UUID().uuidString
+        let activitiesString = activities.map { $0.rawValue }
         let newJourney: [String: Any] = [
             "id": id,
             "destination": destination,
-            "activities": activities,
+            "activities": activitiesString,
             "image": image,
             "startDate": Timestamp(date: startDate),
             "endDate": Timestamp(date: endDate),
             "packingItemId": packingItemId
-
         ]
         
         dbCollection.addDocument(data: newJourney) { error in
@@ -52,6 +51,7 @@ class JourneyService: ObservableObject {
             }
         }
     }
+
     
     private func startRealtimeUpdates() {
         listener = dbCollection.addSnapshotListener { [self] querySnapshot, error in

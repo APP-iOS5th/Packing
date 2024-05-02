@@ -127,7 +127,7 @@ struct AddJourneyView: View {
                         //MARK: - 확인 버튼
                         Button{
                             //TODO: 버튼 클릭시 데이터 전송
-                            service?.addJourney(destination: testString, activities: ["해변"], image: "", startDate: startdate, endDate: endDate, packingItemId: "")
+                            service?.addJourney(destination: testString, activities: [travelActivitys], image: "", startDate: startdate, endDate: endDate, packingItemId: "")
                             dismiss()
                         } label: {
                             Text("확인")
