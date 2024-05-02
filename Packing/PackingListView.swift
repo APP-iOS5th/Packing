@@ -18,11 +18,11 @@ struct PackingListView: View {
                 .padding()
             
             Form {
-                Section(header: Text("구성원")
+                Section(header: Text("구성원 선택")
                     .foregroundStyle(.black)
                     .font(.title2)
                     .fontWeight(.bold)) {
-                        Picker(selection: $showingMember, label: Text("choose member")){
+                        Picker(selection: $showingMember, label: Text("")){
                             ForEach(Array(service.personalLuggages.keys), id: \.self){ name in
                                 Text(name).tag(name)
                             }
