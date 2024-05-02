@@ -21,8 +21,8 @@ final class StorageManager {
         storage.child("images")
     }
     
-//    private func userReference(userId: String) -> StorageReference {
-//        storage.child("users").child(userId)
+//    private func journeyReference(journeyId: String) -> StorageReference {
+//        storage.child("journey").child(journeyId)
 //    }
     
     func getDate(path: String) async throws -> Data {

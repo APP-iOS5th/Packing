@@ -29,9 +29,11 @@ struct PackingApp: App {
     @StateObject var authenticationViewModel = AuthenticationViewModel()
 
     var body: some Scene {
+//        WindowGroup {
+//            RegistrationView()
+//                .environmentObject(authenticationViewModel)
         WindowGroup {
-            RegistrationView()
-                .environmentObject(authenticationViewModel)
+            AddJourneyView()
         }
     }
 }

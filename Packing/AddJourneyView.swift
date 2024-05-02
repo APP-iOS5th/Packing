@@ -13,22 +13,15 @@ struct AddJourneyView: View {
     var service: JourneyService?
     @Environment(\.dismiss) var dismiss
 
-    @StateObject private var viewModel = AuthenticationViewModel()
+    @StateObject private var viewModel = JourneyService()
     @State var testString = ""
     @State private var startdate = Date()
     @State private var endDate = Date()
     @State private var selectedItem: PhotosPickerItem? = nil
-    @State private var imageData: Data? = nil
+    @State private var image: UIImage? = nil
     @State private var travelActivitys: TravelActivity = .beach
     
-    @State var showImagePicker = false
-    @State var selectedUIImage: UIImage?
-    @State var image: Image?
-    
-//    func loadImage() {
-//        guard let selectedImage = selectedItem else { return }
-//        image = Image(uiImage: selectedImage)
-//    }
+  
     @Environment(\.colorScheme) var colorScheme
     
     
@@ -43,7 +36,7 @@ struct AddJourneyView: View {
                 
                 VStack{
                     ZStack{
-                        if let imageData, let image = UIImage(data: imageData) {
+                        if let image = image {
                             Image(uiImage: image)
                                 .resizable()
                                 .clipShape(RoundedRectangle(cornerRadius: 30))
@@ -70,12 +63,16 @@ struct AddJourneyView: View {
                                 
                                     }
                                 }
+                            }.onChange(of: selectedItem) {
+                                Task{
+                                    guard let imageData = try await selectedItem?.loadTransferable(type: Data.self) else { return }
+                                    guard let uiImage = UIImage(data: imageData) else { return }
+                                    image = uiImage
+                                }
                             }
 
                            
                         }
-                    }.onTapGesture {
-//                        showImagePicker.toggle()
                     }
                     ZStack{
                         RoundedRectangle(cornerRadius: 30)
@@ -137,6 +134,9 @@ struct AddJourneyView: View {
                             Button{
                                 //TODO: 버튼 클릭시 데이터 전송
                                 service?.addJourney(destination: testString, activities: [travelActivitys], image: "", startDate: startdate, endDate: endDate, packingItemId: "")
+                                if let newValue = selectedItem {
+                                    viewModel.saveJourneyImage(item: newValue)
+                                }
                                 dismiss()
                             } label: {
                                 Text("확인")
@@ -157,23 +157,8 @@ struct AddJourneyView: View {
                 }
             }
             .ignoresSafeArea(.all)
-        }
-        .task {
-            let data = try? await StorageManager.shared.getDate(path: "images")
-            self.imageData = data
-        }
-        .onChange(of: selectedItem) { _, newValue in
-            if let newValue {
-                viewModel.saveJourneyImage(item: newValue)
-//                loadImage()
-            }
-        }
-//        .sheet(isPresented: $showImagePicker, onDismiss: {
-//            loadImage()
-//        }) {
-//            ImagePicker(image: $selectedUIImage)
-//        }
         
+        }
     }
 }
 
