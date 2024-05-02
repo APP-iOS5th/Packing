@@ -79,6 +79,9 @@ struct PackingListView: View {
                     }
                 }
             }
+            .task{
+                service.updatePackingItems()
+            }
             .scrollContentBackground(.hidden)
             
             //색상 변경해야함
