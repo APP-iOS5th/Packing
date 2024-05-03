@@ -124,12 +124,14 @@ struct JourneySummaryView: View {
                     .init(color: .clear, location: 1)
                 ]), startPoint: .leading, endPoint: .trailing)
             }
-                .frame(height: 100)
-                .clipped()
+//                .frame(height: 100)
+//                .clipped()
         )
         .cornerRadius(8)
         .shadow(radius: 3)
         .scaledToFill()
+        .frame(height: 100)
+        .clipped()
     }
 }
 

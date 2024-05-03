@@ -16,13 +16,32 @@ struct PackingListView: View {
     var journey: Journey
     
     @Environment(\.colorScheme) var colorScheme
+//    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
+//            HStack {
+//                Button(action: {
+//                    dismiss()
+//                    print("dismiss")
+//                }) {
+//                    Image(systemName: "chevron.backward")
+//                        .font(.title3)
+//                        .foregroundColor(.primary)
+//                }
+//                .padding()
+//                Spacer()
+//            }
+//            .padding()
+            
             JourneySummaryView(journey: journey)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-                .padding()
+                .frame(minWidth: 200, maxWidth: .infinity)
+                .padding(.horizontal)
+                .padding(.vertical, 5)
             Divider().overlay(colorScheme == .dark ? .white.opacity(0.5) : .gray.opacity(0.8)).padding(.horizontal)
+            
+
+            
             Form {
                 Section(header: Text("구성원 선택")
                     .foregroundStyle(colorScheme == .dark ? .white.opacity(0.85) : .black)
@@ -111,6 +130,7 @@ struct PackingListView: View {
             .scrollContentBackground(.hidden)
 
         }
+//        .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $isNewSharePresented) {
             AddShareLuggageView(journey: journey, service: service)
         }
