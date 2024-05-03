@@ -4,6 +4,8 @@
 //
 //  Created by 장예진 on 5/1/24.
 //
+// MARK: Fixed applelogin struct updatedddd 
+
 import Foundation
 import FirebaseAuth
 import GoogleSignIn
@@ -40,13 +42,13 @@ final class AuthenticationViewModel: ObservableObject {
     var photoURL: URL? { authResult?.user.photoURL }
     var userId: String { authResult?.user.uid ?? "" }
     
-    func logout() {
-        GIDSignIn.sharedInstance.signOut()
-        GIDSignIn.sharedInstance.disconnect()
-        try? Auth.auth().signOut()
-        authResult = nil
-        state = .signedOut
-    }
+    //    func logout() {
+    //        GIDSignIn.sharedInstance.signOut()
+    //        GIDSignIn.sharedInstance.disconnect()
+    //        try? Auth.auth().signOut()
+    //        authResult = nil
+    //        state = .signedOut
+    //    }
     
     func restorePreviousSignIn() {
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
@@ -73,7 +75,7 @@ final class AuthenticationViewModel: ObservableObject {
             }
             Task {
                 await self.signIn(user: result?.user)
-            
+                
             }
         }
     }
@@ -85,7 +87,7 @@ final class AuthenticationViewModel: ObservableObject {
         controller.performRequests()
     }
     
-   func signIn(user: GIDGoogleUser?) async {
+    func signIn(user: GIDGoogleUser?) async {
         guard let user, let idToken = user.idToken else {
             errorMessage = "Login failed: Invalid user data"
             state = .signedOut
@@ -103,5 +105,4 @@ final class AuthenticationViewModel: ObservableObject {
             state = .signedOut
         }
     }
-    
 }
