@@ -80,7 +80,7 @@ struct PackingListView: View {
                     Text("개인 물품")
                     Spacer()
                     Button {
-                        
+                        isNewPersonalPresented.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -103,6 +103,9 @@ struct PackingListView: View {
                             }
                         }
                         //                        .disabled(showingMember가 내가 아니면)
+                    }
+                    .sheet(isPresented: $isNewPersonalPresented) {
+                        AddPersonalLuggageView(journey: journey, service: service)
                     }
                 }
             }
