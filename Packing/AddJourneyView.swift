@@ -133,9 +133,8 @@ struct AddJourneyView: View {
                             //MARK: - 확인 버튼
                             Button{
                                 //TODO: 버튼 클릭시 데이터 전송
-                                service?.addJourney(destination: testString, activities: [travelActivitys], image: "", startDate: startdate, endDate: endDate, packingItemId: "")
-                                if let newValue = selectedItem {
-                                    viewModel.saveJourneyImage(item: newValue)
+                                if let image = image {
+                                    service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, packingItemId: "")
                                 }
                                 dismiss()
                                 

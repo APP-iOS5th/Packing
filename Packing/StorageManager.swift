@@ -9,48 +9,29 @@ import Foundation
 import FirebaseStorage
 import UIKit
 
-
 final class StorageManager {
-    
     static let shared = StorageManager()
-    private init ( ) { }
+    private init() { }
     
     private let storage = Storage.storage().reference()
     
-    private var imagesRefrence: StorageReference {
+    private var imagesReference: StorageReference {
         storage.child("images")
     }
     
-//    private func journeyReference(journeyId: String) -> StorageReference {
-//        storage.child("journey").child(journeyId)
-//    }
-    
-    func getDate(path: String) async throws -> Data {
-        try await imagesRefrence.child(path).data(maxSize: 3 * 1024 * 1024)
-    }
-    
-    func saveImage(data: Data) async throws  -> (path: String, name: String){
+    func saveImage(data: Data) async throws -> String {
         let meta = StorageMetadata()
-        
         meta.contentType = "image/jpeg"
         let path = "\(UUID().uuidString).jpeg"
-        let returnedMetaData = try await imagesRefrence.child(path).putDataAsync(data, metadata: meta)
-        
-        guard let returnedPath = returnedMetaData.path, let returnedName = returnedMetaData.name else {
-            throw URLError(.badServerResponse)
-        }
-        return(returnedPath, returnedName)
-        
+        let _ = try await imagesReference.child(path).putDataAsync(data, metadata: meta)
+        let url = try await imagesReference.child(path).downloadURL()
+        return url.absoluteString
     }
     
-    func saveImage(image: UIImage) async throws  -> (path: String, name: String){
-        // image.pngData()
-        guard let data = image.jpegData(compressionQuality: 1) else {
-            throw URLError(.backgroundSessionWasDisconnected)
+    func saveImage(image: UIImage) async throws -> String {
+        guard let data = image.jpegData(compressionQuality: 0.8) else {
+            throw URLError(.cannotCreateFile)
         }
-        
-        return  try await saveImage(data: data)
+        return try await saveImage(data: data)
     }
-    
-    
 }

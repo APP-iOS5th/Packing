@@ -7,52 +7,8 @@
 
 import SwiftUI
 
-enum TravelActivity: String, CaseIterable, Codable {
-    case beach = "해변"
-    case camping = "캠핑"
-    case hiking = "등산"
-    case sightseeing = "관광"
-    case skiing = "스키"
-    case cycling = "자전거 타기"
-    case foodTour = "음식 투어"
-    case culturalExperience = "문화 체험"
-    case waterSports = "수상 스포츠"
-    // 다른 여행 활동 추가
-}
-
-
-struct Journey: Identifiable, Codable, Hashable {
-    let id: String
-    let destination: String // 여행 목적지
-    let activities: [TravelActivity]
-    let image: String    //  여행 사진
-    let startDate: Date // 여행 시작 날짜
-    let endDate: Date   // 여행 끝 날짜
-    let packingItemId: String
-    var docId: String?
-    
-    var duration: String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        return "\(formatter.string(from: startDate)) - \(formatter.string(from: endDate))"
-    }
-}
-
-extension Journey {
-    static let sample: [Journey] = [
-        Journey(id: UUID().uuidString, destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "", docId: nil),
-        Journey(id: UUID().uuidString, destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7), packingItemId: "", docId: nil),
-        Journey(id: UUID().uuidString, destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3), packingItemId: "", docId: nil),
-        Journey(id: UUID().uuidString, destination: "다낭", activities: [.beach, .sightseeing, .waterSports], image: "다낭", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 5), packingItemId: "", docId: nil),
-        Journey(id: UUID().uuidString, destination: "가평", activities: [.camping], image: "캠핑", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 7), packingItemId: "", docId: nil),
-        Journey(id: UUID().uuidString, destination: "사하라 사막", activities: [.hiking, .sightseeing], image: "사막", startDate: Date(), endDate: Date().addingTimeInterval(86400 * 3), packingItemId: "", docId: nil)
-    ]
-}
-
-
 struct JourneyListView: View {
     @StateObject private var service: JourneyService = JourneyService()
-//    var journeys = Journey.sample
     @State private var selectedJourney: Journey?
     @Environment(\.colorScheme) var colorScheme
     
@@ -74,11 +30,11 @@ struct JourneyListView: View {
                     } else {
                         Spacer()
                         ZStack {
-                            RoundedRectangle(cornerRadius: 30)
-                                .fill(colorScheme == .dark ? Color("DarkColor") : .white)
-                                .frame(minHeight: 700, maxHeight: .infinity)
-                                .shadow(radius: 5)
-                                .edgesIgnoringSafeArea(.bottom)
+//                            RoundedRectangle(cornerRadius: 30)
+//                                .fill(colorScheme == .dark ? Color("DarkColor") : .white)
+//                                .frame(minHeight: 700, maxHeight: .infinity)
+//                                .shadow(radius: 5)
+//                                .edgesIgnoringSafeArea(.bottom)
                             
                             List(service.journeys) { journey in
                                 Button(action: {
@@ -87,7 +43,6 @@ struct JourneyListView: View {
                                     JourneySummaryView(journey: journey)
                                         .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
                                         .padding(.top, 10)
-                                    //                                        .background(Color.clear)
                                         .shadow(radius: 3, x: 1, y: 4)
                                 }
                                 .buttonStyle(PlainButtonStyle())
@@ -101,18 +56,13 @@ struct JourneyListView: View {
                                     }
                                 }
                             }
-                            
                             .listStyle(.plain)
                             .cornerRadius(30)
                             .edgesIgnoringSafeArea(.bottom)
-                            
-                            //                        .padding(.top)
                             .navigationDestination(item: $selectedJourney) { journey in
                                 PackingListView(journey: journey)
-                                
                             }
                         }
-                        //                        .offset(y: 20)
                     }
                 }
             }
@@ -133,19 +83,12 @@ struct JourneyListView: View {
     }
 }
 
-
+// MARK: - JOURNEY SUMMARY VIEW
 struct JourneySummaryView: View {
     @Environment(\.colorScheme) var colorScheme
     var journey: Journey
     
     var body: some View {
-        let backgroundImage: Image?
-        
-        if let uiImage = UIImage(named: journey.image) {
-            backgroundImage = Image(uiImage: uiImage)
-        } else {
-            backgroundImage = Image("다낭")
-        }
         
         return HStack {
             VStack(alignment: .leading, spacing: 4) {
@@ -166,9 +109,13 @@ struct JourneySummaryView: View {
         .padding()
         .background(
             ZStack {
-                if let background = backgroundImage {
-                    background
+                AsyncImage(url: URL(string: journey.image)) { image in
+                    image.resizable()
+                } placeholder: {
+                    EmptyView()
                 }
+                .scaledToFill()
+                
                 LinearGradient(gradient: Gradient(stops: [
                     .init(color: colorScheme == .dark ? Color.black.opacity(0.6) : Color.white.opacity(0.8), location: 0.3),
                     .init(color: colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.5), location: 0.7),
@@ -184,19 +131,12 @@ struct JourneySummaryView: View {
     }
 }
 
-struct JourneyDetailView: View {
-    var journey: Journey
-    
-    var body: some View {
-        Text("")
-    }
-}
-
 #Preview {
     JourneyListView()
         .environmentObject(JourneyService())
 }
 
+// MARK: - COLOR EXTENSION
 extension Color {
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

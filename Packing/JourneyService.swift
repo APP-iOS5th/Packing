@@ -31,24 +31,25 @@ class JourneyService: ObservableObject {
         }
     }
     
-    func addJourney(destination: String, activities: [TravelActivity], image: String, startDate: Date, endDate: Date, packingItemId: String) {
-        let id = UUID().uuidString
-        let activitiesString = activities.map { $0.rawValue }
-        let newJourney: [String: Any] = [
-            "id": id,
-            "destination": destination,
-            "activities": activitiesString,
-            "image": image,
-            "startDate": Timestamp(date: startDate),
-            "endDate": Timestamp(date: endDate),
-            "packingItemId": packingItemId
-        ]
-        
-        dbCollection.addDocument(data: newJourney) { error in
-            if let error = error {
-                print("Error adding journey: \(error)")
-            } else {
-                self.fetch()
+    func addJourney(destination: String, activities: [TravelActivity], image: UIImage, startDate: Date, endDate: Date, packingItemId: String) {
+        Task {
+            do {
+                let imageUrl = try await StorageManager.shared.saveImage(image: image)
+                let id = UUID().uuidString
+                let activitiesString = activities.map { $0.rawValue }
+                let newJourney: [String: Any] = [
+                    "id": id,
+                    "destination": destination,
+                    "activities": activitiesString,
+                    "image": imageUrl,
+                    "startDate": Timestamp(date: startDate),
+                    "endDate": Timestamp(date: endDate),
+                    "packingItemId": packingItemId
+                ]
+                try await dbCollection.document(id).setData(newJourney)
+                fetch()
+            } catch {
+                print("Error uploading journey or image: \(error)")
             }
         }
     }
@@ -143,19 +144,6 @@ class JourneyService: ObservableObject {
             }
         }
     }
-    
-    func saveJourneyImage(item: PhotosPickerItem) {
-//        guard let docId = journey.docId else { return }
-        Task{
-            guard let data = try await item.loadTransferable(type: Data.self) else { return }
-            let (path, name) = try await StorageManager.shared.saveImage(data: data)
-            print("Success!")
-            print(path)
-            print(name)
-        }
-    }
-
-
 }
 
 

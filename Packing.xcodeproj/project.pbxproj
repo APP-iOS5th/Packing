@@ -13,7 +13,6 @@
 		1526C01B2BE36ECB00CDDE90 /* AddPackingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
-		4B8AA8AA2BE3AC5700F0BD66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B8AA8A92BE3AC5700F0BD66 /* GoogleService-Info.plist */; };
 		4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8056D2BE35D67004880FE /* StorageManager.swift */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
 		B84E2A672BE1CD03006EBF0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A662BE1CD03006EBF0D /* FirebaseFirestoreSwift */; };
@@ -26,14 +25,15 @@
 		C60C5F242BE2A2CC00558210 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C60C5F232BE2A2CC00558210 /* GoogleSignInSwift */; };
 		C67761802BE327F1000AAF57 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C677617F2BE327F1000AAF57 /* FirebaseStorage */; };
 		C67761822BE32831000AAF57 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = C67761812BE32831000AAF57 /* FirebaseStorage */; };
-		C67761842BE3296E000AAF57 /* JourneyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67761832BE3296E000AAF57 /* JourneyManager.swift */; };
 		C67761862BE337A0000AAF57 /* JourneyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67761852BE337A0000AAF57 /* JourneyService.swift */; };
+		C67BF5DD2BE3E6EC00A9FE67 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C67BF5DC2BE3E6EC00A9FE67 /* GoogleService-Info.plist */; };
 		C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B792BE0CBE600B62122 /* PackingApp.swift */; };
 		C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B7B2BE0CBE600B62122 /* ContentView.swift */; };
 		C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */; };
 		C68C4B812BE0CBE900B62122 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C68C4B802BE0CBE900B62122 /* Preview Assets.xcassets */; };
 		C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B872BE0CD5700B62122 /* JourneyListView.swift */; };
 		C68C4B8C2BE0CE3100B62122 /* RegisterationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */; };
+		C6EFA7DF2BE466B900AA4686 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EFA7DE2BE466B900AA4686 /* Journey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,15 +43,14 @@
 		1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPackingItemView.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		4B8AA8A92BE3AC5700F0BD66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		C60C5F182BE2A00800558210 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewmodel.swift; sourceTree = "<group>"; };
 		C60C5F1C2BE2A1E500558210 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		C63415BD2BE2A4530068BFD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C63415C02BE2A54E0068BFD0 /* Packing.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Packing.entitlements; sourceTree = "<group>"; };
-		C67761832BE3296E000AAF57 /* JourneyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyManager.swift; sourceTree = "<group>"; };
 		C67761852BE337A0000AAF57 /* JourneyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyService.swift; sourceTree = "<group>"; };
+		C67BF5DC2BE3E6EC00A9FE67 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C68C4B762BE0CBE600B62122 /* Packing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Packing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C68C4B792BE0CBE600B62122 /* PackingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingApp.swift; sourceTree = "<group>"; };
 		C68C4B7B2BE0CBE600B62122 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -59,6 +58,7 @@
 		C68C4B802BE0CBE900B62122 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C68C4B872BE0CD5700B62122 /* JourneyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListView.swift; sourceTree = "<group>"; };
 		C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationView.swift; sourceTree = "<group>"; };
+		C6EFA7DE2BE466B900AA4686 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,13 +101,13 @@
 				C63415C02BE2A54E0068BFD0 /* Packing.entitlements */,
 				C63415BD2BE2A4530068BFD0 /* Info.plist */,
 				C68C4B792BE0CBE600B62122 /* PackingApp.swift */,
-				C67761832BE3296E000AAF57 /* JourneyManager.swift */,
 				C67761852BE337A0000AAF57 /* JourneyService.swift */,
 				15256EDB2BE0D04000473DD1 /* PackingListView.swift */,
 				1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */,
 				1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */,
 				1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */,
 				C68C4B872BE0CD5700B62122 /* JourneyListView.swift */,
+				C6EFA7DE2BE466B900AA4686 /* Journey.swift */,
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
 				4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */,
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
@@ -116,7 +116,7 @@
 				C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */,
 				C60C5F182BE2A00800558210 /* OnboardingView.swift */,
 				C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */,
-				4B8AA8A92BE3AC5700F0BD66 /* GoogleService-Info.plist */,
+				C67BF5DC2BE3E6EC00A9FE67 /* GoogleService-Info.plist */,
 				4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */,
 				C68C4B7F2BE0CBE900B62122 /* Preview Content */,
 			);
@@ -203,7 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C68C4B812BE0CBE900B62122 /* Preview Assets.xcassets in Resources */,
-				4B8AA8AA2BE3AC5700F0BD66 /* GoogleService-Info.plist in Resources */,
+				C67BF5DD2BE3E6EC00A9FE67 /* GoogleService-Info.plist in Resources */,
 				C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */,
 				B84E2A692BE1CE08006EBF0D /* (null) in Resources */,
 			);
@@ -216,11 +216,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C67761842BE3296E000AAF57 /* JourneyManager.swift in Sources */,
 				C67761862BE337A0000AAF57 /* JourneyService.swift in Sources */,
 				C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */,
 				4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */,
 				4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */,
+				C6EFA7DF2BE466B900AA4686 /* Journey.swift in Sources */,
 				C60C5F192BE2A00800558210 /* OnboardingView.swift in Sources */,
 				C60C5F1B2BE2A19300558210 /* AuthenticationViewmodel.swift in Sources */,
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
