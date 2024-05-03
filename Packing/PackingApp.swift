@@ -30,10 +30,10 @@ struct PackingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
-                .environmentObject(authenticationViewModel)
-//        WindowGroup {
-//            JourneyListView()
+//            LoginView()
+//                .environmentObject(authenticationViewModel)
+            
+            JourneyListView()
         }
     }
 }

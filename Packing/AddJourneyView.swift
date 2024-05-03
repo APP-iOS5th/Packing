@@ -191,10 +191,10 @@ struct AddJourneyView: View {
     private func addJourney() {
         isUploading = true
         let id = UUID().uuidString
-        service?.addJourney(id: id, destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
+        service?.addJourney(id: id, destination: testString, activities: travelActivitys, image: image, startDate: startdate, endDate: endDate, completion: { success, message in
             alertMessage = message
             if success {
-                packingItemService.newPackingList(id: id, activities: [travelActivitys], completion: { _, error in
+                packingItemService.newPackingList(id: id, activities: travelActivitys, completion: { _, error in
                     if let error = error {
                         alertMessage = error.localizedDescription
                         print("Error creating packing list: \(error.localizedDescription)")

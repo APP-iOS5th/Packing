@@ -153,6 +153,8 @@ struct PackingListView: View {
 
         }
 //        .navigationBarBackButtonHidden(true)
+        .padding(.top, 90)
+        .ignoresSafeArea()
         .sheet(isPresented: $isNewSharePresented) {
             AddShareLuggageView(journey: journey, service: service)
         }
