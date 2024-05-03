@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-enum TravelActivity: String, CaseIterable, Codable {
+enum TravelActivity: String, CaseIterable, Codable, Identifiable{
+    var id: String { self.rawValue}
     case beach = "해변"
     case camping = "캠핑"
     case hiking = "등산"

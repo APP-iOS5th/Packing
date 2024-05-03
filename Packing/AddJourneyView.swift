@@ -9,19 +9,18 @@ import SwiftUI
 import PhotosUI
 
 
+
 struct AddJourneyView: View {
     var service: JourneyService?
     @Environment(\.dismiss) var dismiss
-
     @StateObject private var viewModel = JourneyService()
     @State var testString = ""
     @State private var startdate = Date()
     @State private var endDate = Date()
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var image: UIImage? = nil
-    @State private var travelActivitys: TravelActivity = .beach
+    @State private var travelActivitys = [String]()
     
-  
     @Environment(\.colorScheme) var colorScheme
     
     
@@ -60,7 +59,7 @@ struct AddJourneyView: View {
                                             .frame(width: 100)
                                             .padding(.top, 50)
                                             .foregroundStyle(Color(hex: 0x566375))
-                                
+                                        
                                     }
                                 }
                             }.onChange(of: selectedItem) {
@@ -70,8 +69,8 @@ struct AddJourneyView: View {
                                     image = uiImage
                                 }
                             }
-
-                           
+                            
+                            
                         }
                     }
                     ZStack{
@@ -110,62 +109,91 @@ struct AddJourneyView: View {
                                 .background(Color(hex: 0xF3F3F3))
                                 .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                 .padding()
-                                    
+                                
                                 //MARK: - 여행 목적
-                                Picker("여행 활동", selection: $travelActivitys){
-                                    ForEach(TravelActivity.allCases, id: \.self) {
-                                        Text($0.rawValue)
-                                            .font(.body)
+                                //                                Picker("여행 활동", selection: $travelActivitys){
+                                //                                    ForEach(TravelActivity.allCases, id: \.self) {
+                                //                                        Text($0.rawValue)
+                                //                                            .font(.body)
+                                //                                    }
+                                //                                }
+                                //                                .foregroundStyle(.black)
+                                //                                .font(.title3)
+                                //                                .bold()
+                                //                                .padding()
+                                //                                .pickerStyle(.navigationLink)
+                                //                                .frame(width: 300,height: 60)
+                                //                                .background(Color(hex: 0xF3F3F3))
+                                //                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                       
+                                
+                                NavigationLink(destination: MultiSelector(selections: $travelActivitys)) {
+                                    HStack{
+                                        
+                                        Text("여행목적")
+                                            .font(.title3)
+                                            .padding()
+                                            .bold()
+                                        Spacer()
+                                        if travelActivitys.isEmpty {
+                                            Text("클릭")
+                                                .foregroundStyle(.gray)
+                                                .font(.title3)
+                                                .padding()
+                                        }
+                                        Text("\(travelActivitysString(travelActivitys: travelActivitys))")
+                                            .foregroundStyle(.gray)
+                                            .padding()
+                                        
                                     }
-                                }
-                                .foregroundStyle(.black)
-                                .font(.title3)
-                                .bold()
-                                .padding()
-                                .pickerStyle(.navigationLink)
-                                .frame(width: 300,height: 60)
-                                .background(Color(hex: 0xF3F3F3))
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                
-                                
-                            }
-                            
-                            //MARK: - 확인 버튼
-                            Button{
-                                //TODO: 버튼 클릭시 데이터 전송
-                                service?.addJourney(destination: testString, activities: [travelActivitys], image: "", startDate: startdate, endDate: endDate, packingItemId: "")
-                                if let newValue = selectedItem {
-                                    viewModel.saveJourneyImage(item: newValue)
-                                }
-                                dismiss()
-                                
-                            } label: {
-                                Text("확인")
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal,50)
-                                    .padding(.vertical,20)
-                                    .background(Color(hex: 0x566375))
+                                    .foregroundStyle(.black)
+                                    .background(Color(hex: 0xF3F3F3))
                                     .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    .frame(width: 300 , alignment: .leading)
+                                    
+                                    
+                                }
+                                //MARK: - 확인 버튼
+                                Button{
+                                    //TODO: 버튼 클릭시 데이터 전송
+                                    service?.addJourney(destination: testString, activities: travelActivitys, image: "", startDate: startdate, endDate: endDate, packingItemId: "")
+                                    if let newValue = selectedItem {
+                                        viewModel.saveJourneyImage(item: newValue)
+                                    }
+                                    dismiss()
+                                    
+                                } label: {
+                                    Text("확인")
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.white)
+                                        .padding(.horizontal,50)
+                                        .padding(.vertical,20)
+                                        .background(Color(hex: 0x566375))
+                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    
+                                }
+                                .padding(.top, 30)
+                                .disabled(testString.isEmpty)
+                                
                                 
                             }
-                            .padding(.top, 30)
-                            .disabled(testString.isEmpty)
-
-                            
                         }
                     }
                 }
+                .ignoresSafeArea(.all)
+                
             }
-            .ignoresSafeArea(.all)
-        
         }
     }
-}
-
-#Preview {
-    NavigationStack{
-        
-        AddJourneyView(service: nil)
+    
+    func travelActivitysString(travelActivitys: [String]) -> String{
+        let string = travelActivitys.joined(separator: ", ")
+        return string
     }
 }
+    #Preview {
+        NavigationStack{
+            
+            AddJourneyView(service: nil)
+        }
+    }
