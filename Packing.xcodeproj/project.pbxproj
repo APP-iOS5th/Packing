@@ -14,6 +14,7 @@
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
 		4B8AA8AA2BE3AC5700F0BD66 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B8AA8A92BE3AC5700F0BD66 /* GoogleService-Info.plist */; };
+		4B8AA8AC2BE3F35E00F0BD66 /* MultiSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */; };
 		4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8056D2BE35D67004880FE /* StorageManager.swift */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
 		B84E2A672BE1CD03006EBF0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A662BE1CD03006EBF0D /* FirebaseFirestoreSwift */; };
@@ -44,6 +45,7 @@
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		4B8AA8A92BE3AC5700F0BD66 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelector.swift; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		C60C5F182BE2A00800558210 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewmodel.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */,
 				C68C4B872BE0CD5700B62122 /* JourneyListView.swift */,
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
+				4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */,
 				4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */,
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
 				C60C5F1C2BE2A1E500558210 /* ProfileView.swift */,
@@ -226,6 +229,7 @@
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
 				1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */,
+				4B8AA8AC2BE3F35E00F0BD66 /* MultiSelector.swift in Sources */,
 				1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */,
 				1526C01B2BE36ECB00CDDE90 /* AddPackingItemView.swift in Sources */,
 				15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */,
