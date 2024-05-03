@@ -9,8 +9,12 @@ import SwiftUI
 
 struct PackingListView: View {
     @State var showingMember: String = "나"
-    @State private var service: PackingItemService = PackingItemService(documentID: "test")
+    @State var service: PackingItemService = PackingItemService(documentID: "test")
+    @State private var isNewSharePresented = false
+    @State private var isNewPersonalPresented = false
+    
     var journey: Journey
+    
     var body: some View {
         NavigationStack {
             JourneySummaryView(journey: journey)
@@ -33,7 +37,7 @@ struct PackingListView: View {
                     Text("공용 물품")
                     Spacer()
                     Button {
-                        
+                        isNewSharePresented.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -67,6 +71,9 @@ struct PackingListView: View {
                                 }
                             }
                         }
+                    }
+                    .sheet(isPresented: $isNewSharePresented) {
+                        AddShareLuggageView(journey: journey, service: service)
                     }
                 }
                 Section(header: HStack{

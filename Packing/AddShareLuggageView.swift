@@ -9,8 +9,7 @@ import SwiftUI
 
 struct AddShareLuggageView: View {
     let journey: Journey
-//    var service: PackingItemService
-    var service: PackingItemService = PackingItemService(documentID: "test")
+    var service: PackingItemService
     
     @State var itemName: String = ""
     @State var requiredCount: Int = 1
@@ -60,12 +59,21 @@ struct AddShareLuggageView: View {
                                 if duplicated {
                                     descriptionText = "이미 등록된 물품입니다."
                                 } else {
-                                    //shareLuggage 추가하기
+                                    //shareLuggage 추가 기능 구현
                                     dismiss()
                                 }
                             }
                         }
                         .foregroundStyle(.blue)
+                    }
+                }
+                Section {
+                    HStack {
+                        Spacer()
+                        Button("취소"){
+                            dismiss()
+                        }
+                        .foregroundStyle(.red)
                     }
                 }
             }
@@ -78,8 +86,4 @@ struct AddShareLuggageView: View {
             .ignoresSafeArea()
         }
     }
-}
-
-#Preview {
-    AddShareLuggageView(journey: Journey.sample[0])
 }
