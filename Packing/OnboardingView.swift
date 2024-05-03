@@ -80,17 +80,17 @@ struct OnboardingStepView: View {
                 .foregroundColor(.black)
                 .shadow(color:.gray, radius: 2, x:0 , y:1)
 
-            Image(images[index])
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .padding()
-
             Text(descriptionText[index])
                 .font(.headline)
                 .fontWeight(.light)
                 .multilineTextAlignment(.center)
                 .padding()
-
+            
+            Image(images[index])
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .padding()
+            
             if index == 3 {
                 Button("Let's Start") {
                     showMainView = true
@@ -121,6 +121,9 @@ let descriptionText = [
     ""
 ]
 
+let image = [
+    #imageLiteral(resourceName: "onboarding2.png")
+]
 
 
 
