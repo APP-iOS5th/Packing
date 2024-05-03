@@ -93,8 +93,18 @@ class PackingItemService {
     }
     
     func addPersonalLuggage(name: String){
-        
+        var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
+        for (key, value) in personalLuggages {
+            var luggageArray: [[String: Any]] = []
+            for luggage in value {
+                luggageArray.append(luggage.dictionaryRepresentation())
+            }
+            luggageArray.append(["isChecked":false, "name":name])
+            updatedPersonalLuggages[key] = luggageArray
+        }
+        dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
     }
+    
     func addShareLuggage(name: String,requiredCount: Int){
         var updatedShareLuggages: [[String:Any]] = []
         for luggage in shareLuggages {

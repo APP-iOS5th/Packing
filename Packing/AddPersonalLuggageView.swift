@@ -12,7 +12,6 @@ struct AddPersonalLuggageView: View {
     var service: PackingItemService
     let myID = "나"
     @State var itemName: String = ""
-    @State var requiredCount: Int = 1
     @State var descriptionText: String = ""
     @State var duplicated: Bool = false
     
@@ -53,7 +52,7 @@ struct AddPersonalLuggageView: View {
                                 if duplicated {
                                     descriptionText = "이미 등록된 물품입니다."
                                 } else {
-                                    //personalLuggage 추가 기능 구현
+                                    service.addPersonalLuggage(name: itemName)
                                     dismiss()
                                 }
                             }
