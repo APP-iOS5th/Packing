@@ -92,6 +92,19 @@ class PackingItemService {
         }
     }
     
+    func deleteShareLuggage(index: Int) {
+        var updatedShareLuggages: [[String:Any]] = []
+        for luggage in shareLuggages {
+            updatedShareLuggages.append(["checkedPeople": luggage.checkedPeople, "name": luggage.name, "requiredCount": luggage.requiredCount])
+        }
+        guard index < updatedShareLuggages.count else{
+            print("Invalid index")
+            return
+        }
+        updatedShareLuggages.remove(at: index)
+        dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
+    }
+    
     func addPersonalLuggage(name: String){
         var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
         for (key, value) in personalLuggages {

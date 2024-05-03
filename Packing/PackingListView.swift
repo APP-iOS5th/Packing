@@ -60,6 +60,17 @@ struct PackingListView: View {
                                     Image(systemName: shareLuggage.checkedPeople.contains(showingMember) ? "checkmark.square" : "square")
                                 }
                             }
+                            .contextMenu {
+                                Button {
+                                    if let index = service.shareLuggages.firstIndex(where: {$0.name == shareLuggage.name}) {
+                                        service.deleteShareLuggage(index: index)
+                                    }
+                                } label: {
+                                    Image(systemName: "trash")
+                                    Text("삭제")
+                                        .tint(.red)
+                                }
+                            }
                             //                            .disabled(showingMember가 내가 아니면)
                             Text("( \(shareLuggage.checkedPeople.count) / \(shareLuggage.requiredCount) )")
                                 .foregroundStyle(.gray)
