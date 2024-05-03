@@ -30,7 +30,7 @@ class JourneyService: ObservableObject {
         }
     }
     
-    func addJourney(destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date, completion: @escaping (Bool, String) -> Void) {
+    func addJourney(id: String, destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date, completion: @escaping (Bool, String) -> Void) {
         Task {
             // image optional 처리
             var imageUrl: String = ""
@@ -46,7 +46,6 @@ class JourneyService: ObservableObject {
                 }
             }
             
-            let id = UUID().uuidString
             let activitiesString = activities.map { $0.rawValue }
             let newJourney: [String: Any] = [
                 "id": id,

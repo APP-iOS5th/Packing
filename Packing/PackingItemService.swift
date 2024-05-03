@@ -91,23 +91,62 @@ class PackingItemService {
             dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
         }
     }
-//    func newPackingList(id: String) {
-//        let dbCollection = Firestore.firestore().collection("PackingList")
-//        let people: [String] = ["나","멤버2","멤버3","멤버4"]
-//        let personalLuggages: [String] = ["세면도구","여벌옷","충전기","개인 약"]
-//        let shareLuggages: [String : Int] = ["비상 약":1,"드라이기":1,"간식":2]
-//        var personalLuggageList:[String : [[ String : Any ]]] = [:]
-//        for person in people {
-//            var array:[[String : Any]] = []
-//            for personalLuggage in personalLuggages {
-//                array.append(["isChecked" : false, "name" : personalLuggage])
-//            }
-//            personalLuggageList[person] = array
-//        }
-//        var shareLuggageList: [[String : Any]] = []
-//        for (name, count) in shareLuggages {
-//            shareLuggageList.append(["checkedPeople":[],"name": name,"requiredCount":count])
-//        }
-//        dbCollection.document(id).setData(["personal":personalLuggageList, "share":shareLuggageList])
-//    }
+    func newPackingList(id: String, activities: [TravelActivity], completion: @escaping (Bool, Error?) -> Void) {
+        let dbCollection = Firestore.firestore().collection("PackingList")
+        let people: [String] = ["나", "멤버2", "멤버3", "멤버4"]
+        
+        var personalLuggages: [String] = ["세면도구","여벌옷","충전기","개인 약"]
+        var shareLuggages: [String : Int] = ["비상 약":1,"드라이기":1,"간식":2]
+
+        for activity in activities {
+            switch activity {
+            case .beach:
+                personalLuggages += ["수영복", "선글라스", "모자"]
+                shareLuggages["해변 용품"] = 1
+            case .camping:
+                personalLuggages += ["모기퇴치제", "손전등"]
+                shareLuggages["텐트"] = 1
+                shareLuggages["캠핑 스토브"] = 1
+            case .hiking:
+                personalLuggages += ["등산화", "등산복", "보호대"]
+            case .skiing:
+                personalLuggages += ["스키복", "보호대"]
+                shareLuggages["스키 장비"] = 1
+            case .cycling:
+                personalLuggages += ["자전거 헬멧", "장갑"]
+                shareLuggages["수리 키트"] = 1
+            case .foodTour:
+                personalLuggages += ["간식", "휴대용 포크"]
+                shareLuggages["식욕"] = 1
+            case .culturalExperience, .sightseeing:
+                personalLuggages += ["카메라", "여행 가이드북"]
+            case .waterSports:
+                personalLuggages += ["구명조끼", "방수 카메라"]
+                shareLuggages["카약"] = 1
+            }
+        }
+
+        var personalLuggageList: [String: [[String: Any]]] = [:]
+        for person in people {
+            var array: [[String: Any]] = []
+            for personalLuggage in Set(personalLuggages) {  // Set
+                array.append(["isChecked": false, "name": personalLuggage])
+            }
+            personalLuggageList[person] = array
+        }
+
+        var shareLuggageList: [[String: Any]] = []
+        for (name, count) in shareLuggages {
+            shareLuggageList.append(["checkedPeople": [], "name": name, "requiredCount": count])
+        }
+
+        dbCollection.document(id).setData(["personal": personalLuggageList, "share": shareLuggageList]) { error in
+            if let error = error {
+                completion(false, error)
+            } else {
+                completion(true, nil)
+            }
+        }
+    }
+
 }

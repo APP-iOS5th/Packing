@@ -42,6 +42,7 @@
 		C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B872BE0CD5700B62122 /* JourneyListView.swift */; };
 		C68C4B8C2BE0CE3100B62122 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B8B2BE0CE3000B62122 /* LoginView.swift */; };
 		C6EFA7DF2BE466B900AA4686 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EFA7DE2BE466B900AA4686 /* Journey.swift */; };
+		C6EFA7E32BE4942400AA4686 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +76,7 @@
 		C68C4B872BE0CD5700B62122 /* JourneyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListView.swift; sourceTree = "<group>"; };
 		C68C4B8B2BE0CE3000B62122 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C6EFA7DE2BE466B900AA4686 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
+		C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,9 +146,10 @@
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
 				C60C5F1C2BE2A1E500558210 /* ProfileView.swift */,
 				C68C4B8B2BE0CE3000B62122 /* LoginView.swift */,
+				C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */,
+				C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */,
 				C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */,
 				C60C5F182BE2A00800558210 /* OnboardingView.swift */,
-				B8232FB22BE4BB04009CD6FA /* GoogleService-Info.plist */,
 				8D7C4CE82BE3D84800CB6F1B /* Font */,
 				C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */,
 				4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */,
@@ -238,6 +241,7 @@
 				C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */,
 				8D7C4CED2BE3D84800CB6F1B /* NanumSquareR.otf in Resources */,
 				8D7C4CEE2BE3D84800CB6F1B /* Sansita-Black.ttf in Resources */,
+				C6EFA7E32BE4942400AA4686 /* GoogleService-Info.plist in Resources */,
 				8D7C4CEC2BE3D84800CB6F1B /* NanumSquareL.otf in Resources */,
 				8D7C4CEB2BE3D84800CB6F1B /* NanumSquareEB.otf in Resources */,
 				8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */,

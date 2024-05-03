@@ -27,7 +27,7 @@ struct JourneyListView: View {
             .navigationTitle("Your Journeys")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddJourneyView(service: service)) {
+                    NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.large)
                             .foregroundColor(.accentColor)
@@ -80,7 +80,7 @@ struct JourneyListView: View {
         }
         .listStyle(PlainListStyle())
         .navigationDestination(item: $selectedJourney) { journey in
-            PackingListView(journey: journey)
+            PackingListView(service: PackingItemService(documentID: journey.id), journey: journey)
         }
     }
 }
@@ -124,12 +124,14 @@ struct JourneySummaryView: View {
                     .init(color: .clear, location: 1)
                 ]), startPoint: .leading, endPoint: .trailing)
             }
-                .frame(height: 100)
-                .clipped()
+//                .frame(height: 100)
+//                .clipped()
         )
         .cornerRadius(8)
         .shadow(radius: 3)
         .scaledToFill()
+        .frame(height: 100)
+        .clipped()
     }
 }
 

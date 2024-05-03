@@ -9,21 +9,42 @@ import SwiftUI
 
 struct PackingListView: View {
     @State var showingMember: String = "나"
-    @State var service: PackingItemService = PackingItemService(documentID: "test")
+    @State var service: PackingItemService
     @State private var isNewSharePresented = false
     @State private var isNewPersonalPresented = false
     
     var journey: Journey
     
+    @Environment(\.colorScheme) var colorScheme
+//    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        NavigationStack {
+        VStack {
+//            HStack {
+//                Button(action: {
+//                    dismiss()
+//                    print("dismiss")
+//                }) {
+//                    Image(systemName: "chevron.backward")
+//                        .font(.title3)
+//                        .foregroundColor(.primary)
+//                }
+//                .padding()
+//                Spacer()
+//            }
+//            .padding()
+            
             JourneySummaryView(journey: journey)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-                .padding()
+                .frame(minWidth: 200, maxWidth: .infinity)
+                .padding(.horizontal)
+                .padding(.vertical, 5)
+            Divider().overlay(colorScheme == .dark ? .white.opacity(0.5) : .gray.opacity(0.8)).padding(.horizontal)
+            
+
             
             Form {
                 Section(header: Text("구성원 선택")
-                    .foregroundStyle(.black)
+                    .foregroundStyle(colorScheme == .dark ? .white.opacity(0.85) : .black)
                     .font(.title2)
                     .fontWeight(.bold)) {
                         Picker(selection: $showingMember, label: Text("")){
@@ -42,7 +63,7 @@ struct PackingListView: View {
                         Image(systemName: "plus")
                     }
                 }
-                    .foregroundStyle(.black)
+                    .foregroundStyle(colorScheme == .dark ? .white.opacity(0.85) : .black)
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
@@ -55,7 +76,7 @@ struct PackingListView: View {
                             } label: {
                                 Label {
                                     Text(shareLuggage.name)
-                                        .tint(.black)
+                                        .tint(colorScheme == .dark ? .white.opacity(0.85) : .black)
                                 } icon: {
                                     Image(systemName: shareLuggage.checkedPeople.contains(showingMember) ? "checkmark.square" : "square")
                                 }
@@ -72,9 +93,7 @@ struct PackingListView: View {
                             }
                         }
                     }
-                    .sheet(isPresented: $isNewSharePresented) {
-                        AddShareLuggageView(journey: journey, service: service)
-                    }
+
                 }
                 Section(header: HStack{
                     Text("개인 물품")
@@ -85,7 +104,7 @@ struct PackingListView: View {
                         Image(systemName: "plus")
                     }
                 }
-                    .foregroundStyle(.black)
+                    .foregroundStyle(colorScheme == .dark ? .white.opacity(0.85) : .black)
                     .font(.title2)
                     .fontWeight(.bold)
                 ){
@@ -97,12 +116,11 @@ struct PackingListView: View {
                         } label: {
                             Label {
                                 Text(personalLuggage.name)
-                                    .tint(.black)
+                                    .tint(colorScheme == .dark ? .white.opacity(0.85) : .black)
                             } icon: {
                                 Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
-                        //                        .disabled(showingMember가 내가 아니면)
                     }
                 }
             }
@@ -110,14 +128,21 @@ struct PackingListView: View {
                 service.fetch()
             }
             .scrollContentBackground(.hidden)
-            .background(RoundedRectangle(cornerRadius: 30)
-                .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
-            .ignoresSafeArea()
+
         }
+//        .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $isNewSharePresented) {
+            AddShareLuggageView(journey: journey, service: service)
+        }
+        .sheet(isPresented: $isNewPersonalPresented) {
+            AddPersonalLuggageView(journey: journey, service: service)
+        }
+        .background(LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 }
 
+
 #Preview {
-    PackingListView(journey: Journey.sample[0])
+    PackingListView(service: PackingItemService(documentID: "test"), journey: Journey.sample[0])
 }
 
