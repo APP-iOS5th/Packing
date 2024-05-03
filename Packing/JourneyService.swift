@@ -30,7 +30,7 @@ class JourneyService: ObservableObject {
         }
     }
     
-    func addJourney(destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date) {
+    func addJourney(destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date, completion: @escaping () -> Void) {
         Task {
             // image optional 처리
             var imageUrl: String = ""
@@ -42,22 +42,27 @@ class JourneyService: ObservableObject {
                 }
             }
             
+            let id = UUID().uuidString
+            let activitiesString = activities.map { $0.rawValue }
+            let newJourney: [String: Any] = [
+                "id": id,
+                "destination": destination,
+                "activities": activitiesString,
+                "image": imageUrl,
+                "startDate": Timestamp(date: startDate),
+                "endDate": Timestamp(date: endDate)
+            ]
+            
             do {
-                let id = UUID().uuidString
-                let activitiesString = activities.map { $0.rawValue }
-                let newJourney: [String: Any] = [
-                    "id": id,
-                    "destination": destination,
-                    "activities": activitiesString,
-                    "image": imageUrl,
-                    "startDate": Timestamp(date: startDate),
-                    "endDate": Timestamp(date: endDate)
-                ]
                 try await dbCollection.document(id).setData(newJourney)
                 fetch()
+                completion()
             } catch {
                 print("Error uploading journey: \(error)")
+                completion()
             }
+            
+            
         }
     }
 
