@@ -149,4 +149,71 @@ class PackingItemService {
         }
     }
 
+    
+    func deletePersonalLuggage(index: Int){
+        var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
+        for (key, value) in personalLuggages {
+            var luggageArray: [[String: Any]] = []
+            for luggage in value {
+                luggageArray.append(luggage.dictionaryRepresentation())
+            }
+            luggageArray.remove(at: index)
+            updatedPersonalLuggages[key] = luggageArray
+        }
+        dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
+    }
+    
+    func deleteShareLuggage(index: Int) {
+        var updatedShareLuggages: [[String:Any]] = []
+        for luggage in shareLuggages {
+            updatedShareLuggages.append(["checkedPeople": luggage.checkedPeople, "name": luggage.name, "requiredCount": luggage.requiredCount])
+        }
+        guard index < updatedShareLuggages.count else{
+            print("Invalid index")
+            return
+        }
+        updatedShareLuggages.remove(at: index)
+        dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
+    }
+    
+    func addPersonalLuggage(name: String){
+        var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
+        for (key, value) in personalLuggages {
+            var luggageArray: [[String: Any]] = []
+            for luggage in value {
+                luggageArray.append(luggage.dictionaryRepresentation())
+            }
+            luggageArray.append(["isChecked":false, "name":name])
+            updatedPersonalLuggages[key] = luggageArray
+        }
+        dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
+    }
+    
+    func addShareLuggage(name: String,requiredCount: Int){
+        var updatedShareLuggages: [[String:Any]] = []
+        for luggage in shareLuggages {
+            updatedShareLuggages.append(["checkedPeople": luggage.checkedPeople, "name": luggage.name, "requiredCount": luggage.requiredCount])
+        }
+        updatedShareLuggages.append(["checkedPeople":[], "name":name, "requiredCount":requiredCount])
+        dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
+    }
+//    func newPackingList(id: String) {
+//        let dbCollection = Firestore.firestore().collection("PackingList")
+//        let people: [String] = ["나","멤버2","멤버3","멤버4"]
+//        let personalLuggages: [String] = ["세면도구","여벌옷","충전기","개인 약"]
+//        let shareLuggages: [String : Int] = ["비상 약":1,"드라이기":1,"간식":2]
+//        var personalLuggageList:[String : [[ String : Any ]]] = [:]
+//        for person in people {
+//            var array:[[String : Any]] = []
+//            for personalLuggage in personalLuggages {
+//                array.append(["isChecked" : false, "name" : personalLuggage])
+//            }
+//            personalLuggageList[person] = array
+//        }
+//        var shareLuggageList: [[String : Any]] = []
+//        for (name, count) in shareLuggages {
+//            shareLuggageList.append(["checkedPeople":[],"name": name,"requiredCount":count])
+//        }
+//        dbCollection.document(id).setData(["personal":personalLuggageList, "share":shareLuggageList])
+//    }
 }

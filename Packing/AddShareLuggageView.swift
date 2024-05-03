@@ -59,7 +59,7 @@ struct AddShareLuggageView: View {
                                 if duplicated {
                                     descriptionText = "이미 등록된 물품입니다."
                                 } else {
-                                    //shareLuggage 추가 기능 구현
+                                    service.addShareLuggage(name: itemName, requiredCount: requiredCount)
                                     dismiss()
                                 }
                             }
