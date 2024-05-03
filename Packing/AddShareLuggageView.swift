@@ -17,6 +17,8 @@ struct AddShareLuggageView: View {
     @State var descriptionText: String = ""
     @State var duplicated: Bool = false
     
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             JourneySummaryView(journey: journey)
@@ -59,6 +61,7 @@ struct AddShareLuggageView: View {
                                     descriptionText = "이미 등록된 물품입니다."
                                 } else {
                                     //shareLuggage 추가하기
+                                    dismiss()
                                 }
                             }
                         }
