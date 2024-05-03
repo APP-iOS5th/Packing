@@ -80,7 +80,7 @@ struct JourneyListView: View {
         }
         .listStyle(PlainListStyle())
         .navigationDestination(item: $selectedJourney) { journey in
-            PackingListView(journey: journey)
+            PackingListView(service: PackingItemService(documentID: "test"), journey: Journey.sample[0])
         }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PackingListView: View {
     @State var showingMember: String = "나"
-    @State var service: PackingItemService = PackingItemService(documentID: "test")
+    @State var service: PackingItemService
     @State private var isNewSharePresented = false
     @State private var isNewPersonalPresented = false
     
@@ -121,6 +121,6 @@ struct PackingListView: View {
 }
 
 #Preview {
-    PackingListView(journey: Journey.sample[0])
+    PackingListView(service: PackingItemService(documentID: "test"), journey: Journey.sample[0])
 }
 
