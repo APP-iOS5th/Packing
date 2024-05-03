@@ -27,7 +27,7 @@ struct JourneyListView: View {
             .navigationTitle("Your Journeys")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddJourneyView()) {
+                    NavigationLink(destination: AddJourneyView(service: service)) {
                         Image(systemName: "plus.circle.fill")
                             .imageScale(.large)
                             .foregroundColor(.accentColor)
@@ -37,7 +37,7 @@ struct JourneyListView: View {
             .task {
                 service.fetch()
             }
-            .environmentObject(service)
+//            .environmentObject(service)
         }
     }
 

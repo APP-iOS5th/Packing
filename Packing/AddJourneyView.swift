@@ -10,7 +10,7 @@ import PhotosUI
 
 
 struct AddJourneyView: View {
-    @EnvironmentObject var service: JourneyService
+    var service: JourneyService?
     @Environment(\.dismiss) var dismiss
 
     @StateObject private var viewModel = JourneyService()
@@ -33,6 +33,9 @@ struct AddJourneyView: View {
                 .ignoresSafeArea()
             
             VStack{
+                
+                // MARK: - Image
+                
                 ZStack{
                     if let image = image {
                         Image(uiImage: image)
@@ -58,7 +61,6 @@ struct AddJourneyView: View {
                                         .frame(width: 100)
                                         .padding(.top, 50)
                                         .foregroundStyle(Color(hex: 0x566375))
-                            
                                 }
                             }
                         }.onChange(of: selectedItem) {
@@ -66,6 +68,8 @@ struct AddJourneyView: View {
                         }
                     }
                 }
+                
+                
                 ZStack{
                     RoundedRectangle(cornerRadius: 30)
                         .foregroundStyle(colorScheme == .dark ? Color("DarkColor") : .white)
@@ -160,7 +164,7 @@ struct AddJourneyView: View {
     
     private func addJourney() {
         isUploading = true
-        service.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
+        service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
             showAlert = true
             alertMessage = message
             isUploading = false
@@ -178,7 +182,6 @@ struct AddJourneyView: View {
 #Preview {
     NavigationStack{
         
-        AddJourneyView()
-            .environmentObject(JourneyService())
+        AddJourneyView(service: nil)
     }
 }
