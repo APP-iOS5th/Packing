@@ -8,12 +8,10 @@
 import SwiftUI
 import PhotosUI
 
-
 struct AddJourneyView: View {
+    @State var packingItemService: PackingItemService
     var service: JourneyService?
     @Environment(\.dismiss) var dismiss
-
-    @StateObject private var viewModel = JourneyService()
     @State var testString = ""
     @State private var startdate = Date()
     @State private var endDate = Date()
@@ -164,12 +162,23 @@ struct AddJourneyView: View {
     
     private func addJourney() {
         isUploading = true
-        service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
-            showAlert = true
+        let id = UUID().uuidString
+        service?.addJourney(id: id, destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
             alertMessage = message
+            if success {
+                packingItemService.newPackingList(id: id, activities: [travelActivitys], completion: { _, error in
+                    if let error = error {
+                        alertMessage = error.localizedDescription
+                        print("Error creating packing list: \(error.localizedDescription)")
+                    }
+                })
+            }
+            showAlert = true
             isUploading = false
         })
     }
+
+
     private func loadImage() {
         Task{
             guard let imageData = try await selectedItem?.loadTransferable(type: Data.self) else { return }
@@ -182,6 +191,6 @@ struct AddJourneyView: View {
 #Preview {
     NavigationStack{
         
-        AddJourneyView(service: nil)
+        AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: nil)
     }
 }

@@ -9,9 +9,15 @@ import SwiftUI
 
 struct PackingListView: View {
     @State var showingMember: String = "나"
-    @State var service: PackingItemService = PackingItemService(documentID: "test")
+    @State var service: PackingItemService
     @State private var isNewSharePresented = false
     @State private var isNewPersonalPresented = false
+    
+//    init(journey: Journey) {
+//        self.journey = journey
+//        _service = StateObject(wrappedValue: PackingItemService(documentID: journey.id))
+//    }
+    
     
     var journey: Journey
     
@@ -118,6 +124,6 @@ struct PackingListView: View {
 }
 
 #Preview {
-    PackingListView(journey: Journey.sample[0])
+    PackingListView(service: PackingItemService(documentID: "test"), journey: Journey.sample[0])
 }
 
