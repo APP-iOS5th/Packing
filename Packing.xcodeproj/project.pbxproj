@@ -14,6 +14,7 @@
 		1526C01D2BE4854600CDDE90 /* AddPersonalLuggageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
+		4B8AA8AC2BE3F35E00F0BD66 /* MultiSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */; };
 		4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8056D2BE35D67004880FE /* StorageManager.swift */; };
 		8D7C4CE92BE3D84800CB6F1B /* Graduate-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */; };
 		8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE22BE3D84800CB6F1B /* NanumSquareB.otf */; };
@@ -53,6 +54,7 @@
 		1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonalLuggageView.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelector.swift; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graduate-Regular.ttf"; sourceTree = "<group>"; };
 		8D7C4CE22BE3D84800CB6F1B /* NanumSquareB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.otf; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				C68C4B872BE0CD5700B62122 /* JourneyListView.swift */,
 				C6EFA7DE2BE466B900AA4686 /* Journey.swift */,
 				C68C4B7B2BE0CBE600B62122 /* ContentView.swift */,
+				4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */,
 				4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */,
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
 				C60C5F1C2BE2A1E500558210 /* ProfileView.swift */,
@@ -269,6 +272,7 @@
 				C68C4B7C2BE0CBE600B62122 /* ContentView.swift in Sources */,
 				C68C4B7A2BE0CBE600B62122 /* PackingApp.swift in Sources */,
 				1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */,
+				4B8AA8AC2BE3F35E00F0BD66 /* MultiSelector.swift in Sources */,
 				1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */,
 				1526C01B2BE36ECB00CDDE90 /* AddShareLuggageView.swift in Sources */,
 				15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */,

@@ -17,7 +17,7 @@ struct AddJourneyView: View {
     @State private var endDate = Date()
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var image: UIImage? = nil
-    @State private var travelActivitys: TravelActivity = .beach
+    @State private var travelActivitys = [String]()
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
     @State private var isUploading: Bool = false
@@ -75,12 +75,12 @@ struct AddJourneyView: View {
                     VStack {
                         VStack(alignment:.center){
                             
-                            // MARK: 여행 목적
-                            Text("여행목적")
+                            // MARK: 여행 목적지
+                            Text("여행목적지")
                                 .font(.title2)
                                 .fontWeight(.bold)
                             
-                            TextField("여행목적",text: $testString)
+                            TextField("여행목적지",text: $testString)
                                 .padding()
                                 .font(.subheadline)
                                 .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
@@ -106,20 +106,46 @@ struct AddJourneyView: View {
                             .padding()
                                 
                             //MARK: - 여행 목적
-                            Picker("여행 활동", selection: $travelActivitys){
-                                ForEach(TravelActivity.allCases, id: \.self) {
-                                    Text($0.rawValue)
-                                        .font(.body)
+                            // Picker("여행 활동", selection: $travelActivitys){
+                            //     ForEach(TravelActivity.allCases, id: \.self) {
+                            //         Text($0.rawValue)
+                            //             .font(.body)
+                            //     }
+                            // }
+                            // .foregroundStyle(colorScheme == .dark ? .white : .black)
+                            // .font(.title3)
+                            // .bold()
+                            // .padding()
+                            // .pickerStyle(.navigationLink)
+                            // .frame(width: 300,height: 60)
+                            // .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
+                            // .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                NavigationLink(destination: MultiSelector(selections: $travelActivitys)) {
+                                    HStack{
+                                        
+                                        Text("여행활동")
+                                            .font(.title3)
+                                            .padding()
+                                            .bold()
+                                        Spacer()
+                                        if travelActivitys.isEmpty {
+                                            Text("추가")
+                                                .foregroundStyle(.gray)
+                                                .font(.title3)
+                                                .padding()
+                                        }
+                                        Text("\(travelActivitysString(travelActivitys: travelActivitys))")
+                                            .foregroundStyle(.gray)
+                                            .padding()
+                                        
+                                    }
+                                    .foregroundStyle(.black)
+                                    .background(Color(hex: 0xF3F3F3))
+                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    .frame(width: 300 , alignment: .leading)
+                                    
+                                    
                                 }
-                            }
-                            .foregroundStyle(colorScheme == .dark ? .white : .black)
-                            .font(.title3)
-                            .bold()
-                            .padding()
-                            .pickerStyle(.navigationLink)
-                            .frame(width: 300,height: 60)
-                            .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
-                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
                             
                             
                         }
@@ -144,6 +170,8 @@ struct AddJourneyView: View {
                         }
                     }
                 }
+                .ignoresSafeArea(.all)
+                
             }
         }
         // MARK: - ALERT
@@ -186,11 +214,18 @@ struct AddJourneyView: View {
             image = uiImage
         }
     }
+
+    func travelActivitysString(travelActivitys: [String]) -> String{
+        let string = travelActivitys.joined(separator: ", ")
+        return string
+    }
 }
 
 #Preview {
     NavigationStack{
-        
         AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: nil)
     }
 }
+    
+
+
