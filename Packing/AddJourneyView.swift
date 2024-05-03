@@ -137,7 +137,7 @@ struct AddJourneyView: View {
                                     showAlert = true
                                     alertMessage = message
                                 })
-                                dismiss()
+//                                dismiss()
                                 
                             } label: {
                                 Text("확인")
@@ -156,6 +156,13 @@ struct AddJourneyView: View {
                         }
                     }
                 }
+            }
+            .alert("알람", isPresented: $showAlert) {
+                Button("확인", role: .cancel) {
+                    dismiss()
+                }
+            } message: {
+                Text(alertMessage)
             }
             .ignoresSafeArea(.all)
         
