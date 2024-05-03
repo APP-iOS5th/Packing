@@ -31,9 +31,9 @@ class JourneyService: ObservableObject {
         }
     }
     
-    func addJourney(destination: String, activities: [TravelActivity], image: String, startDate: Date, endDate: Date, packingItemId: String) {
+    func addJourney(destination: String, activities: [String], image: String, startDate: Date, endDate: Date, packingItemId: String) {
         let id = UUID().uuidString
-        let activitiesString = activities.map { $0.rawValue }
+        let activitiesString = activities.map { $0 }
         let newJourney: [String: Any] = [
             "id": id,
             "destination": destination,
