@@ -92,6 +92,19 @@ class PackingItemService {
         }
     }
     
+    func deletePersonalLuggage(index: Int){
+        var updatedPersonalLuggages: [String: [[String:Any]]] = [:]
+        for (key, value) in personalLuggages {
+            var luggageArray: [[String: Any]] = []
+            for luggage in value {
+                luggageArray.append(luggage.dictionaryRepresentation())
+            }
+            luggageArray.remove(at: index)
+            updatedPersonalLuggages[key] = luggageArray
+        }
+        dbCollection.document(documentID).updateData(["personal" : updatedPersonalLuggages])
+    }
+    
     func deleteShareLuggage(index: Int) {
         var updatedShareLuggages: [[String:Any]] = []
         for luggage in shareLuggages {

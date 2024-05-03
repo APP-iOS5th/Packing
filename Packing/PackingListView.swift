@@ -110,6 +110,17 @@ struct PackingListView: View {
                                 Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
+                        .contextMenu {
+                            Button {
+                                if let index = service.personalLuggages[showingMember]?.firstIndex(where: {$0.name == personalLuggage.name}) {
+                                    service.deletePersonalLuggage(index: index)
+                                }
+                            } label: {
+                                Image(systemName: "trash")
+                                Text("삭제")
+                                    .tint(.red)
+                            }
+                        }
                         //                        .disabled(showingMember가 내가 아니면)
                     }
                 }
