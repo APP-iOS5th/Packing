@@ -10,14 +10,11 @@
 		15256EDC2BE0D04000473DD1 /* PackingListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15256EDB2BE0D04000473DD1 /* PackingListView.swift */; };
 		1526C0172BE1F3EA00CDDE90 /* PackingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */; };
 		1526C0192BE1F6EA00CDDE90 /* PackingItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */; };
-		1526C01B2BE36ECB00CDDE90 /* AddPackingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */; };
 		1526C01B2BE36ECB00CDDE90 /* AddShareLuggageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01A2BE36ECB00CDDE90 /* AddShareLuggageView.swift */; };
 		1526C01D2BE4854600CDDE90 /* AddPersonalLuggageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */; };
-		4B1139FB2BE205160028EE65 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1139FA2BE205160028EE65 /* ImagePicker.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
 		4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8056D2BE35D67004880FE /* StorageManager.swift */; };
-		8D7C4CD92BE3C7F400CB6F1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CD82BE3C7F400CB6F1B /* GoogleService-Info.plist */; };
 		8D7C4CE92BE3D84800CB6F1B /* Graduate-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */; };
 		8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE22BE3D84800CB6F1B /* NanumSquareB.otf */; };
 		8D7C4CEB2BE3D84800CB6F1B /* NanumSquareEB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE32BE3D84800CB6F1B /* NanumSquareEB.otf */; };
@@ -45,20 +42,18 @@
 		C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B872BE0CD5700B62122 /* JourneyListView.swift */; };
 		C68C4B8C2BE0CE3100B62122 /* RegisterationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */; };
 		C6EFA7DF2BE466B900AA4686 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EFA7DE2BE466B900AA4686 /* Journey.swift */; };
+		C6EFA7E32BE4942400AA4686 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		15256EDB2BE0D04000473DD1 /* PackingListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingListView.swift; sourceTree = "<group>"; };
 		1526C0162BE1F3EA00CDDE90 /* PackingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItem.swift; sourceTree = "<group>"; };
 		1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackingItemService.swift; sourceTree = "<group>"; };
-		1526C01A2BE36ECB00CDDE90 /* AddPackingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPackingItemView.swift; sourceTree = "<group>"; };
 		1526C01A2BE36ECB00CDDE90 /* AddShareLuggageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddShareLuggageView.swift; sourceTree = "<group>"; };
 		1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonalLuggageView.swift; sourceTree = "<group>"; };
-		4B1139FA2BE205160028EE65 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
-		8D7C4CD82BE3C7F400CB6F1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graduate-Regular.ttf"; sourceTree = "<group>"; };
 		8D7C4CE22BE3D84800CB6F1B /* NanumSquareB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareB.otf; sourceTree = "<group>"; };
 		8D7C4CE32BE3D84800CB6F1B /* NanumSquareEB.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareEB.otf; sourceTree = "<group>"; };
@@ -81,6 +76,7 @@
 		C68C4B872BE0CD5700B62122 /* JourneyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListView.swift; sourceTree = "<group>"; };
 		C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterationView.swift; sourceTree = "<group>"; };
 		C6EFA7DE2BE466B900AA4686 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
+		C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +146,9 @@
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
 				C60C5F1C2BE2A1E500558210 /* ProfileView.swift */,
 				C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */,
+				C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */,
 				C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */,
 				C60C5F182BE2A00800558210 /* OnboardingView.swift */,
-				8D7C4CD82BE3C7F400CB6F1B /* GoogleService-Info.plist */,
 				8D7C4CE82BE3D84800CB6F1B /* Font */,
 				C68C4B7D2BE0CBE900B62122 /* Assets.xcassets */,
 				C67BF5DC2BE3E6EC00A9FE67 /* GoogleService-Info.plist */,
@@ -246,6 +242,7 @@
 				C68C4B7E2BE0CBE900B62122 /* Assets.xcassets in Resources */,
 				8D7C4CED2BE3D84800CB6F1B /* NanumSquareR.otf in Resources */,
 				8D7C4CEE2BE3D84800CB6F1B /* Sansita-Black.ttf in Resources */,
+				C6EFA7E32BE4942400AA4686 /* GoogleService-Info.plist in Resources */,
 				8D7C4CEC2BE3D84800CB6F1B /* NanumSquareL.otf in Resources */,
 				8D7C4CEB2BE3D84800CB6F1B /* NanumSquareEB.otf in Resources */,
 				8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */,
