@@ -7,14 +7,6 @@
 // MARK: fdeprecated
 import SwiftUI
 
-struct MainView: View {
-    var body: some View {
-        Text("Welcome to LAB5 Packing APP")
-            .font(.title)
-            .padding()
-    }
-}
-
 struct OnboardingView: View {
     @StateObject private var authenticationViewModel = AuthenticationViewModel()
 
@@ -23,7 +15,7 @@ struct OnboardingView: View {
 
     var body: some View {
         if showMainView {
-            MainView()
+            JourneyListView()
         } else {
             ZStack {
                 Color("mainColor").edgesIgnoringSafeArea(.all)

@@ -118,6 +118,7 @@
 			children = (
 				C68C4B782BE0CBE600B62122 /* Packing */,
 				C68C4B772BE0CBE600B62122 /* Products */,
+				C6EFA8002BE4CFB400AA4686 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,7 +150,6 @@
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
 				C60C5F1C2BE2A1E500558210 /* ProfileView.swift */,
 				C68C4B8B2BE0CE3000B62122 /* LoginView.swift */,
-				C68C4B8B2BE0CE3000B62122 /* RegisterationView.swift */,
 				C6EFA7E22BE4942400AA4686 /* GoogleService-Info.plist */,
 				C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */,
 				C60C5F182BE2A00800558210 /* OnboardingView.swift */,
@@ -167,6 +167,14 @@
 				C68C4B802BE0CBE900B62122 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C6EFA8002BE4CFB400AA4686 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B8232FB22BE4BB04009CD6FA /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -427,6 +435,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -464,6 +473,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
