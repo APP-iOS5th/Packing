@@ -79,6 +79,8 @@ struct OnboardingStepView: View {
                 .fontWeight(.semibold)
                 .padding()
                 .foregroundColor(.black)
+                .shadow(color:.gray, radius: 2, x:0 , y:1)
+
             Text(descriptionText[index])
                 .font(.headline)
                 .fontWeight(.light)
@@ -124,6 +126,13 @@ let descriptionText = [
     "친구들과 패킹 리스트를 공유하고,\n누가 무엇을 가져갈지 실시간으로 조율하세요.",
     ""
 ]
+
+let image = [
+    #imageLiteral(resourceName: "onboarding2.png")
+]
+
+
+
 
 #Preview {
     OnboardingView()
