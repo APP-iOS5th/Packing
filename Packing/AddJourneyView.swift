@@ -22,7 +22,8 @@ struct AddJourneyView: View {
     @State private var travelActivitys: TravelActivity = .beach
     @State private var alertMessage: String = ""
     @State private var showAlert: Bool = false
-  
+    @State private var isUploading: Bool = false
+    
     @Environment(\.colorScheme) var colorScheme
     
     
@@ -132,27 +133,31 @@ struct AddJourneyView: View {
                             }
                             
                             //MARK: - 확인 버튼
-                            Button{
-                                service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
-                                    showAlert = true
-                                    alertMessage = message
-                                })
-//                                dismiss()
-                                
-                            } label: {
-                                Text("확인")
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal,50)
-                                    .padding(.vertical,20)
-                                    .background(Color(hex: 0x566375))
-                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                
+                            if isUploading {
+                                ProgressView()
+                            } else {
+                                Button{
+                                    isUploading = true
+                                    service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
+                                        showAlert = true
+                                        alertMessage = message
+                                        isUploading = false
+                                    })
+    //                                dismiss()
+                                } label: {
+                                    Text("확인")
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.white)
+                                        .padding(.horizontal,50)
+                                        .padding(.vertical,20)
+//                                        .background(Color(hex: 0x566375))
+                                        .background(Color.black)
+                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                    
+                                }
+                                .padding(.top, 30)
+                                .disabled(testString.isEmpty)
                             }
-                            .padding(.top, 30)
-                            .disabled(testString.isEmpty)
-
-                            
                         }
                     }
                 }
