@@ -132,10 +132,7 @@ struct AddJourneyView: View {
                             
                             //MARK: - 확인 버튼
                             Button{
-                                //TODO: 버튼 클릭시 데이터 전송
-                                if let image = image {
-                                    service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, packingItemId: "")
-                                }
+                                service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate)
                                 dismiss()
                                 
                             } label: {

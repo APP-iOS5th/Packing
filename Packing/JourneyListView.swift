@@ -11,68 +11,26 @@ struct JourneyListView: View {
     @StateObject private var service: JourneyService = JourneyService()
     @State private var selectedJourney: Journey?
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                BackgroundGradientView(colorScheme: colorScheme)
                     .ignoresSafeArea()
-                
-                VStack {
-                    if service.journeys.isEmpty {
-                        Image(systemName: "airplane")
-                            .font(.title)
-                            .padding()
-                        
-                        Text("현재 여행 목록이 없습니다.\n여행을 추가해주세요.")
-                            .font(.headline)
-                            .multilineTextAlignment(.center)
-                    } else {
-                        Spacer()
-                        ZStack {
-//                            RoundedRectangle(cornerRadius: 30)
-//                                .fill(colorScheme == .dark ? Color("DarkColor") : .white)
-//                                .frame(minHeight: 700, maxHeight: .infinity)
-//                                .shadow(radius: 5)
-//                                .edgesIgnoringSafeArea(.bottom)
-                            
-                            List(service.journeys) { journey in
-                                Button(action: {
-                                    self.selectedJourney = journey
-                                }) {
-                                    JourneySummaryView(journey: journey)
-                                        .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-                                        .padding(.top, 10)
-                                        .shadow(radius: 3, x: 1, y: 4)
-                                }
-                                .buttonStyle(PlainButtonStyle())
-                                .listRowBackground(Color.clear)
-                                .listRowSeparator(.hidden)
-                                .swipeActions(edge: .trailing) {
-                                    Button(role: .destructive) {
-                                        service.deleteJourney(journey)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                }
-                            }
-                            .listStyle(.plain)
-                            .cornerRadius(30)
-                            .edgesIgnoringSafeArea(.bottom)
-                            .navigationDestination(item: $selectedJourney) { journey in
-                                PackingListView(journey: journey)
-                            }
-                        }
-                    }
+
+                if service.journeys.isEmpty {
+                    EmptyStateView()
+                } else {
+                    JourneyList()
                 }
             }
-            .toolbarBackground(Color("mainColor"), for: .navigationBar)
+            .navigationTitle("Your Journeys")
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink(destination: AddJourneyView(service: service)){
-                        Image(systemName: "bag.fill.badge.plus")
-                            .font(.title)
-                            .foregroundStyle(Color("DarkColor"))
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: AddJourneyView(service: service)) {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                            .foregroundColor(.accentColor)
                     }
                 }
             }
@@ -81,28 +39,71 @@ struct JourneyListView: View {
             }
         }
     }
+
+    @ViewBuilder
+    private func BackgroundGradientView(colorScheme: ColorScheme) -> some View {
+        LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
+    }
+
+    @ViewBuilder
+    private func EmptyStateView() -> some View {
+        VStack {
+            Image(systemName: "airplane")
+                .font(.largeTitle)
+                .padding()
+            Text("현재 여행 목록이 없습니다.\n'+'를 눌러 새 여행을 추가해주세요.")
+                .font(.headline)
+                .multilineTextAlignment(.center)
+                .padding()
+        }
+    }
+
+    @ViewBuilder
+    private func JourneyList() -> some View {
+        List(service.journeys) { journey in
+            Button(action: {
+                self.selectedJourney = journey
+            }) {
+                JourneySummaryView(journey: journey)
+                    .padding(.vertical, 5)
+            }
+            .buttonStyle(PlainButtonStyle())
+            .listRowBackground(Color.clear)
+            .swipeActions(edge: .trailing) {
+                Button(role: .destructive) {
+                    service.deleteJourney(journey)
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
+        }
+        .listStyle(PlainListStyle())
+        .navigationDestination(item: $selectedJourney) { journey in
+            PackingListView(journey: journey)
+        }
+    }
 }
+
 
 // MARK: - JOURNEY SUMMARY VIEW
 struct JourneySummaryView: View {
     @Environment(\.colorScheme) var colorScheme
     var journey: Journey
-    
+
     var body: some View {
-        
-        return HStack {
+        HStack {
             VStack(alignment: .leading, spacing: 4) {
                 Text(journey.destination)
-                    .font(.title2)
-                    .fontWeight(.black)
-                
+                    .font(.headline)
+                    .fontWeight(.semibold)
+
                 Text(journey.activities.map { $0.rawValue }.joined(separator: ", "))
-                    .font(.callout)
-                    .fontWeight(.thin)
-                
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+
                 Text(journey.duration)
                     .font(.caption)
-                    .fontWeight(.light)
+                    .foregroundColor(.secondary)
             }
             Spacer()
         }
@@ -130,6 +131,7 @@ struct JourneySummaryView: View {
         .scaledToFill()
     }
 }
+
 
 #Preview {
     JourneyListView()

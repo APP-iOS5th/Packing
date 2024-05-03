@@ -7,7 +7,6 @@
 
 import Firebase
 import FirebaseFirestore
-import _PhotosUI_SwiftUI
 
 class JourneyService: ObservableObject {
     @Published var journeys: [Journey]
@@ -31,10 +30,19 @@ class JourneyService: ObservableObject {
         }
     }
     
-    func addJourney(destination: String, activities: [TravelActivity], image: UIImage, startDate: Date, endDate: Date, packingItemId: String) {
+    func addJourney(destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date) {
         Task {
+            // image optional 처리
+            var imageUrl: String = ""
+            if let image = image {
+                do {
+                    imageUrl = try await StorageManager.shared.saveImage(image: image)
+                } catch {
+                    print("Error saving image: \(error)")
+                }
+            }
+            
             do {
-                let imageUrl = try await StorageManager.shared.saveImage(image: image)
                 let id = UUID().uuidString
                 let activitiesString = activities.map { $0.rawValue }
                 let newJourney: [String: Any] = [
@@ -43,13 +51,12 @@ class JourneyService: ObservableObject {
                     "activities": activitiesString,
                     "image": imageUrl,
                     "startDate": Timestamp(date: startDate),
-                    "endDate": Timestamp(date: endDate),
-                    "packingItemId": packingItemId
+                    "endDate": Timestamp(date: endDate)
                 ]
                 try await dbCollection.document(id).setData(newJourney)
                 fetch()
             } catch {
-                print("Error uploading journey or image: \(error)")
+                print("Error uploading journey: \(error)")
             }
         }
     }
@@ -104,8 +111,7 @@ class JourneyService: ObservableObject {
                   let activitiesData = data["activities"] as? [String],
                   let image = data["image"] as? String,
                   let startDateTimestamp = data["startDate"] as? Timestamp,
-                  let endDateTimestamp = data["endDate"] as? Timestamp,
-                  let packingItemId = data["packingItemId"] as? String else {
+                  let endDateTimestamp = data["endDate"] as? Timestamp else {
                 print("Error decoding journey")
                 return nil
             }
@@ -121,7 +127,6 @@ class JourneyService: ObservableObject {
                 image: image,
                 startDate: startDate,
                 endDate: endDate,
-                packingItemId: packingItemId,
                 docId: document.documentID
             )
         }
