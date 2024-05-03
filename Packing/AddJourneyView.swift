@@ -10,7 +10,7 @@ import PhotosUI
 
 
 struct AddJourneyView: View {
-    var service: JourneyService?
+    @EnvironmentObject var service: JourneyService
     @Environment(\.dismiss) var dismiss
 
     @StateObject private var viewModel = JourneyService()
@@ -66,14 +66,8 @@ struct AddJourneyView: View {
                                     }
                                 }
                             }.onChange(of: selectedItem) {
-                                Task{
-                                    guard let imageData = try await selectedItem?.loadTransferable(type: Data.self) else { return }
-                                    guard let uiImage = UIImage(data: imageData) else { return }
-                                    image = uiImage
-                                }
+                                loadImage()
                             }
-
-                           
                         }
                     }
                     ZStack{
@@ -137,21 +131,15 @@ struct AddJourneyView: View {
                                 ProgressView()
                             } else {
                                 Button{
-                                    isUploading = true
-                                    service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
-                                        showAlert = true
-                                        alertMessage = message
-                                        isUploading = false
-                                    })
-    //                                dismiss()
+                                    addJourney()
                                 } label: {
                                     Text("확인")
                                         .fontWeight(.bold)
-                                        .foregroundStyle(.white)
+//                                        .foregroundStyle(.white)
                                         .padding(.horizontal,50)
                                         .padding(.vertical,20)
 //                                        .background(Color(hex: 0x566375))
-                                        .background(Color.black)
+//                                        .background(Color.black)
                                         .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                     
                                 }
@@ -173,11 +161,27 @@ struct AddJourneyView: View {
         
         }
     }
+    private func addJourney() {
+        isUploading = true
+        service.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
+            showAlert = true
+            alertMessage = message
+            isUploading = false
+        })
+    }
+    private func loadImage() {
+        Task{
+            guard let imageData = try await selectedItem?.loadTransferable(type: Data.self) else { return }
+            guard let uiImage = UIImage(data: imageData) else { return }
+            image = uiImage
+        }
+    }
 }
 
 #Preview {
     NavigationStack{
         
-        AddJourneyView(service: nil)
+        AddJourneyView()
+            .environmentObject(JourneyService())
     }
 }
