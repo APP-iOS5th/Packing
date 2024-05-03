@@ -20,7 +20,8 @@ struct AddJourneyView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var image: UIImage? = nil
     @State private var travelActivitys: TravelActivity = .beach
-    
+    @State private var alertMessage: String = ""
+    @State private var showAlert: Bool = false
   
     @Environment(\.colorScheme) var colorScheme
     
@@ -132,7 +133,10 @@ struct AddJourneyView: View {
                             
                             //MARK: - 확인 버튼
                             Button{
-                                service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate)
+                                service?.addJourney(destination: testString, activities: [travelActivitys], image: image, startDate: startdate, endDate: endDate, completion: { success, message in
+                                    showAlert = true
+                                    alertMessage = message
+                                })
                                 dismiss()
                                 
                             } label: {

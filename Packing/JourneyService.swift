@@ -30,7 +30,7 @@ class JourneyService: ObservableObject {
         }
     }
     
-    func addJourney(destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date, completion: @escaping () -> Void) {
+    func addJourney(destination: String, activities: [TravelActivity], image: UIImage?, startDate: Date, endDate: Date, completion: @escaping (Bool, String) -> Void) {
         Task {
             // image optional 처리
             var imageUrl: String = ""
@@ -39,6 +39,10 @@ class JourneyService: ObservableObject {
                     imageUrl = try await StorageManager.shared.saveImage(image: image)
                 } catch {
                     print("Error saving image: \(error)")
+                    DispatchQueue.main.async {
+                        completion(false, "이미지 업로드에 실패했습니다.")
+                    }
+                    return
                 }
             }
             
@@ -56,13 +60,15 @@ class JourneyService: ObservableObject {
             do {
                 try await dbCollection.document(id).setData(newJourney)
                 fetch()
-                completion()
+                DispatchQueue.main.async {
+                    completion(true, "여행을 성공적으로 추가하였습니다.")
+                }
             } catch {
                 print("Error uploading journey: \(error)")
-                completion()
+                DispatchQueue.main.async {
+                    completion(false, "여행을 추가하는 중 오류가 발생했습니다. 다시 시도해주세요.")
+                }
             }
-            
-            
         }
     }
 
