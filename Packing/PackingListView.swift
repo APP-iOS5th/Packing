@@ -16,7 +16,7 @@ struct PackingListView: View {
     var journey: Journey
     
     var body: some View {
-        NavigationStack {
+        VStack {
             JourneySummaryView(journey: journey)
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
                 .padding()
@@ -72,9 +72,6 @@ struct PackingListView: View {
                             }
                         }
                     }
-                    .sheet(isPresented: $isNewSharePresented) {
-                        AddShareLuggageView(journey: journey, service: service)
-                    }
                 }
                 Section(header: HStack{
                     Text("개인 물품")
@@ -104,9 +101,6 @@ struct PackingListView: View {
                         }
                         //                        .disabled(showingMember가 내가 아니면)
                     }
-                    .sheet(isPresented: $isNewPersonalPresented) {
-                        AddPersonalLuggageView(journey: journey, service: service)
-                    }
                 }
             }
             .task{
@@ -116,6 +110,12 @@ struct PackingListView: View {
             .background(RoundedRectangle(cornerRadius: 30)
                 .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
             .ignoresSafeArea()
+        }
+        .sheet(isPresented: $isNewSharePresented) {
+            AddShareLuggageView(journey: journey, service: service)
+        }
+        .sheet(isPresented: $isNewPersonalPresented) {
+            AddPersonalLuggageView(journey: journey, service: service)
         }
     }
 }

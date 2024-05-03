@@ -91,6 +91,18 @@ class PackingItemService {
             dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
         }
     }
+    
+    func addPersonalLuggage(name: String){
+        
+    }
+    func addShareLuggage(name: String,requiredCount: Int){
+        var updatedShareLuggages: [[String:Any]] = []
+        for luggage in shareLuggages {
+            updatedShareLuggages.append(["checkedPeople": luggage.checkedPeople, "name": luggage.name, "requiredCount": luggage.requiredCount])
+        }
+        updatedShareLuggages.append(["checkedPeople":[], "name":name, "requiredCount":requiredCount])
+        dbCollection.document(documentID).updateData(["share" : updatedShareLuggages])
+    }
 //    func newPackingList(id: String) {
 //        let dbCollection = Firestore.firestore().collection("PackingList")
 //        let people: [String] = ["나","멤버2","멤버3","멤버4"]
