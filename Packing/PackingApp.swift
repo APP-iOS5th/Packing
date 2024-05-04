@@ -32,8 +32,6 @@ struct PackingApp: App {
         WindowGroup {
             LoginView()
                 .environmentObject(authenticationViewModel)
-            
-//            JourneyListView()
         }
     }
 }

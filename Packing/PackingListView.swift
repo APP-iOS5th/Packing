@@ -16,7 +16,6 @@ struct PackingListView: View {
     var journey: Journey
     
     @Environment(\.colorScheme) var colorScheme
-//    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -152,7 +151,6 @@ struct PackingListView: View {
             .scrollContentBackground(.hidden)
 
         }
-//        .navigationBarBackButtonHidden(true)
         .padding(.top, 90)
         .ignoresSafeArea()
         .sheet(isPresented: $isNewSharePresented) {

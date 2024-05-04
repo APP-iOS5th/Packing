@@ -7,22 +7,35 @@
 
 import SwiftUI
 
+struct GradientBackground: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
+
+    func body(content: Content) -> some View {
+        content
+            .background(LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+    }
+}
+
+extension View {
+    func gradientBackground() -> some View {
+        modifier(GradientBackground())
+    }
+}
+
 struct JourneyListView: View {
     @StateObject private var service: JourneyService = JourneyService()
     @State private var selectedJourney: Journey?
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        ZStack {
-            BackgroundGradientView(colorScheme: colorScheme)
-                .ignoresSafeArea()
-
+        VStack {
             if service.journeys.isEmpty {
-                EmptyStateView()
+                EmptyStateView
             } else {
-                JourneyList()
+                JourneyList
             }
         }
+        .gradientBackground()
         .navigationTitle("Your Journeys")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
@@ -39,13 +52,7 @@ struct JourneyListView: View {
         .navigationBarBackButtonHidden(true)
     }
 
-    @ViewBuilder
-    private func BackgroundGradientView(colorScheme: ColorScheme) -> some View {
-        LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
-    }
-
-    @ViewBuilder
-    private func EmptyStateView() -> some View {
+    private var EmptyStateView: some View {
         VStack {
             Image(systemName: "airplane")
                 .font(.largeTitle)
@@ -55,10 +62,10 @@ struct JourneyListView: View {
                 .multilineTextAlignment(.center)
                 .padding()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    @ViewBuilder
-    private func JourneyList() -> some View {
+    private var JourneyList: some View {
         List(service.journeys) { journey in
             Button(action: {
                 self.selectedJourney = journey
