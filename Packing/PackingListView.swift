@@ -159,7 +159,7 @@ struct PackingListView: View {
         .sheet(isPresented: $isNewPersonalPresented) {
             AddPersonalLuggageView(journey: journey, service: service)
         }
-        .background(LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .gradientBackground()
     }
 }
 
