@@ -78,8 +78,7 @@ struct AddShareLuggageView: View {
             .font(.title2)
             .fontWeight(.bold)
             .scrollContentBackground(.hidden)
-            .background(RoundedRectangle(cornerRadius: 30)
-                .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
+            .gradientBackground()
             .ignoresSafeArea()
         }
     }

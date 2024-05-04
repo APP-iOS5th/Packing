@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// MARK: - VIEW MODIFIER
 struct GradientBackground: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
 

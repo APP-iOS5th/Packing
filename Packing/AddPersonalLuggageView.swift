@@ -18,11 +18,7 @@ struct AddPersonalLuggageView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationStack {
-            JourneySummaryView(journey: journey)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-                .padding()
-            
+        VStack {
             Form {
                 Section(header: Text("개인 물품 이름")
                 ){
@@ -74,8 +70,7 @@ struct AddPersonalLuggageView: View {
             .font(.title2)
             .fontWeight(.bold)
             .scrollContentBackground(.hidden)
-            .background(RoundedRectangle(cornerRadius: 30)
-                .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
+            .gradientBackground()
             .ignoresSafeArea()
         }
     }
