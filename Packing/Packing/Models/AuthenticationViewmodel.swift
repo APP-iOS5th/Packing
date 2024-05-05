@@ -38,7 +38,8 @@ final class AuthenticationViewModel: ObservableObject {
     
     @Published var state: State = .busy
     private var authResult: AuthDataResult? = nil
-    var username: String { authResult?.user.displayName ?? "" }
+//    var username: String { authResult?.user.displayName ?? "" }
+    var username: String? { authResult?.user.displayName }
     var email: String { authResult?.user.email ?? "" }
     var photoURL: URL? { authResult?.user.photoURL }
     var userId: String { authResult?.user.uid ?? "" }
