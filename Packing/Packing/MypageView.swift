@@ -4,27 +4,24 @@
 //
 //  Created by 장예진 on 5/5/24.
 //
-
+//
 import SwiftUI
 import Firebase
 import GoogleSignIn
 
 struct MyPageView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
-    
+
     var body: some View {
         NavigationView {
             VStack {
-                // 사용자 정보 표시
-                if let username = authViewModel.username {
-                    Text("Hello, \(username)")
-                }
-                if let email = authViewModel.email {
-                    Text("Email: \(email)")
-                }
+                Text("Hello, \(authViewModel.username.isEmpty ? "Guest" : authViewModel.username)")
+                Text("Email: \(authViewModel.email.isEmpty ? "Not available" : authViewModel.email)")
+
                 if let photoURL = authViewModel.photoURL {
                     AsyncImage(url: photoURL) { image in
                         image.resizable()
+                            .aspectRatio(contentMode: .fill)
                     } placeholder: {
                         ProgressView()
                     }
@@ -32,7 +29,6 @@ struct MyPageView: View {
                     .clipShape(Circle())
                 }
 
-                // 로그아웃 버튼
                 Button("Logout") {
                     authViewModel.logout()
                 }
@@ -46,6 +42,7 @@ struct MyPageView: View {
         }
     }
 }
+
 #Preview {
-    MypageView()
+    MyPageView()
 }
