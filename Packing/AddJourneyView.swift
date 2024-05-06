@@ -93,7 +93,8 @@ struct AddJourneyView: View {
                                 .font(.title2)
                                 .fontWeight(.bold)
                             VStack{
-                                DatePicker("시작 날짜", selection: $startdate, displayedComponents: [.date])
+                                DatePicker("시작 날짜", selection: $startdate,displayedComponents: [.date])
+                                
                                     .padding()
                                 DatePicker("종료 날짜", selection: $endDate, displayedComponents: [.date])
                                     .padding()

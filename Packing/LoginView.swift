@@ -44,7 +44,7 @@ struct LoginView: View {
                 .alert("Login Error", isPresented: $showingAlert, presenting: authViewModel.errorMessage) { error in
                     Button("OK", role: .cancel) { }
                 }
-                .onChange(of: authViewModel.state) { _ in
+                .onChange(of: authViewModel.state) { _, _ in
                      if authViewModel.state == .signedIn {
                          isOnboardingActive = true
                     }
