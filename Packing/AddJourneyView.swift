@@ -35,16 +35,16 @@ struct AddJourneyView: View {
                 // MARK: - Image
                 
                 ZStack{
-                    if let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .clipShape(RoundedRectangle(cornerRadius: 30))
-                            .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
-                            .padding(.top, 60)
-                            .shadow(radius: 3)
-                    } else {
-                        Spacer()
-                        PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
+                    PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
+                        if let image = image {
+                            Image(uiImage: image)
+                                .resizable()
+                                .clipShape(RoundedRectangle(cornerRadius: 30))
+                                .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                                .padding(.top, 60)
+                                .shadow(radius: 3)
+                        } else {
+                            Spacer()
                             ZStack{
                                 Rectangle()
                                     .clipShape(RoundedRectangle(cornerRadius: 30))
@@ -61,9 +61,9 @@ struct AddJourneyView: View {
                                         .foregroundStyle(Color(hex: 0x566375))
                                 }
                             }
-                        }.onChange(of: selectedItem) {
-                            loadImage()
                         }
+                    }.onChange(of: selectedItem) {
+                        loadImage()
                     }
                 }
                 
@@ -93,7 +93,8 @@ struct AddJourneyView: View {
                                 .font(.title2)
                                 .fontWeight(.bold)
                             VStack{
-                                DatePicker("시작 날짜", selection: $startdate, displayedComponents: [.date])
+                                DatePicker("시작 날짜", selection: $startdate,displayedComponents: [.date])
+                                
                                     .padding()
                                 DatePicker("종료 날짜", selection: $endDate, displayedComponents: [.date])
                                     .padding()
@@ -104,7 +105,7 @@ struct AddJourneyView: View {
                             .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
                             .clipShape(RoundedRectangle(cornerRadius: 15.0))
                             .padding()
-                                
+                            
                             //MARK: - 여행 목적
                             // Picker("여행 활동", selection: $travelActivitys){
                             //     ForEach(TravelActivity.allCases, id: \.self) {
@@ -120,32 +121,32 @@ struct AddJourneyView: View {
                             // .frame(width: 300,height: 60)
                             // .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
                             // .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                NavigationLink(destination: MultiSelector(selections: $travelActivitys)) {
-                                    HStack{
-                                        
-                                        Text("여행활동")
+                            NavigationLink(destination: MultiSelector(selections: $travelActivitys)) {
+                                HStack{
+                                    
+                                    Text("여행활동")
+                                        .font(.title3)
+                                        .padding()
+                                        .bold()
+                                    Spacer()
+                                    if travelActivitys.isEmpty {
+                                        Text("추가")
+                                            .foregroundStyle(.gray)
                                             .font(.title3)
                                             .padding()
-                                            .bold()
-                                        Spacer()
-                                        if travelActivitys.isEmpty {
-                                            Text("추가")
-                                                .foregroundStyle(.gray)
-                                                .font(.title3)
-                                                .padding()
-                                        }
-                                        Text("\(travelActivitysString(travelActivitys: travelActivitys))")
-                                            .foregroundStyle(.gray)
-                                            .padding()
-                                        
                                     }
-                                    .foregroundStyle(.black)
-                                    .background(Color(hex: 0xF3F3F3))
-                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                    .frame(width: 300 , alignment: .leading)
-                                    
+                                    Text("\(travelActivitysString(travelActivitys: travelActivitys))")
+                                        .foregroundStyle(.gray)
+                                        .padding()
                                     
                                 }
+                                .foregroundStyle(.black)
+                                .background(Color(hex: 0xF3F3F3))
+                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                .frame(width: 300 , alignment: .leading)
+                                
+                                
+                            }
                             
                             
                         }
@@ -205,8 +206,8 @@ struct AddJourneyView: View {
             isUploading = false
         })
     }
-
-
+    
+    
     private func loadImage() {
         Task{
             guard let imageData = try await selectedItem?.loadTransferable(type: Data.self) else { return }
@@ -214,7 +215,7 @@ struct AddJourneyView: View {
             image = uiImage
         }
     }
-
+    
     func travelActivitysString(travelActivitys: [String]) -> String{
         let string = travelActivitys.joined(separator: ", ")
         return string
@@ -226,6 +227,6 @@ struct AddJourneyView: View {
         AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: nil)
     }
 }
-    
+
 
 
