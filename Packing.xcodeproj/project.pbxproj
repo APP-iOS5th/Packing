@@ -47,6 +47,7 @@
 		C68C4B812BE0CBE900B62122 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C68C4B802BE0CBE900B62122 /* Preview Assets.xcassets */; };
 		C68C4B882BE0CD5700B62122 /* JourneyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B872BE0CD5700B62122 /* JourneyListView.swift */; };
 		C68C4B8C2BE0CE3100B62122 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68C4B8B2BE0CE3000B62122 /* LoginView.swift */; };
+		C69AB7192BEB560300BF3E8B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C69AB7182BEB560300BF3E8B /* GoogleService-Info.plist */; };
 		C6EFA7DF2BE466B900AA4686 /* Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6EFA7DE2BE466B900AA4686 /* Journey.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		8D7C4CE52BE3D84800CB6F1B /* NanumSquareR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.otf; sourceTree = "<group>"; };
 		8D7C4CE62BE3D84800CB6F1B /* Sansita-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansita-Black.ttf"; sourceTree = "<group>"; };
 		8D7C4CE72BE3D84800CB6F1B /* Sansita-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansita-Regular.ttf"; sourceTree = "<group>"; };
+		B845D10A2BEB4E1200818CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8C898672BE78EB200713438 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		C60C5F182BE2A00800558210 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewmodel.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 		C68C4B802BE0CBE900B62122 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C68C4B872BE0CD5700B62122 /* JourneyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListView.swift; sourceTree = "<group>"; };
 		C68C4B8B2BE0CE3000B62122 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		C69AB7182BEB560300BF3E8B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C6EFA7DE2BE466B900AA4686 /* Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Journey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +199,7 @@
 		C68C4B782BE0CBE600B62122 /* Packing */ = {
 			isa = PBXGroup;
 			children = (
+				C69AB7182BEB560300BF3E8B /* GoogleService-Info.plist */,
 				B8F88BFE2BE7B30F00C30631 /* Extension */,
 				B8F88BFD2BE7B2D900C30631 /* View */,
 				B8F88BFB2BE7B29600C30631 /* Services */,
@@ -297,6 +301,7 @@
 				8D7C4CED2BE3D84800CB6F1B /* NanumSquareR.otf in Resources */,
 				8D7C4CEE2BE3D84800CB6F1B /* Sansita-Black.ttf in Resources */,
 				8D7C4CEC2BE3D84800CB6F1B /* NanumSquareL.otf in Resources */,
+				C69AB7192BEB560300BF3E8B /* GoogleService-Info.plist in Resources */,
 				8D7C4CEB2BE3D84800CB6F1B /* NanumSquareEB.otf in Resources */,
 				8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */,
 				B84E2A692BE1CE08006EBF0D /* (null) in Resources */,

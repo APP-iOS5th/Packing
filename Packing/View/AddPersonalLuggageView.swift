@@ -18,10 +18,10 @@ struct AddPersonalLuggageView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationStack {
-            JourneySummaryView(journey: journey)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-                .padding()
+        VStack {
+//            JourneySummaryView(journey: journey)
+//                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
+//                .padding()
             
             Form {
                 Section(header: Text("개인 물품 이름")
