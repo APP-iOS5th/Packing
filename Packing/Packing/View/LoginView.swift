@@ -79,6 +79,7 @@ struct LoginView: View {
                 .alert("Login Error", isPresented: $showingAlert, presenting: authViewModel.errorMessage) { error in
                     Button("OK", role: .cancel) { }
                 }
+<<<<<<< HEAD:Packing/Packing/View/LoginView.swift
 //                .onChange(of: authViewModel.state) { _, _ in
 //                    if authViewModel.state == .signedIn {
 //                        isMainViewActive = true
@@ -87,6 +88,11 @@ struct LoginView: View {
                     if newState == .signedIn && !isNavigated {
                         isMainViewActive = true
                         isNavigated = true
+=======
+                .onChange(of: authViewModel.state) { _, _ in
+                     if authViewModel.state == .signedIn {
+                         isOnboardingActive = true
+>>>>>>> origin/main:Packing/LoginView.swift
                     }
                 }
             }
