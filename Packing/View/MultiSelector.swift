@@ -34,7 +34,7 @@ struct MultiSelector: View {
     @Binding var selections: [String]
 
     var body: some View {
-        NavigationStack {
+        VStack {
             List {
                 ForEach(TravelActivity.allCases, id: \.self) { item in
                     MultipleSelectionRow(title: item.rawValue, isSelected: self.selections.contains(item.rawValue)) {

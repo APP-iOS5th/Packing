@@ -13,32 +13,30 @@ struct JourneyListView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                BackgroundGradientView(colorScheme: colorScheme)
-                    .ignoresSafeArea()
+        ZStack {
+            BackgroundGradientView(colorScheme: colorScheme)
+                .ignoresSafeArea()
 
-                if service.journeys.isEmpty {
-                    EmptyStateView()
-                } else {
-                    JourneyList()
-                }
+            if service.journeys.isEmpty {
+                EmptyStateView()
+            } else {
+                JourneyList()
             }
-            .navigationTitle("Your Journeys")
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {
-                        Image(systemName: "plus.circle.fill")
-                            .imageScale(.large)
-                            .foregroundColor(.accentColor)
-                    }
-                }
-            }
-            .task {
-                service.fetch()
-            }
-//            .environmentObject(service)
         }
+        .navigationTitle("Your Journeys")
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {
+                    Image(systemName: "plus.circle.fill")
+                        .imageScale(.large)
+                        .foregroundColor(.accentColor)
+                }
+            }
+        }
+        .task {
+            service.fetch()
+        }
+        .navigationBarBackButtonHidden(true)
     }
 
     @ViewBuilder

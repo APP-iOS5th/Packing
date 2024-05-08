@@ -18,7 +18,7 @@ struct AddPersonalLuggageView: View {
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        NavigationStack {
+        VStack {
             JourneySummaryView(journey: journey)
                 .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
                 .padding()
