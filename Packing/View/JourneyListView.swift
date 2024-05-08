@@ -26,10 +26,14 @@ struct JourneyListView: View {
         .navigationTitle("Your Journeys")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {
-                    Label("여행 추가", systemImage: "plus.circle.fill")
-                        .imageScale(.large)
-                        .foregroundColor(.accentColor)
+                NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {                    
+                    HStack {
+                        Text("여행 추가")
+                        Image(systemName: "plus.circle.fill")
+                    }
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                    
                 }
             }
         }
