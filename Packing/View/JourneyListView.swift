@@ -68,6 +68,7 @@ struct JourneyListView: View {
                 self.selectedJourney = journey
             }) {
                 JourneySummaryView(journey: journey)
+                    .shadow(radius: 1)
                     .padding(.vertical, 5)
             }
             .buttonStyle(PlainButtonStyle())
@@ -130,7 +131,6 @@ struct JourneySummaryView: View {
 //                .clipped()
         )
         .cornerRadius(8)
-        .shadow(radius: 3)
         .scaledToFill()
         .frame(height: 100)
         .clipped()
