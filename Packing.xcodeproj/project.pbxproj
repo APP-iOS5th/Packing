@@ -23,7 +23,6 @@
 		8D7C4CED2BE3D84800CB6F1B /* NanumSquareR.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE52BE3D84800CB6F1B /* NanumSquareR.otf */; };
 		8D7C4CEE2BE3D84800CB6F1B /* Sansita-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE62BE3D84800CB6F1B /* Sansita-Black.ttf */; };
 		8D7C4CEF2BE3D84800CB6F1B /* Sansita-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE72BE3D84800CB6F1B /* Sansita-Regular.ttf */; };
-		B845D1092BEB4E0C00818CEA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B845D1082BEB4E0C00818CEA /* GoogleService-Info.plist */; };
 		B84E2A652BE1CD03006EBF0D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A642BE1CD03006EBF0D /* FirebaseFirestore */; };
 		B84E2A672BE1CD03006EBF0D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B84E2A662BE1CD03006EBF0D /* FirebaseFirestoreSwift */; };
 		B84E2A692BE1CE08006EBF0D /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -58,6 +57,7 @@
 		1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonalLuggageView.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		4B74DD4D2BEB58CE00E6ECB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelector.swift; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graduate-Regular.ttf"; sourceTree = "<group>"; };
@@ -67,7 +67,6 @@
 		8D7C4CE52BE3D84800CB6F1B /* NanumSquareR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.otf; sourceTree = "<group>"; };
 		8D7C4CE62BE3D84800CB6F1B /* Sansita-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansita-Black.ttf"; sourceTree = "<group>"; };
 		8D7C4CE72BE3D84800CB6F1B /* Sansita-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansita-Regular.ttf"; sourceTree = "<group>"; };
-		B845D1082BEB4E0C00818CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B845D10A2BEB4E1200818CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8C898672BE78EB200713438 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		C60C5F182BE2A00800558210 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		B8C8985C2BE784FE00713438 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
+				4B74DD4D2BEB58CE00E6ECB2 /* GoogleService-Info.plist */,
 				B845D10A2BEB4E1200818CEA /* GoogleService-Info.plist */,
 			);
 			name = "Recovered References";
@@ -146,7 +146,6 @@
 				1526C0182BE1F6EA00CDDE90 /* PackingItemService.swift */,
 				C67761852BE337A0000AAF57 /* JourneyService.swift */,
 				4BC8056D2BE35D67004880FE /* StorageManager.swift */,
-				B845D1082BEB4E0C00818CEA /* GoogleService-Info.plist */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -299,7 +298,6 @@
 				8D7C4CED2BE3D84800CB6F1B /* NanumSquareR.otf in Resources */,
 				8D7C4CEE2BE3D84800CB6F1B /* Sansita-Black.ttf in Resources */,
 				8D7C4CEC2BE3D84800CB6F1B /* NanumSquareL.otf in Resources */,
-				B845D1092BEB4E0C00818CEA /* GoogleService-Info.plist in Resources */,
 				8D7C4CEB2BE3D84800CB6F1B /* NanumSquareEB.otf in Resources */,
 				8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */,
 				B84E2A692BE1CE08006EBF0D /* (null) in Resources */,
