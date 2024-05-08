@@ -14,6 +14,7 @@
 		1526C01D2BE4854600CDDE90 /* AddPersonalLuggageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */; };
 		4B4E2EEF2BE0CFEA008AFA5D /* AddJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */; };
 		4B4E2EF32BE0DD12008AFA5D /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */; };
+		4B74440B2BEB637B009BCE01 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B74440A2BEB637B009BCE01 /* GoogleService-Info.plist */; };
 		4B8AA8AC2BE3F35E00F0BD66 /* MultiSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */; };
 		4BC8056E2BE35D67004880FE /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC8056D2BE35D67004880FE /* StorageManager.swift */; };
 		8D7C4CE92BE3D84800CB6F1B /* Graduate-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */; };
@@ -57,7 +58,7 @@
 		1526C01C2BE4854600CDDE90 /* AddPersonalLuggageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonalLuggageView.swift; sourceTree = "<group>"; };
 		4B4E2EEE2BE0CFEA008AFA5D /* AddJourneyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJourneyView.swift; sourceTree = "<group>"; };
 		4B4E2EF22BE0DD12008AFA5D /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
-		4B74DD4D2BEB58CE00E6ECB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		4B74440A2BEB637B009BCE01 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4B8AA8AB2BE3F35E00F0BD66 /* MultiSelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelector.swift; sourceTree = "<group>"; };
 		4BC8056D2BE35D67004880FE /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		8D7C4CE12BE3D84800CB6F1B /* Graduate-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graduate-Regular.ttf"; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		8D7C4CE52BE3D84800CB6F1B /* NanumSquareR.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = NanumSquareR.otf; sourceTree = "<group>"; };
 		8D7C4CE62BE3D84800CB6F1B /* Sansita-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansita-Black.ttf"; sourceTree = "<group>"; };
 		8D7C4CE72BE3D84800CB6F1B /* Sansita-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sansita-Regular.ttf"; sourceTree = "<group>"; };
-		B845D10A2BEB4E1200818CEA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8C898672BE78EB200713438 /* MypageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageView.swift; sourceTree = "<group>"; };
 		C60C5F182BE2A00800558210 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		C60C5F1A2BE2A19300558210 /* AuthenticationViewmodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewmodel.swift; sourceTree = "<group>"; };
@@ -124,8 +124,7 @@
 		B8C8985C2BE784FE00713438 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				4B74DD4D2BEB58CE00E6ECB2 /* GoogleService-Info.plist */,
-				B845D10A2BEB4E1200818CEA /* GoogleService-Info.plist */,
+				4B74440A2BEB637B009BCE01 /* GoogleService-Info.plist */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -301,6 +300,7 @@
 				8D7C4CEB2BE3D84800CB6F1B /* NanumSquareEB.otf in Resources */,
 				8D7C4CEA2BE3D84800CB6F1B /* NanumSquareB.otf in Resources */,
 				B84E2A692BE1CE08006EBF0D /* (null) in Resources */,
+				4B74440B2BEB637B009BCE01 /* GoogleService-Info.plist in Resources */,
 				8D7C4CE92BE3D84800CB6F1B /* Graduate-Regular.ttf in Resources */,
 				8D7C4CEF2BE3D84800CB6F1B /* Sansita-Regular.ttf in Resources */,
 			);
@@ -468,7 +468,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Packing/Preview Content\"";
-				DEVELOPMENT_TEAM = 285ZKW5MPR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Packing/Info.plist;
@@ -505,7 +505,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Packing/Preview Content\"";
-				DEVELOPMENT_TEAM = 285ZKW5MPR;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Packing/Info.plist;
