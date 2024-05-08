@@ -27,7 +27,7 @@ struct JourneyListView: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {
-                    Image(systemName: "plus.circle.fill")
+                    Label("여행 추가", systemImage: "plus.circle.fill")
                         .imageScale(.large)
                         .foregroundColor(.accentColor)
                 }
