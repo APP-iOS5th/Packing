@@ -79,14 +79,12 @@ struct LoginView: View {
                 .alert("Login Error", isPresented: $showingAlert, presenting: authViewModel.errorMessage) { error in
                     Button("OK", role: .cancel) { }
                 }
-//                .onChange(of: authViewModel.state) { _, _ in
-//                    if authViewModel.state == .signedIn {
-//                        isMainViewActive = true
-//                        isNavigated = true
+
                 .onChange(of: authViewModel.state) { newState, _ in
                     if newState == .signedIn && !isNavigated {
                         isMainViewActive = true
                         isNavigated = true
+
                     }
                 }
             }
