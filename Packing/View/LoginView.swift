@@ -37,6 +37,8 @@ struct LoginView: View {
                         .font(Font.custom("Graduate-Regular", size: 50))
                         .foregroundStyle(Color(hex: 0x566375))
                         .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                        .padding(.bottom, 50)
+                    
                     
                     if authViewModel.state == .signedIn {
                         // 로그인 성공 시, 환영 메시지와 시작하기 버튼 표시하게함.
