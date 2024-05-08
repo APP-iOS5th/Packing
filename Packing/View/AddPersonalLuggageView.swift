@@ -19,9 +19,9 @@ struct AddPersonalLuggageView: View {
     
     var body: some View {
         VStack {
-            JourneySummaryView(journey: journey)
-                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-                .padding()
+//            JourneySummaryView(journey: journey)
+//                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
+//                .padding()
             
             Form {
                 Section(header: Text("개인 물품 이름")
