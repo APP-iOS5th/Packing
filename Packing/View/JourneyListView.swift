@@ -13,7 +13,12 @@ struct GradientBackground: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .background(LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(
+                LinearGradient(gradient: Gradient(colors: colorScheme == .light ?
+                    [Color(hex: "AEC6CF"), Color(hex: "D6D6D6"), Color(hex: "F0EAD6")] :
+                    [Color(hex: "34495E"), Color(hex: "4E4E4E"), Color(hex: "2E2E2E")]),
+                    startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
     }
 }
 
@@ -147,8 +152,10 @@ struct JourneySummaryView: View {
 
 
 #Preview {
-    JourneyListView()
-        .environmentObject(JourneyService())
+    NavigationStack {
+        JourneyListView()
+            .environmentObject(JourneyService())
+    }
 }
 
 // MARK: - COLOR EXTENSION
