@@ -5,22 +5,16 @@
 //  Created by 장예진 on 4/30/24.
 //
 
-
-import SwiftUI
-import AuthenticationServices
-
-// MARK: Logout 기능 추가
-// MARK: Login 이후에는 시작하기랑 로그아웃 창 뜸
 import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
     @EnvironmentObject var authViewModel: AuthenticationViewModel
     @State private var isMainViewActive = false
+    @State private var isMyPageViewActive = false // MyPage로 직접 이동 상태 관리
     @State private var showingAlert = false
-    @State private var isNavigated = false // 네비게이션 발생을 한 번만 허용하게
+    @State private var isNavigated = false
 
-    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -37,9 +31,9 @@ struct LoginView: View {
                         .font(Font.custom("Graduate-Regular", size: 50))
                         .foregroundStyle(Color(hex: 0x566375))
                         .shadow(color: .gray, radius: 2, x: 0, y: 1)
+                        .padding(.bottom, 50)
                     
                     if authViewModel.state == .signedIn {
-                        // 로그인 성공 시, 환영 메시지와 시작하기 버튼 표시하게함.
                         if let username = authViewModel.username {
                             Text("Hello, \(username)")
                                 .font(.headline)
@@ -49,24 +43,26 @@ struct LoginView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .padding(.vertical, 5)
                         }
-                        Button("시작하기") {
-                            isMainViewActive = true
-                        }
-                        .padding()
-                        .frame(width: 100, height: 50)
-                        .background(.gray)
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .shadow(radius: 10)
+                        HStack(spacing: 20) {
+                            Button("시작하기") {
+                                isMainViewActive = true
+                            }
+                            .padding()
+                            .frame(width: 100, height: 50)
+                            .background(.gray)
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 5)
 
-                        Button("Logout") {
-                            authViewModel.logout()
+                            Button("My Page") {
+                                isMyPageViewActive = true
+                            }
+                            .frame(width: 100, height: 50)
+                            .background(.blue)
+                            .foregroundColor(.white)
+                            .clipShape(RoundedRectangle(cornerRadius: 20))
+                            .shadow(radius: 5)
                         }
-                        .frame(width: 100, height: 50)
-                        .background(Color.blue)
-                        .foregroundColor(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 20))
-                        .shadow(radius: 5)
                         .padding()
                     } else {
                         loginButtons
@@ -76,25 +72,27 @@ struct LoginView: View {
                 .navigationDestination(isPresented: $isMainViewActive) {
                     OnboardingView()
                 }
+                .navigationDestination(isPresented: $isMyPageViewActive) {
+                    MyPageView()
+                }
                 .alert("Login Error", isPresented: $showingAlert, presenting: authViewModel.errorMessage) { error in
                     Button("OK", role: .cancel) { }
                 }
-
                 .onChange(of: authViewModel.state) { newState, _ in
                     if newState == .signedIn && !isNavigated {
                         isMainViewActive = true
                         isNavigated = true
-
                     }
                 }
             }
         }
         .onAppear {
             isMainViewActive = false
+            isMyPageViewActive = false
             authViewModel.restorePreviousSignIn()
         }
     }
-    
+
     var loginButtons: some View {
         VStack(spacing: 15) {
             Button(action: {
@@ -135,9 +133,6 @@ struct LoginView: View {
         }
     }
 }
-
-
-
 #Preview {
     LoginView()
 }
