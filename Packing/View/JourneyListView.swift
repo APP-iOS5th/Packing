@@ -126,22 +126,19 @@ struct JourneySummaryView: View {
         }
         .padding()
         .background(
-            ZStack {
-                AsyncImage(url: URL(string: journey.image)) { image in
+            AsyncImage(url: URL(string: journey.image)) { image in
+                ZStack {
                     image.resizable()
-                } placeholder: {
-                    colorScheme == .dark ? Color("DarkColor") : Color(hex: 0xE2E8F0)
+                    LinearGradient(gradient: Gradient(stops: [
+                        .init(color: colorScheme == .dark ? Color.black.opacity(0.6) : Color.white.opacity(0.8), location: 0.3),
+                        .init(color: colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.5), location: 0.7),
+                        .init(color: .clear, location: 1)
+                    ]), startPoint: .leading, endPoint: .trailing)
                 }
-                .scaledToFill()
-                
-//                LinearGradient(gradient: Gradient(stops: [
-//                    .init(color: colorScheme == .dark ? Color.black.opacity(0.6) : Color.white.opacity(0.8), location: 0.3),
-//                    .init(color: colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.5), location: 0.7),
-//                    .init(color: .clear, location: 1)
-//                ]), startPoint: .leading, endPoint: .trailing)
+            } placeholder: {
+                colorScheme == .dark ? Color("DarkColor") : Color(hex: 0xE2E8F0)
             }
-//                .frame(height: 100)
-//                .clipped()
+            .scaledToFill()
         )
         .cornerRadius(8)
         .scaledToFill()
