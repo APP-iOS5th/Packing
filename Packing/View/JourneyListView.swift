@@ -130,15 +130,15 @@ struct JourneySummaryView: View {
                 AsyncImage(url: URL(string: journey.image)) { image in
                     image.resizable()
                 } placeholder: {
-                    EmptyView()
+                    colorScheme == .dark ? Color("DarkColor") : Color(hex: 0xE2E8F0)
                 }
                 .scaledToFill()
                 
-                LinearGradient(gradient: Gradient(stops: [
-                    .init(color: colorScheme == .dark ? Color.black.opacity(0.6) : Color.white.opacity(0.8), location: 0.3),
-                    .init(color: colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.5), location: 0.7),
-                    .init(color: .clear, location: 1)
-                ]), startPoint: .leading, endPoint: .trailing)
+//                LinearGradient(gradient: Gradient(stops: [
+//                    .init(color: colorScheme == .dark ? Color.black.opacity(0.6) : Color.white.opacity(0.8), location: 0.3),
+//                    .init(color: colorScheme == .dark ? Color.black.opacity(0.4) : Color.white.opacity(0.5), location: 0.7),
+//                    .init(color: .clear, location: 1)
+//                ]), startPoint: .leading, endPoint: .trailing)
             }
 //                .frame(height: 100)
 //                .clipped()
