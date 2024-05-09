@@ -29,21 +29,27 @@ struct JourneyListView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        VStack {
+        ZStack {
+            BackgroundGradientView(colorScheme: colorScheme)
+                .ignoresSafeArea()
+
             if service.journeys.isEmpty {
-                EmptyStateView
+                EmptyStateView()
             } else {
-                JourneyList
+                JourneyList()
             }
         }
-        .gradientBackground()
         .navigationTitle("Your Journeys")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {
-                    Image(systemName: "plus.circle.fill")
-                        .imageScale(.large)
-                        .foregroundColor(.accentColor)
+                NavigationLink(destination: AddJourneyView(packingItemService: PackingItemService(documentID: "test"), service: service)) {                    
+                    HStack {
+                        Text("여행 추가")
+                        Image(systemName: "plus.circle.fill")
+                    }
+                    .imageScale(.large)
+                    .foregroundColor(.accentColor)
+                    
                 }
             }
         }
@@ -72,6 +78,7 @@ struct JourneyListView: View {
                 self.selectedJourney = journey
             }) {
                 JourneySummaryView(journey: journey)
+                    .shadow(radius: 1)
                     .padding(.vertical, 5)
             }
             .buttonStyle(PlainButtonStyle())
@@ -134,7 +141,6 @@ struct JourneySummaryView: View {
 //                .clipped()
         )
         .cornerRadius(8)
-        .shadow(radius: 3)
         .scaledToFill()
         .frame(height: 100)
         .clipped()

@@ -7,6 +7,7 @@
 // MARK: Fixed applelogin struct updatedddd 
 
 import Foundation
+import Firebase
 import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
@@ -37,18 +38,24 @@ final class AuthenticationViewModel: ObservableObject {
     
     @Published var state: State = .busy
     private var authResult: AuthDataResult? = nil
-    var username: String { authResult?.user.displayName ?? "" }
+//    var username: String { authResult?.user.displayName ?? "" }
+    var username: String? { authResult?.user.displayName }
     var email: String { authResult?.user.email ?? "" }
     var photoURL: URL? { authResult?.user.photoURL }
     var userId: String { authResult?.user.uid ?? "" }
     
-    //    func logout() {
-    //        GIDSignIn.sharedInstance.signOut()
-    //        GIDSignIn.sharedInstance.disconnect()
-    //        try? Auth.auth().signOut()
-    //        authResult = nil
-    //        state = .signedOut
-    //    }
+    func logout() {
+        // 구글 로그아웃
+        GIDSignIn.sharedInstance.signOut()
+        
+        // Firebase 로그아웃
+        do {
+            try Auth.auth().signOut()
+            self.state = .signedOut
+        } catch let signOutError {
+            print("Error signing out: \(signOutError.localizedDescription)")
+        }
+    }
     
     func restorePreviousSignIn() {
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
