@@ -26,155 +26,170 @@ struct AddJourneyView: View {
     
     
     var body: some View {
-        ZStack{
-            LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .ignoresSafeArea()
+        VStack{
             
-            VStack{
-                
-                // MARK: - Image
-                
-                ZStack{
-                    PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
-                        if let image = image {
-                            Image(uiImage: image)
-                                .resizable()
+            // MARK: - Image
+            
+            ZStack{
+                PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
+                    if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .clipShape(RoundedRectangle(cornerRadius: 30))
+                            .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
+                            .padding(.top, 60)
+                            .shadow(radius: 3)
+                    } else {
+                        Spacer()
+                        ZStack{
+                            Rectangle()
                                 .clipShape(RoundedRectangle(cornerRadius: 30))
                                 .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
                                 .padding(.top, 60)
                                 .shadow(radius: 3)
-                        } else {
-                            Spacer()
-                            ZStack{
-                                Rectangle()
-                                    .clipShape(RoundedRectangle(cornerRadius: 30))
-                                    .frame(minWidth: 200, maxWidth: .infinity, maxHeight: .infinity)
-                                    .padding(.top, 60)
-                                    .shadow(radius: 3)
-                                    .foregroundStyle(colorScheme == .dark ? Color("DarkColor") : .white)
-                                VStack{
-                                    Image(systemName: "photo.badge.plus")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 100)
-                                        .padding(.top, 50)
-                                        .foregroundStyle(Color(hex: 0x566375))
-                                }
+                                .foregroundStyle(colorScheme == .dark ? Color("DarkColor") : .white)
+                            VStack{
+                                Image(systemName: "photo.badge.plus")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 100)
+                                    .padding(.top, 50)
+                                    .foregroundStyle(Color(hex: 0x566375))
                             }
                         }
-                    }.onChange(of: selectedItem) {
-                        loadImage()
                     }
+                }.onChange(of: selectedItem) {
+                    loadImage()
                 }
-                
-                
-                ZStack{
-                    RoundedRectangle(cornerRadius: 30)
-                        .foregroundStyle(colorScheme == .dark ? Color("DarkColor") : .white)
-                        .frame(minHeight: 550, maxHeight: .infinity)
-                    VStack {
-                        VStack(alignment:.center){
-                            
-                            // MARK: 여행 목적지
-                            Text("여행목적지")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                            
-                            TextField("여행목적지",text: $testString)
-                                .padding()
-                                .font(.subheadline)
-                                .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                .frame(width: 300)
-                                .padding(.bottom,30)
-                            
-                            // MARK: - 여행 기간
-                            Text("여행 기간")
-                                .font(.title2)
-                                .fontWeight(.bold)
-                            VStack{
-                                DatePicker("시작 날짜", selection: $startdate,displayedComponents: [.date])
-                                
-                                    .padding()
-                                DatePicker("종료 날짜", selection: $endDate, displayedComponents: [.date])
-                                    .padding()
-                            }
-                            .bold()
-                            .font(.body)
-                            .frame(width: 300 , alignment: .leading)
+            }
+            
+            
+            ZStack{
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundStyle(colorScheme == .dark ? Color("DarkColor") : .white)
+                    .frame(minHeight: 550, maxHeight: .infinity)
+                VStack {
+                    VStack(alignment:.center){
+                        
+                        // MARK: 여행 목적지
+                        Text("여행목적지")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        
+                        TextField("여행목적지",text: $testString)
+                            .padding()
+                            .font(.subheadline)
                             .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
                             .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            .padding()
+                            .frame(width: 300)
+                            .padding(.bottom,30)
+                        
+                        // MARK: - 여행 기간
+                        Text("여행 기간")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        VStack{
+                            DatePicker("시작 날짜", selection: $startdate,displayedComponents: [.date])
                             
-                            //MARK: - 여행 목적
-                            // Picker("여행 활동", selection: $travelActivitys){
-                            //     ForEach(TravelActivity.allCases, id: \.self) {
-                            //         Text($0.rawValue)
-                            //             .font(.body)
-                            //     }
-                            // }
-                            // .foregroundStyle(colorScheme == .dark ? .white : .black)
-                            // .font(.title3)
-                            // .bold()
-                            // .padding()
-                            // .pickerStyle(.navigationLink)
-                            // .frame(width: 300,height: 60)
-                            // .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
-                            // .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            NavigationLink(destination: MultiSelector(selections: $travelActivitys)) {
-                                HStack{
-                                    
-                                    Text("여행활동")
+                                .padding()
+                            DatePicker("종료 날짜", selection: $endDate, displayedComponents: [.date])
+                                .padding()
+                        }
+                        .bold()
+                        .font(.body)
+                        .frame(width: 300 , alignment: .leading)
+                        .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
+                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                        .padding()
+                        
+                        //MARK: - 여행 목적
+                        // Picker("여행 활동", selection: $travelActivitys){
+                        //     ForEach(TravelActivity.allCases, id: \.self) {
+                        //         Text($0.rawValue)
+                        //             .font(.body)
+                        //     }
+                        // }
+                        // .foregroundStyle(colorScheme == .dark ? .white : .black)
+                        // .font(.title3)
+                        // .bold()
+                        // .padding()
+                        // .pickerStyle(.navigationLink)
+                        // .frame(width: 300,height: 60)
+                        // .background(colorScheme == .dark ? Color(hex: 0x1A1A1A) : Color(hex: 0xF3F3F3))
+                        // .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                        NavigationLink(destination: MultiSelector(selections: $travelActivitys)) {
+                            HStack{
+                                
+                                Text("여행활동")
+                                    .font(.title3)
+                                    .padding()
+                                    .bold()
+                                Spacer()
+                                if travelActivitys.isEmpty {
+                                    Text("추가")
+                                        .foregroundStyle(.gray)
                                         .font(.title3)
                                         .padding()
-                                        .bold()
-                                    Spacer()
-                                    if travelActivitys.isEmpty {
-                                        Text("추가")
-                                            .foregroundStyle(.gray)
-                                            .font(.title3)
-                                            .padding()
-                                    }
-                                    Text("\(travelActivitysString(travelActivitys: travelActivitys))")
-                                        .foregroundStyle(.gray)
-                                        .padding()
-                                    
                                 }
-                                .foregroundStyle(.black)
-                                .background(Color(hex: 0xF3F3F3))
-                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                .frame(width: 300 , alignment: .leading)
-                                
+                                Text("\(travelActivitysString(travelActivitys: travelActivitys))")
+                                    .foregroundStyle(.gray)
+                                    .padding()
                                 
                             }
+                            .foregroundStyle(.black)
+                            .background(Color(hex: 0xF3F3F3))
+                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                            .frame(width: 300 , alignment: .leading)
                             
                             
                         }
                         
-                        //MARK: - 확인 버튼
-                        if isUploading {
-                            ProgressView()
-                        } else {
-                            Button{
-                                addJourney()
-                            } label: {
-                                Text("확인")
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal,50)
-                                    .padding(.vertical,20)
-                                    .background(testString.isEmpty ? Color(hex: 0x566375).opacity(0.5) : Color(hex: 0x566375))
-                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                            }
-                            .padding(.top, 30)
-                            .disabled(testString.isEmpty)
-                        }
+                        
                     }
+                    
+                    //MARK: - 확인 버튼
+                    if isUploading {
+                        ProgressView()
+                    } else {
+                        Button{
+                            addJourney()
+                        } label: {
+                            Text("확인")
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+                                .padding(.horizontal,50)
+                                .padding(.vertical,20)
+                                .background(testString.isEmpty ? Color(hex: 0x566375).opacity(0.5) : Color(hex: 0x566375))
+                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                        }
+                    
+                    
                 }
-                .ignoresSafeArea(.all)
                 
+                //MARK: - 확인 버튼
+                if isUploading {
+                    ProgressView()
+                } else {
+                    Button{
+                        addJourney()
+                    } label: {
+                        Text("확인")
+                            .fontWeight(.bold)
+                            .foregroundStyle(.white)
+                            .padding(.horizontal,50)
+                            .padding(.vertical,20)
+                            .background(testString.isEmpty ? Color(hex: 0x566375).opacity(0.5) : Color(hex: 0x566375))
+                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                    }
+                    .padding(.top, 30)
+                    .disabled(testString.isEmpty)
+                }
             }
         }
+        .ignoresSafeArea(.all)
+        
+    }
+        .gradientBackground()
         // MARK: - ALERT
         
         .alert("알람", isPresented: $showAlert) {

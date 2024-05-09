@@ -16,7 +16,7 @@ struct OnboardingView: View {
     @AppStorage("hasCompletedOnboarding") var showMainView: Bool = false
 
     var body: some View {
-        NavigationView {
+//        NavigationView {
             if showMainView {
                 JourneyListView()
             } else {
@@ -35,10 +35,11 @@ struct OnboardingView: View {
 
                     NavigationButtons(currentPage: $currentPage, totalPages: 4)
                 }
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
             }
-        }
-        .navigationBarHidden(true)
-        .navigationBarBackButtonHidden(true)
+//        }
+
     }
 }
 
