@@ -29,16 +29,14 @@ struct JourneyListView: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        ZStack {
-            BackgroundGradientView(colorScheme: colorScheme)
-                .ignoresSafeArea()
-
+        VStack {
             if service.journeys.isEmpty {
-                EmptyStateView()
+                EmptyStateView
             } else {
-                JourneyList()
+                JourneyList
             }
         }
+        .gradientBackground()
         .navigationTitle("Your Journeys")
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
