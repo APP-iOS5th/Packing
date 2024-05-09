@@ -12,17 +12,41 @@ struct AddPersonalLuggageView: View {
     var service: PackingItemService
     let myID = "나"
     @State var itemName: String = ""
-    @State var descriptionText: String = ""
     @State var duplicated: Bool = false
+    @State var showAlert: Bool = false
     
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
-//            JourneySummaryView(journey: journey)
-//                .frame(minWidth: 200, maxWidth: .infinity, minHeight: 100)
-//                .padding()
-            
+            HStack{
+                Button("취소"){
+                    dismiss()
+                }
+                .foregroundStyle(.red)
+                Spacer()
+                Button("추가"){
+                    duplicated = false
+                    for personalLuggage in service.personalLuggages[myID]! {
+                        if personalLuggage.name == itemName {
+                            duplicated = true
+                        }
+                    }
+                    if duplicated {
+                        showAlert.toggle()
+                    } else {
+                        service.addPersonalLuggage(name: itemName)
+                        dismiss()
+                    }
+                }
+                .disabled(itemName.isEmpty)
+                .alert("추가 실패", isPresented: $showAlert) {
+                    Button("확인",role: .cancel){}
+                } message: {
+                    Text("이미 있는 개인 물품입니다.")
+                }
+            }
+            .padding()
             Form {
                 Section(header: Text("개인 물품 이름")
                 ){
@@ -30,53 +54,12 @@ struct AddPersonalLuggageView: View {
                         Text("개인 물품 이름")
                     }
                 }
-                Section(footer: HStack{
-                    Spacer()
-                    Text(descriptionText)
-                        .font(.callout)
-                        .foregroundStyle(.red)
-                }
-                ){
-                    HStack {
-                        Spacer()
-                        Button("개인 물품 추가"){
-                            if itemName.isEmpty {
-                                descriptionText = "물품 이름을 입력하세요."
-                            } else {
-                                duplicated = false
-                                for personalLuggage in service.personalLuggages[myID]! {
-                                    if personalLuggage.name == itemName {
-                                        duplicated = true
-                                    }
-                                }
-                                if duplicated {
-                                    descriptionText = "이미 등록된 물품입니다."
-                                } else {
-                                    service.addPersonalLuggage(name: itemName)
-                                    dismiss()
-                                }
-                            }
-                        }
-                        .foregroundStyle(.blue)
-                    }
-                }
-                Section {
-                    HStack {
-                        Spacer()
-                        Button("취소"){
-                            dismiss()
-                        }
-                        .foregroundStyle(.red)
-                    }
-                }
             }
             .foregroundStyle(.black)
-            .font(.title2)
-            .fontWeight(.bold)
             .scrollContentBackground(.hidden)
-            .background(RoundedRectangle(cornerRadius: 30)
-                .fill(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing)))
-            .ignoresSafeArea()
         }
+        .font(.title2)
+        .fontWeight(.bold)
+        .background(LinearGradient(colors: [Color(hex: "AEC6CF"),Color(hex: "ECECEC"),Color(hex: "FFFDD0")], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 }

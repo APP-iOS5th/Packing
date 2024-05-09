@@ -34,7 +34,6 @@ struct AddShareLuggageView: View {
                         }
                     }
                     if duplicated {
-                        print("duplicated")
                         showAlert.toggle()
                     } else {
                         service.addShareLuggage(name: itemName, requiredCount: requiredCount)
