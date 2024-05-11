@@ -16,23 +16,23 @@ struct PackingListView: View {
     var journey: Journey
     
     @Environment(\.colorScheme) var colorScheme
-//    @Environment(\.dismiss) var dismiss
+    //    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
-//            HStack {
-//                Button(action: {
-//                    dismiss()
-//                    print("dismiss")
-//                }) {
-//                    Image(systemName: "chevron.backward")
-//                        .font(.title3)
-//                        .foregroundColor(.primary)
-//                }
-//                .padding()
-//                Spacer()
-//            }
-//            .padding()
+            //            HStack {
+            //                Button(action: {
+            //                    dismiss()
+            //                    print("dismiss")
+            //                }) {
+            //                    Image(systemName: "chevron.backward")
+            //                        .font(.title3)
+            //                        .foregroundColor(.primary)
+            //                }
+            //                .padding()
+            //                Spacer()
+            //            }
+            //            .padding()
             
             JourneySummaryView(journey: journey)
                 .frame(minWidth: 200, maxWidth: .infinity)
@@ -40,7 +40,7 @@ struct PackingListView: View {
                 .padding(.vertical, 5)
             Divider().overlay(colorScheme == .dark ? .white.opacity(0.5) : .gray.opacity(0.8)).padding(.horizontal)
             
-
+            
             
             Form {
                 Section(header: Text("구성원 선택")
@@ -81,15 +81,13 @@ struct PackingListView: View {
                                     Image(systemName: shareLuggage.checkedPeople.contains(showingMember) ? "checkmark.square" : "square")
                                 }
                             }
-                            .contextMenu {
-                                Button {
+                            .swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
                                     if let index = service.shareLuggages.firstIndex(where: {$0.name == shareLuggage.name}) {
                                         service.deleteShareLuggage(index: index)
                                     }
                                 } label: {
-                                    Image(systemName: "trash")
-                                    Text("삭제")
-                                        .tint(.red)
+                                    Label("Delete", systemImage: "trash")
                                 }
                             }
                             //                            .disabled(showingMember가 내가 아니면)
@@ -131,15 +129,13 @@ struct PackingListView: View {
                                 Image(systemName: personalLuggage.isChecked ? "checkmark.square" : "square")
                             }
                         }
-                        .contextMenu {
-                            Button {
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
                                 if let index = service.personalLuggages[showingMember]?.firstIndex(where: {$0.name == personalLuggage.name}) {
                                     service.deletePersonalLuggage(index: index)
                                 }
                             } label: {
-                                Image(systemName: "trash")
-                                Text("삭제")
-                                    .tint(.red)
+                                Label("Delete", systemImage: "trash")
                             }
                         }
                         //                        .disabled(showingMember가 내가 아니면)
@@ -150,9 +146,9 @@ struct PackingListView: View {
                 service.fetch()
             }
             .scrollContentBackground(.hidden)
-
+            
         }
-//        .navigationBarBackButtonHidden(true)
+        //        .navigationBarBackButtonHidden(true)
         .padding(.top, 90)
         .ignoresSafeArea()
         .sheet(isPresented: $isNewSharePresented) {
@@ -166,7 +162,7 @@ struct PackingListView: View {
 }
 
 
-#Preview {
-    PackingListView(service: PackingItemService(documentID: "test"), journey: Journey.sample[0])
-}
+//#Preview {
+//    PackingListView(service: PackingItemService(documentID: "test"), journey: Journey.sample[0])
+//}
 
