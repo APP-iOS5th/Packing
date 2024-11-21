@@ -16,7 +16,6 @@ struct PackingListView: View {
     var journey: Journey
     
     @Environment(\.colorScheme) var colorScheme
-//    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         VStack {
@@ -152,7 +151,6 @@ struct PackingListView: View {
             .scrollContentBackground(.hidden)
 
         }
-//        .navigationBarBackButtonHidden(true)
         .padding(.top, 90)
         .ignoresSafeArea()
         .sheet(isPresented: $isNewSharePresented) {
@@ -161,7 +159,7 @@ struct PackingListView: View {
         .sheet(isPresented: $isNewPersonalPresented) {
             AddPersonalLuggageView(journey: journey, service: service)
         }
-        .background(LinearGradient(gradient: Gradient(colors: colorScheme == .light ? [Color(hex: "AEC6CF"), Color(hex: "ECECEC"), Color(hex: "FFFDD0")] : [Color(hex: "34495E"), Color(hex: "555555"), Color(hex: "333333")]), startPoint: .topLeading, endPoint: .bottomTrailing))
+        .gradientBackground()
     }
 }
 

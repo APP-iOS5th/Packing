@@ -219,6 +219,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C6EFA8002BE4CFB400AA4686 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				B8232FB22BE4BB04009CD6FA /* GoogleService-Info.plist */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
